@@ -1,14 +1,21 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState } from 'react';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+function App() {
+  const [count, setCount] = useState(0);
 
-  render() {
-    return <h1>Hello World</h1>;
-  }
+  return (
+    <div>
+      <p>
+        You clicked
+        {count}
+        {' '}
+        times
+      </p>
+      <button type="button" onClick={() => setCount(count + 1)}>
+        Click me
+      </button>
+    </div>
+  );
 }
 
 export default App;
