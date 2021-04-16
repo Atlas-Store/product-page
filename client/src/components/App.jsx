@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-
 import $ from 'jquery';
+import QuestionsAnswers from './QuestionsAndAnswers';
 
 function App() {
   const [count, setCount] = useState(0);
@@ -36,6 +36,7 @@ function App() {
       <button type="button" onClick={() => setCount(count + 1)}>
         Click me
       </button>
+      <QuestionsAnswers />
     </div>
   );
 }
