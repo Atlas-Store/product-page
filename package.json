@@ -2,9 +2,10 @@
   "name": "product-detail-page",
   "version": "1.0.0",
   "description": "front end capstone",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "build": "webpack --config webpack.config.js -w"
+    "build": "webpack --config webpack.config.js -w",
+    "server-dev": "npx nodemon server/index.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,8 @@
   "dependencies": {
     "ajax": "0.0.4",
     "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "jquery": "^3.6.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
