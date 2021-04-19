@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 import $ from 'jquery';
 
+import RelatedProducts from './relatedProductsAndComp/RelatedProducts';
+
 function App() {
   const [count, setCount] = useState(0);
   const [products, setProducts] = useState([]);
@@ -11,7 +13,6 @@ function App() {
       method: 'GET',
       url: '/test',
       success: (data) => {
-        console.log(data);
         setProducts(data);
       },
       failure: (res) => {
@@ -33,6 +34,7 @@ function App() {
           (product) => <p>{ product.name }</p>,
         ) }
       </p>
+      <RelatedProducts />
       <button type="button" onClick={() => setCount(count + 1)}>
         Click me
       </button>
