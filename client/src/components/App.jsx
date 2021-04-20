@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-
 import $ from 'jquery';
+import QuestionsAnswers from './QuestionsAndAnswers';
 
 function App() {
-  const [count, setCount] = useState(0);
   const [products, setProducts] = useState([]);
+  // const [curProduct] = useState(products[0]);
 
   useEffect(() => {
     $.ajax({
@@ -22,20 +22,7 @@ function App() {
 
   return (
     <div>
-      <p>
-        You clicked
-        { count }
-        {' '}
-        times
-      </p>
-      <p>
-        { products.map(
-          (product) => <p>{ product.name }</p>,
-        ) }
-      </p>
-      <button type="button" onClick={() => setCount(count + 1)}>
-        Click me
-      </button>
+      <QuestionsAnswers />
     </div>
   );
 }

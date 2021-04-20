@@ -8,6 +8,7 @@ app.use(express.static(`${__dirname}/client/dist`));
 app.use(express.urlencoded({ extended: false }));
 
 app.get('/*', (req, res) => {
+  console.log('we hit the wildcard route');
   getAPIdata((err, data) => {
     if (err) {
       res.status(400).send(err);
