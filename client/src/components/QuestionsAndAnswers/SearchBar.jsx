@@ -1,24 +1,32 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, {useState, useEffect} from 'react';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+
+const ModdedSearchBar = styled.input`
+  width: 900px;
+  height: 30px;
+  border: 1px solid #999999;
+`;
 
 function SearchBar() {
   const [searchTerm, setSearchTerm] = useState('');
 
+  function handleChange(event) {
+    setSearchTerm(event.target.value);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log('hello', event.target.value);
+  }
+
   return (
-    <form action="/" method="get">
-      <label htmlFor="header-search">
-        <span className="visually-hidden">Search for the Answers</span>
-      </label>
-      <input
-        type="text"
-        id="header-search"
-        placeholder="Show me the money"
-        name="s"
-        onChange={(event) => {
-          setSearchTerm(event.target.value);
-        }}
+    <form onSubmit={handleSubmit}>
+      <ModdedSearchBar
+        placeholder="ask me anything"
+        onChange={handleChange}
       />
-      <button type="submit">Search</button>
+      <input type="submit" value="submit" />
     </form>
   );
 }
