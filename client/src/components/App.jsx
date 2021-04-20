@@ -1,17 +1,22 @@
 import React, { useState, useEffect } from 'react';
-
-import PropTypes from 'prop-types';
-
 import $ from 'jquery';
+import styled from 'styled-components';
+import Reviews from './Ratings_Reviews/Reviews';
+import QuestionsAnswers from './QuestionsAndAnswers';
+import Overview from './OView/Overview';
 
 import RelatedProducts from './relatedProductsAndComp/RelatedProducts';
 
 import config from '../../../config';
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 function App() {
-  const [count, setCount] = useState(0);
   const [products, setProducts] = useState([]);
-  const [styles, setStyles] = useState(null);
+  const [currentProduct, setCurrentProduct] = useState(products[0]);
 
   useEffect(() => {
     // $.ajax({
@@ -33,6 +38,7 @@ function App() {
         Authorization: config.TOKEN,
       },
       success: (data) => {
+        // console.log(data);
         setProducts(data);
       },
       failure: (res) => {
@@ -55,24 +61,25 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    setCurrentProduct(products[0]);
+  });
+
   return (
-    <div>
-      <p>
-        You clicked
-        { count }
-        {' '}
-        times
-      </p>
-      <p>
-        { products.map(
-          (product) => <p>{ product.id + ' ' + product.name }</p>,
-        ) }
-      </p>
-      <RelatedProducts productId={23145} />
-      <button type="button" onClick={() => setCount(count + 1)}>
-        Click me
-      </button>
-    </div>
+    <Wrapper>
+      <section>
+        <Overview currentProduct={currentProduct} />
+      </section>
+      <section>
+        <QuestionsAnswers />
+      </section>
+      <section>
+        <Reviews />
+      </section>
+      <section>
+        <RelatedProducts productId={23145} />
+      </section>
+    </Wrapper>
   );
 }
 
