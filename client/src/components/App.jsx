@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import $ from 'jquery';
 import Reviews from './Ratings_Reviews/Reviews';
+import QuestionsAnswers from './QuestionsAndAnswers';
+import Overview from './OView/Overview';
 
 function App() {
-  const [count, setCount] = useState(0);
   const [products, setProducts] = useState([]);
+  const [currentProduct, setCurrentProduct] = useState(products[0]);
 
   useEffect(() => {
     $.ajax({
@@ -20,22 +22,14 @@ function App() {
     });
   }, []);
 
+  useEffect(() => {
+    setCurrentProduct(products[0]);
+  });
+
   return (
     <div>
-      <p>
-        You clicked
-        { count }
-        {' '}
-        times
-      </p>
-      <p>
-        { products.map(
-          (product) => <p>{ product.name }</p>,
-        ) }
-      </p>
-      <button type="button" onClick={() => setCount(count + 1)}>
-        Click me
-      </button>
+      <Overview currentProduct={currentProduct} />
+      <QuestionsAnswers />
       <Reviews />
     </div>
   );
