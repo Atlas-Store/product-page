@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import $ from 'jquery';
+import Reviews from './Ratings_Reviews/Reviews';
 import QuestionsAnswers from './QuestionsAndAnswers';
 import Overview from './OView/Overview';
 
@@ -29,6 +30,7 @@ function App() {
     <div>
       <Overview currentProduct={currentProduct} />
       <QuestionsAnswers />
+      <Reviews />
     </div>
   );
 }
