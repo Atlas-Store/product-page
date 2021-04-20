@@ -4,7 +4,6 @@ import QAEntry from './QAEntry';
 import { Col } from './Layout';
 
 function QAList({ questions }) {
-  console.log(questions);
   return (
     <Col>
       {questions.map((question) => (
