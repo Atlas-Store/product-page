@@ -1,0 +1,71 @@
+/* #prodCategory {
+  color: black;
+  font: 1.2em 'Arial', sans-serif;
+  display: flex;
+  justify-content: flex-end;
+} */
+/* #prodTitle {
+  color: black;
+  font: 2.5em 'Arial', sans-serif;
+  display: flex;
+  justify-content: flex-end;
+} */
+/* #prodDescription {
+  color: black;
+  font: 1.2em 'Optima', sans-serif;
+  display: flex;
+  justify-content: flex-start;
+} */
+/* #onesieImage {
+  max-width: 280px;
+  max-height: 280px;
+  display: flex;
+  justify-content: flex-start;
+} */
+/* #prodPrice {
+  color: black;
+  font: 1.0em 'Arial', sans-serif;
+  display: flex;
+  justify-content: flex-end;
+} */
+/* #sizeSelect {
+  color: black;
+  font: 0.85em 'Arial', sans-serif;
+  display: flex;
+  justify-content: flex-start;
+} */
+
+/* @charset "UTF-8"; */
+:root {
+  --star-size: 20px;
+  --star-color: rgb(211, 211, 211);
+  --star-background: #fc0;
+}
+
+.Stars {
+  --percent: calc(var(--rating) / 5 * 100%);
+  display: inline-block;
+  font-size: var(--star-size);
+  font-family: Times;
+  line-height: 1;
+}
+.Stars::before {
+  content: "★★★★★";
+  letter-spacing: 3px;
+  background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+body {
+  background: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+* {
+  position: relative;
+  box-sizing: border-box;
+}
