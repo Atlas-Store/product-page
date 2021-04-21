@@ -8,6 +8,8 @@ import Helpful from './Helpful';
 import AddReview from './AddReview';
 import ReviewPhotos from './ReviewPhotos';
 
+const sortFunc = require('./sortingFuncs.js');
+
 const StyledRating = styled.div`
   min-width: fit-content;
   width: 2in;
@@ -76,41 +78,6 @@ const SortMenu = styled.select`
   font-weight: bold;
 `;
 
-const sortByHelpful = (reviews) => {
-  // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < reviews.length; i++) {
-    let highest = i;
-    // eslint-disable-next-line no-plusplus
-    for (let j = i + 1; j < reviews.length; j++) {
-      if (reviews[j].helpfulness > reviews[highest].helpfulness) {
-        highest = j;
-      }
-    }
-    const temp = reviews[i];
-    reviews[i] = reviews[highest];
-    reviews[highest] = temp;
-  }
-  return reviews;
-};
-const sortByTime = (reviews) => {
-  // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < reviews.length; i++) {
-    let highest = i;
-    const dateI = new Date(reviews[highest].date);
-    // eslint-disable-next-line no-plusplus
-    for (let j = i + 1; j < reviews.length; j++) {
-      const dateJ = new Date(reviews[j].date);
-      if (dateJ > dateI) {
-        highest = j;
-      }
-    }
-    const temp = reviews[i];
-    reviews[i] = reviews[highest];
-    reviews[highest] = temp;
-  }
-  return reviews;
-};
-
 const Review = () => {
   const [numReviews, updateNumReviews] = useState(sampleReviews.results.length);
   const [reviewsToShow, updateToShow] = useState(2);
@@ -119,12 +86,11 @@ const Review = () => {
 
   let sortedReviews;
   if (sort === 'Helpful') {
-    sortedReviews = sortByHelpful(sampleReviews.results);
+    sortedReviews = sortFunc.sortByHelpful(sampleReviews.results);
   }
   if (sort === 'Newest') {
-    sortedReviews = sortByTime(sampleReviews.results);
+    sortedReviews = sortFunc.sortByTime(sampleReviews.results);
   }
-  console.log(sortedReviews);
   const reviewsSamp = sortedReviews.map((review) => (
     <StyledReview>
       <ReviewInfo>
