@@ -4,6 +4,7 @@ import Style from './Style.jsx';
 import {Grid, Row, Col} from './Overview.jsx';
 
 const StyleSelector = (props) => {
+
   // var abc = (
   //   <Grid>
   //     <Row>
@@ -21,7 +22,7 @@ const StyleSelector = (props) => {
     <Grid>
       <Row>
         <Col>
-          <Style styleURL={props.stylesURLs[0]} setCurrentImageURL={props.setCurrentImageURL}/>
+          <Style styleURL={props.stylesURLs[0]} setCurrentImageURL={props.setCurrentImageURL} />
         </Col>
 
         <Col>

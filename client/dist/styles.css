@@ -36,36 +36,27 @@
 } */
 
 /* @charset "UTF-8"; */
-:root {
-  --star-size: 20px;
-  --star-color: rgb(211, 211, 211);
-  --star-background: #fc0;
-}
+/* :root {
 
-.Stars {
-  --percent: calc(var(--rating) / 5 * 100%);
-  display: inline-block;
-  font-size: var(--star-size);
-  font-family: Times;
-  line-height: 1;
-}
-.Stars::before {
-  content: "★★★★★";
-  letter-spacing: 3px;
-  background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+} */
 
-body {
+/* .Stars {
+
+}
+.Stars
+} */
+
+/* body {
   background: rgb(255, 255, 255);
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  justify-content: safe center;
+  /* align-items: safe center; */
+  /* margin: auto; */
+  /* height: 100vh; */
+  /* display: flex; */
+  /* justify-content: center; */
 }
 
-* {
-  position: relative;
-  box-sizing: border-box;
-}
+/* * {
+
+} */

@@ -12,6 +12,17 @@ import config from '../../../config';
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 0;
+  // margin-top: auto;
+  margin-bottom: auto;
+  // flex-wrap: wrap;
+  // min-height: 0;
+  // margin: auto;
+  align-items: center;
+`;
+
+const InnerWrapper = styled.div`
+  align-items: center;
 `;
 
 function App() {
@@ -66,19 +77,24 @@ function App() {
   });
 
   return (
+
     <Wrapper>
+      <br/><br/><br/>
       <section>
         <Overview currentProduct={currentProduct} />
       </section>
+
+      <section>
+        <RelatedProducts productId={23145} />
+      </section>
+
       <section>
         <QuestionsAnswers />
       </section>
       <section>
         <Reviews />
       </section>
-      <section>
-        <RelatedProducts productId={23145} />
-      </section>
+
     </Wrapper>
   );
 }

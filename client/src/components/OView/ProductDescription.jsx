@@ -3,7 +3,7 @@ import styled, {css} from 'styled-components';
 
 const ProdDescription = styled.div`
   color: black;
-  font: 1.2em 'Optima', sans-serif;
+  font: 1.2em 'Arial', sans-serif;
   display: flex;
   justify-content: flex-start;
   flex: 1;
@@ -12,7 +12,7 @@ const ProdDescription = styled.div`
 function ProductDescription(props) {
   return (
     <ProdDescription id='prodDescription'>
-      Product Description/Overview: {props.description}
+      {props.description}
       <br/><br/>
     </ProdDescription>
   )
