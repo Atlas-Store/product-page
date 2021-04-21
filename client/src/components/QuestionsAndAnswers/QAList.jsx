@@ -11,7 +11,7 @@ function QAList({ questions }) {
 
   return (
     <Col>
-      {sortedQs.map((question) => (
+      {questions.map((question) => (
         <QAEntry question={question} key={question.question_id} />
       ))}
     </Col>
