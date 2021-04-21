@@ -4,11 +4,15 @@ import QAEntry from './QAEntry';
 import { Col } from './Layout';
 
 function QAList({ questions }) {
-  console.log(questions);
+  const sortedQs = questions;
+  sortedQs.sort((a, b) => (
+    b.question_helpfulness - a.question_helpfulness
+  ));
+
   return (
     <Col>
-      {questions.map((question) => (
-        <QAEntry question={question} key={question.id} />
+      {sortedQs.map((question) => (
+        <QAEntry question={question} key={question.question_id} />
       ))}
     </Col>
   );

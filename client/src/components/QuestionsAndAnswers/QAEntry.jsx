@@ -26,7 +26,7 @@ function QAEntry({ question }) {
       {Object.keys(question.answers).slice(0, aCount).map((key) => {
         const answer = question.answers[key];
         return (
-          <Container>
+          <Container key={key}>
             <Row>
               <Col size={2}>
                 <p>
@@ -53,7 +53,7 @@ function QAEntry({ question }) {
         );
       })}
       {Object.keys(question.answers).length > aCount
-            && <Row><Col onClick={handleMoreAnswersClick}>Load More Question</Col></Row>}
+        && <Row><Col onClick={handleMoreAnswersClick}>Load More Question</Col></Row>}
     </Container>
   );
 }
