@@ -9,7 +9,7 @@ import config from '../../../../config';
 
 const Wrapper = styled.div`
   width: 600px;
-  position: absolute;
+  position: relative;
 
   .slick-prev:hover,
   .slick-prev:focus,

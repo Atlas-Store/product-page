@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled, {css} from 'styled-components';
 
 const RoundedImageDiv = styled.div`
@@ -11,7 +11,13 @@ const RoundedImageDiv = styled.div`
 
 // width: ${widthABC}px;
 // height: ${heightABC}px;
-const RoundedImage = styled.img`
+
+
+const Style = (props) => {
+  const [clicked, setClicked] = useState(false);
+  // const [isCurrentlyHovering, setIsCurrentlyHovering] = useState(false);
+
+  const RoundedImage = styled.img`
   width: 80px;
   height: 80px;
   position: relative;
@@ -21,19 +27,34 @@ const RoundedImage = styled.img`
   border-width: thin;
   border-color: gray;
   cursor: pointer;
+  object-fit: cover;
+
   &:hover {
     width: 100px;
     height: 100px;
+    border-width: medium;
   }
 `
 
-const Style = (props) => {
-
-  // const [isCurrentlyHovering, setIsCurrentlyHovering] = useState(false);
+// const RoundedImageBigger = styled.img`
+//   width: 100px;
+//   height: 100px;
+//   position: relative;
+//   overflow: hidden;
+//   border-radius: 50%;
+//   border-style: solid;
+//   border-width: thin;
+//   border-color: gray;
+//   cursor: pointer;
+//   // &:hover {
+//   //   width: 100px;
+//   //   height: 100px;
+//   // }
+// `
 
   const handleClick = () => {
     props.setCurrentImageURL(props.styleURL);
-
+    // setClicked(true);
   }
 
   const handleMouseEnter = () => {
@@ -49,6 +70,9 @@ const Style = (props) => {
     // <select>Select Size</select>
     <RoundedImageDiv onClick={handleClick} onMouseEnter={handleMouseEnter}>
 
+      {/* {clicked ?
+      <RoundedImageBigger src={props.styleURL} /> :
+      <RoundedImage src={props.styleURL} /> } */}
       <RoundedImage src={props.styleURL} />
     </RoundedImageDiv>
   )

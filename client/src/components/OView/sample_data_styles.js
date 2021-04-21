@@ -366,3 +366,85 @@ const dataFirstProduct =
 //   }
 export default dataFirstProduct;
 // export default stylesURLs;
+
+export const otherProduct = {
+  "product_id": "23146",
+  "results": [
+      {
+          "style_id": 129649,
+          "name": "Black Lenses & Black Frame",
+          "original_price": "69.00",
+          "sale_price": null,
+          "default?": false,
+          "photos": [
+              {
+                  "thumbnail_url": null,
+                  "url": null
+              }
+          ],
+          "skus": {
+              "null": {
+                  "quantity": null,
+                  "size": null
+              }
+          }
+      },
+      {
+          "style_id": 129650,
+          "name": "Black Lenses & Gold Frame",
+          "original_price": "69.00",
+          "sale_price": null,
+          "default?": true,
+          "photos": [
+              {
+                  "thumbnail_url": null,
+                  "url": null
+              }
+          ],
+          "skus": {
+              "null": {
+                  "quantity": null,
+                  "size": null
+              }
+          }
+      },
+      {
+          "style_id": 129651,
+          "name": "Gold Lenses & Black Frame",
+          "original_price": "69.00",
+          "sale_price": null,
+          "default?": false,
+          "photos": [
+              {
+                  "thumbnail_url": null,
+                  "url": null
+              }
+          ],
+          "skus": {
+              "null": {
+                  "quantity": null,
+                  "size": null
+              }
+          }
+      },
+      {
+          "style_id": 129652,
+          "name": "Gold Lenses & Gold Frame",
+          "original_price": "69.00",
+          "sale_price": null,
+          "default?": false,
+          "photos": [
+              {
+                  "thumbnail_url": null,
+                  "url": null
+              }
+          ],
+          "skus": {
+              "null": {
+                  "quantity": null,
+                  "size": null
+              }
+          }
+      }
+  ]
+}
