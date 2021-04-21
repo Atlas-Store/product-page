@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import React, { useState } from 'react';
 import moment from 'moment';
 import styled from 'styled-components';
@@ -5,7 +6,6 @@ import sampleReviews from './sampleReviews';
 import ReviewBody from './ReviewBody';
 import Helpful from './Helpful';
 import AddReview from './AddReview';
-import SortBy from './SortBy';
 import ReviewPhotos from './ReviewPhotos';
 
 const StyledRating = styled.div`
@@ -64,8 +64,68 @@ const TimeOfReview = styled.span`
   font-size: smaller;
 `;
 
+const SortMenu = styled.select`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: .85em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+`;
+
+const sortByHelpful = (reviews) => {
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < reviews.length; i++) {
+    let highest = i;
+    // eslint-disable-next-line no-plusplus
+    for (let j = i + 1; j < reviews.length; j++) {
+      if (reviews[j].helpfulness > reviews[highest].helpfulness) {
+        highest = j;
+      }
+    }
+    const temp = reviews[i];
+    reviews[i] = reviews[highest];
+    reviews[highest] = temp;
+  }
+  return reviews;
+};
+const sortByTime = (reviews) => {
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < reviews.length; i++) {
+    let highest = i;
+    const dateI = new Date(reviews[highest].date);
+    // eslint-disable-next-line no-plusplus
+    for (let j = i + 1; j < reviews.length; j++) {
+      const dateJ = new Date(reviews[j].date);
+      if (dateJ > dateI) {
+        highest = j;
+      }
+    }
+    const temp = reviews[i];
+    reviews[i] = reviews[highest];
+    reviews[highest] = temp;
+  }
+  return reviews;
+};
+
 const Review = () => {
-  const reviewsSamp = sampleReviews.results.map((review) => (
+  const [numReviews, updateNumReviews] = useState(sampleReviews.results.length);
+  const [reviewsToShow, updateToShow] = useState(2);
+  const [writeReview, toggleWR] = useState(false);
+  const [sort, updateSort] = useState('Helpful');
+
+  let sortedReviews;
+  if (sort === 'Helpful') {
+    sortedReviews = sortByHelpful(sampleReviews.results);
+  }
+  if (sort === 'Newest') {
+    sortedReviews = sortByTime(sampleReviews.results);
+  }
+  console.log(sortedReviews);
+  const reviewsSamp = sortedReviews.map((review) => (
     <StyledReview>
       <ReviewInfo>
         {review.rating}
@@ -107,11 +167,8 @@ const Review = () => {
       </p>
     </StyledReview>
   ));
-
   // eslint-disable-next-line no-unused-vars
-  const [numReviews, updateNumReviews] = useState(sampleReviews.results.length);
-  const [reviewsToShow, updateToShow] = useState(2);
-  const [writeReview, toggleWR] = useState(false);
+
   return (
     <section>
       <h5> RATINGS AND REVIEWS </h5>
@@ -130,7 +187,11 @@ const Review = () => {
             { sampleReviews.results.length }
             {'  '}
             reviews sorted by
-            <SortBy />
+            <SortMenu onChange={(event) => { updateSort(event.target.value); updateToShow(2); }}>
+              <option value="Helpful" selected> Helpful </option>
+              <option value="Newest">  Newest  </option>
+              <option value="Relevant">  Relevant  </option>
+            </SortMenu>
           </h3>
           <div>
             {reviewsSamp.slice(0, reviewsToShow)}
