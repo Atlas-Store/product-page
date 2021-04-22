@@ -7,16 +7,17 @@ import ReviewBody from './ReviewBody';
 import Helpful from './Helpful';
 import AddReview from './AddReview';
 import ReviewPhotos from './ReviewPhotos';
+import Stars from '../OView/StarRating';
+import BarRatings from './BarRatings';
 
-const sortFunc = require('./sortingFuncs.js');
+const renderFunc = require('./renderFunc.js');
 
-const StyledRating = styled.div`
-  min-width: fit-content;
-  width: 2in;
-  height: 2in;
+const RatingsSection = styled.div`
+  padding-right: 48px;
 `;
 const StyledRRBox = styled.div`
   display: flex;
+  align-items: baseline;
   flex-wrap: wrap;
   flex-direction: row;
 `;
@@ -78,23 +79,45 @@ const SortMenu = styled.select`
   font-weight: bold;
 `;
 
+const FractionRecs = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding-top: 20px;
+  padding-bottom: 20px;
+`;
+
+const StarsContent = styled.div`
+  display: flex;
+  padding-left: 36px;
+  align-items: center;
+  background-color: black;
+`;
+
+const RatingNum = styled.div`
+  font-size: 36px;
+  padding-left: 10px;
+  color: rgb(211, 211, 211);
+`;
+
 const Review = () => {
   const [numReviews, updateNumReviews] = useState(sampleReviews.results.length);
   const [reviewsToShow, updateToShow] = useState(2);
   const [writeReview, toggleWR] = useState(false);
   const [sort, updateSort] = useState('Helpful');
+  const averageRating = renderFunc.calcAvg(sampleReviews.results);
+  const fracRecs = renderFunc.numRecommenders(sampleReviews.results);
 
   let sortedReviews;
   if (sort === 'Helpful') {
-    sortedReviews = sortFunc.sortByHelpful(sampleReviews.results);
+    sortedReviews = renderFunc.sortByHelpful(sampleReviews.results);
   }
   if (sort === 'Newest') {
-    sortedReviews = sortFunc.sortByTime(sampleReviews.results);
+    sortedReviews = renderFunc.sortByTime(sampleReviews.results);
   }
   const reviewsSamp = sortedReviews.map((review) => (
     <StyledReview>
       <ReviewInfo>
-        {review.rating}
+        <Stars rating={review.rating} />
         <ReviewUserDate>
           <UserName>
             {review.reviewer_name}
@@ -137,17 +160,28 @@ const Review = () => {
 
   return (
     <section>
-      <h5> RATINGS AND REVIEWS </h5>
+      <h2>
+        RATINGS
+        {'&'}
+        REVIEWS
+      </h2>
       <StyledRRBox>
         {/* Need to change 'AND' to & */}
-        <StyledRating>
-          <h1>4.6</h1>
-          <span>
-            {numReviews}
-            {' '}
-            Reviews
-          </span>
-        </StyledRating>
+        <RatingsSection>
+          <StarsContent>
+            <Stars rating={averageRating} />
+            <RatingNum>
+              <strong>
+                {averageRating}
+              </strong>
+            </RatingNum>
+          </StarsContent>
+          <FractionRecs>
+            {fracRecs}
+            % reviewers recommend this product
+          </FractionRecs>
+          <BarRatings reviews={sampleReviews.results} />
+        </RatingsSection>
         <StyledReviewSection>
           <h3>
             { sampleReviews.results.length }

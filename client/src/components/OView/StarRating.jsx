@@ -10,17 +10,6 @@ const Star = styled.div`
   font-size: var(--star-size);
   font-family: Times;
   line-height: 1;
-
-  //  background: rgb(255, 255, 255);
-    // display: flex;
-    // justify-content: safe center;
-    // /* align-items: safe center; */
-    // /* margin: auto; */
-    // height: 100vh;
-
-    position: relative;
-    box-sizing: border-box;
-
   ::before {
     content: "★★★★★";
     letter-spacing: 3px;
@@ -31,7 +20,7 @@ const Star = styled.div`
 
 
 `
-function StarRating({handleSubmit, changeHandler, rating}) {
+function StarRating({ rating }) {
   const [count, setCount] = useState(0);
 
   // const [rating, setRating] = useState(5);
@@ -53,7 +42,7 @@ function StarRating({handleSubmit, changeHandler, rating}) {
         <button >Rate!</button>
       </form> */}
     {/* <div className="Stars" style={{'--rating': rating}} aria-label="Rating of this product is 2.3 out of 5." ></div> */}
-    <Star className="Stars" style={{'--rating': 4.2}} aria-label="Rating of this product is 4.2 out of 5." ></Star>
+    <Star className="Stars" style={{'--rating': rating}} aria-label="Rating of this product is 4.2 out of 5." ></Star>
     </div>
   )
 }

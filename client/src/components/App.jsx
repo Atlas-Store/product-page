@@ -79,7 +79,7 @@ function App() {
   return (
 
     <Wrapper>
-      {/* <br/><br/><br/>
+      <br/><br/><br/>
       <section>
         <Overview currentProduct={currentProduct} />
       </section>
@@ -90,7 +90,7 @@ function App() {
 
       <section>
         <QuestionsAnswers />
-      </section> */}
+      </section>
       <section>
         <Reviews />
       </section>
