@@ -9,6 +9,9 @@ import ProductCategory from './ProductCategory.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import dataFirstProduct from '../OView/sample_data_styles';
 import ImageGallery from './ImageGallery.jsx';
+import Slider from 'react-slick';
+import {productReview} from './sample_data_styles';
+import {ProductImage, ProductImageDiv} from './StyledItems.jsx';
 
 // import stylesURLs from '../OView/sample_data_styles';
 
@@ -34,9 +37,100 @@ let stylesURLs = [];
   // console.log('old mcdonald had a farm')
 }
 
+// let stylesIDs = [];
+// for (let i = 0; i < dataFirstProduct['results'].length; i++) {
+//   stylesIDs.push()
+// }
+
+const Wrapper = styled.div`
+width: 600px;
+position: relative;
+
+.slick-prev:hover,
+.slick-prev:focus,
+.slick-next:hover,
+.slick-next:focus
+{
+  color: white;
+  outline: none;
+  background: transparent;
+}
+.slick-prev:hover:before,
+.slick-prev:focus:before,
+.slick-next:hover:before,
+.slick-next:focus:before
+{
+    opacity: 1;
+}
+.slick-prev.slick-disabled:before,
+.slick-next.slick-disabled:before
+{
+    opacity: 0;
+}
+
+.slick-prev:before,
+.slick-next:before
+{
+    font-family: 'Monaco';
+    font-size: 30px;
+    line-height: 1;
+
+    opacity: 1;
+    color: black;
+    background: white;
+    padding: 0px 10px;
+    border: 1px solid black;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.slick-prev
+{
+    left: -25px;
+}
+
+.slick-prev:before
+{
+    content: '<';
+}
+
+.slick-next:before
+{
+    content: '>';
+}
+`;
+
+const settings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  arrows: true
+  // autoplay: true,
+  // autoplaySpeed: 2000,
+  // pauseOnHover: true
+};
+
+
+let arrayOfRatings = [];
+for (let i = 0; i < productReview['results'].length; i++) {
+  // console.log('should be a rating', productReview['results'][i]['rating']);
+  arrayOfRatings.push(productReview['results'][i]['rating']);
+}
+
+const computeAverageRating = (arrayOfRatings) => {
+  let sum = 0;
+  for (let i = 0; i < arrayOfRatings.length; i++) {
+    sum += arrayOfRatings[i];
+  }
+  let avg = (sum / arrayOfRatings.length);
+  return avg;
+}
 
 const Overview = ({currentProduct}) => {
-
+  // console.log('average rating is', computeAverageRating(arrayOfRatings))
   // for (let i = 0; i < props.products.length; i++) {
   // console.log('dataFirstProduct is', dataFirstProduct);
   // }
@@ -44,8 +138,9 @@ const Overview = ({currentProduct}) => {
   // console.log('currentProduct is ', currentProduct);
   // console.log('stylesURLs is', stylesURLs);
 
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(computeAverageRating(arrayOfRatings));
   const [currentImageURL, setCurrentImageURL] = useState(stylesURLs[0]);
+  // const [currentStyleID, setCurrentStyleID] = useState(dataFirstProduct['results'][0]['style_id']);
 
   const handleClickStyle = () => {
 
@@ -70,10 +165,41 @@ const Overview = ({currentProduct}) => {
       {/* {props.products.map(prod => ( */}
       {currentProduct &&
       <div>
+
+
         <Grid>
           <Row>
             <Col size={1.5}>
-              <ImageGallery currentImageURL={currentImageURL}/>
+            <Wrapper>
+        <Slider {...settings}>
+          <div>
+          {/* <ImageGallery currentImageURL={currentImageURL}/> */}
+          <ProductImageDiv>
+          <ProductImage src={currentImageURL} />
+          </ProductImageDiv>
+
+          </div>
+          <div>
+          {/* <img style="background:url(meadow.jpeg)" src="onesie.jpeg" /> */}
+          {/* <ImageGallery currentImageURL={currentImageURL}/> */}
+          <ProductImageDiv>
+          <ProductImage src={currentImageURL} />
+          </ProductImageDiv>
+        {/* <img src='meadow.jpeg'></img> */}
+          </div>
+
+          <div>
+          {/* <ImageGallery currentImageURL={currentImageURL}/> */}
+          <ProductImageDiv>
+          <ProductImage src={currentImageURL} />
+          </ProductImageDiv>
+        {/* <img src='onesie.jpeg'></img> */}
+          </div>
+            </Slider>
+            </Wrapper>
+              {/* <ImageGallery currentImageURL={currentImageURL}/> */}
+              {/* <div> */}
+
             </Col>
             <Col size={1}>
               {/* Double the size of */}

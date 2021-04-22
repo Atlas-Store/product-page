@@ -22,7 +22,7 @@ const StyleSelector = (props) => {
     <Grid>
       <Row>
         <Col>
-          <Style styleURL={props.stylesURLs[0]} setCurrentImageURL={props.setCurrentImageURL} />
+          <Style styleURL={props.stylesURLs[0]} setCurrentImageURL={props.setCurrentImageURL} setCurrentStyleImages={props.setCurrentStyleImages}/>
         </Col>
 
         <Col>
