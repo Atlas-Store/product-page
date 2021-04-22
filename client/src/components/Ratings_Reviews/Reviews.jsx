@@ -9,6 +9,7 @@ import AddReview from './AddReview';
 import ReviewPhotos from './ReviewPhotos';
 import Stars from '../OView/StarRating';
 import BarRatings from './BarRatings';
+import SizeComfort from './SizeComfort';
 
 const renderFunc = require('./renderFunc.js');
 
@@ -20,6 +21,7 @@ const StyledRRBox = styled.div`
   align-items: baseline;
   flex-wrap: wrap;
   flex-direction: row;
+  font-family: Arial;
 `;
 
 const StyledReviewSection = styled.div`
@@ -30,6 +32,7 @@ const StyledReview = styled.div`
   border-bottom: 2.5px solid black;
   margin-top: 40px;
   margin-bottom: 40px;
+  font-family: Arial;
 `;
 
 const StyledReviewButton = styled.button`
@@ -61,10 +64,12 @@ const ReviewResponse = styled.p`
 const UserName = styled.span`
   font-size: smaller;
   padding-right: 5px;
+  font-family: Arial;
 `;
 
 const TimeOfReview = styled.span`
   font-size: smaller;
+  font-family: Arial;
 `;
 
 const SortMenu = styled.select`
@@ -106,15 +111,9 @@ const Review = () => {
   const [sort, updateSort] = useState('Helpful');
   const averageRating = renderFunc.calcAvg(sampleReviews.results);
   const fracRecs = renderFunc.numRecommenders(sampleReviews.results);
-
   let sortedReviews;
-  if (sort === 'Helpful') {
-    sortedReviews = renderFunc.sortByHelpful(sampleReviews.results);
-  }
-  if (sort === 'Newest') {
-    sortedReviews = renderFunc.sortByTime(sampleReviews.results);
-  }
-  const reviewsSamp = sortedReviews.map((review) => (
+
+  const reviewsSamp = (input) => (input.map((review) => (
     <StyledReview>
       <ReviewInfo>
         <Stars rating={review.rating} />
@@ -155,14 +154,20 @@ const Review = () => {
         <Helpful countYes={review.helpfulness} />
       </p>
     </StyledReview>
-  ));
+  )));
+  const [reviewsToRender, updateReviewsRender] = useState(reviewsSamp(sampleReviews.results));
+
+  // if (sort === 'Helpful') {
+  //   sortedReviews = renderFunc.sortByHelpful(sampleReviews.results);
+  //   updateReviewsRender(reviewsSamp(sortedReviews));
+  // }
   // eslint-disable-next-line no-unused-vars
 
   return (
     <section>
       <h2>
         RATINGS
-        {'&'}
+        {' & '}
         REVIEWS
       </h2>
       <StyledRRBox>
@@ -181,20 +186,26 @@ const Review = () => {
             % reviewers recommend this product
           </FractionRecs>
           <BarRatings reviews={sampleReviews.results} />
+          <SizeComfort />
         </RatingsSection>
         <StyledReviewSection>
           <h3>
             { sampleReviews.results.length }
             {'  '}
             reviews sorted by
-            <SortMenu onChange={(event) => { updateSort(event.target.value); updateToShow(2); }}>
+            <SortMenu onChange={(event) => {
+              // eslint-disable-next-line max-len
+              updateSort(event.target.value); sortedReviews = renderFunc.sortByTime(sampleReviews.results);
+              updateReviewsRender(reviewsSamp(sortedReviews));
+            }}
+            >
               <option value="Helpful" selected> Helpful </option>
               <option value="Newest">  Newest  </option>
               <option value="Relevant">  Relevant  </option>
             </SortMenu>
           </h3>
           <div>
-            {reviewsSamp.slice(0, reviewsToShow)}
+            {reviewsToRender.slice(0, reviewsToShow)}
           </div>
           <div id="writeRev">
             {(reviewsToShow < numReviews) && (

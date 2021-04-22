@@ -7,16 +7,19 @@ const YesButton = styled.button`
   cursor: pointer;
   border: none;
   font-size: smaller;
+  font-family: 'Arial';
 `;
 const NoButton = styled.button`
   background-color: transparent;
   cursor: pointer;
   border: none;
   font-size: smaller;
+  font-family: 'Arial'
 `;
 const HelpfulSection = styled.section`
   padding-top: 20px;
   font-size: smaller;
+  font-family: 'Arial';
 `;
 const Helpful = ({ countYes }) => {
   const [helpfulCount, updateHelpful] = useState(countYes);
