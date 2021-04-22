@@ -10,18 +10,6 @@ const Star = styled.div`
   font-size: var(--star-size);
   font-family: Times;
   line-height: 1;
-
-  //  background: rgb(255, 255, 255);
-    // display: flex;
-    // justify-content: safe center;
-    // justify-content: flex-start;
-    // /* align-items: safe center; */
-    // /* margin: auto; */
-    // height: 100vh;
-
-    position: relative;
-    box-sizing: border-box;
-
   ::before {
     content: "★★★★★";
     letter-spacing: 0px;

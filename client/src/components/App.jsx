@@ -64,7 +64,7 @@ function App() {
         Authorization: config.TOKEN,
       },
       success: (data) => {
-        setStyles(data);
+        // setStyles(data);
       },
       failure: (res) => {
         console.log(res);
