@@ -14,6 +14,7 @@ const QAWrapper = styled.div`
   // padding: 0.25em 1em;
   border-bottom: 20px solid blue;
   max-height: 100vh;
+  overflow: auto;
 `;
 
 function QuestionsAnswers({ productId }) {
@@ -29,15 +30,17 @@ function QuestionsAnswers({ productId }) {
   };
 
   return (
-    <QAWrapper>
+    <div>
+      <h1>Questions and Answers</h1>
       <SearchBar />
+      <QAWrapper>
+        <QAList questions={questions.slice(0, qCount)} />
 
-      <QAList questions={questions.slice(0, qCount)} />
+        {questions.length > qCount && <MoreQuestionsButton onClick={handleMoreQuestionsClick} />}
 
-      {questions.length > qCount && <MoreQuestionsButton onClick={handleMoreQuestionsClick} />}
-
-      <AddQuestionButton />
-    </QAWrapper>
+        <AddQuestionButton />
+      </QAWrapper>
+    </div>
   );
 }
 

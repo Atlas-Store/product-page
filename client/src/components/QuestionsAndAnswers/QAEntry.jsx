@@ -8,6 +8,8 @@ const Row = styled.div`
 
 const Col = styled.div`
   flex: ${(props) => props.size};
+  margin: 20ev;
+  padding: 20ev;
 `;
 
 function QAEntry({ question }) {
@@ -22,11 +24,11 @@ function QAEntry({ question }) {
   return (
     <div>
       <Row>
-        <Col size={2}>
+        <Col size={2} padding={10}>
           Q:
           {question.question_body}
         </Col>
-        <Col size={1}>
+        <Col size={1} padding={100}>
           helpful? yes
           (
           {question.question_helpfulness}
