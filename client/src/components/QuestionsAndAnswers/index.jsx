@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import SearchBar from './SearchBar';
 import QAList from './QAList';
 import MoreQuestionsButton from './MoreQuestionsButton';
 import AddQuestionButton from './AddQuestionButton';
 import testData from './dummyData';
-import { Container, Row, Col } from './Layout';
 
 const dummyData = testData.results;
+
+const QAWrapper = styled.div`
+  // border: 2px solid palevioletred;
+  // margin: 1em;
+  // padding: 0.25em 1em;
+  border-bottom: 20px solid blue;
+  max-height: 100vh;
+  overflow: auto;
+`;
 
 function QuestionsAnswers({ productId }) {
   const [questions, setQuestions] = useState([]);
@@ -21,20 +30,17 @@ function QuestionsAnswers({ productId }) {
   };
 
   return (
-    <Container>
-      <Row>
-        <SearchBar />
-      </Row>
-      <QAList questions={questions.slice(0, qCount)} />
-      <Row>
-        <Col>
-          {questions.length > qCount && <MoreQuestionsButton onClick={handleMoreQuestionsClick} />}
-        </Col>
-        <Col>
-          <AddQuestionButton />
-        </Col>
-      </Row>
-    </Container>
+    <div>
+      <h1>Questions and Answers</h1>
+      <SearchBar />
+      <QAWrapper>
+        <QAList questions={questions.slice(0, qCount)} />
+
+        {questions.length > qCount && <MoreQuestionsButton onClick={handleMoreQuestionsClick} />}
+
+        <AddQuestionButton />
+      </QAWrapper>
+    </div>
   );
 }
 
