@@ -33,6 +33,7 @@ const Style = (props) => {
     width: 100px;
     height: 100px;
     border-width: medium;
+    // border-color: yellow;
   }
 `
 
