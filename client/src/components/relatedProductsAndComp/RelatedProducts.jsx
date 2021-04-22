@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Slider from 'react-slick';
 import $ from 'jquery';
 import Card from './Card';
+import { PrevArrow, NextArrow } from './Arrows';
 import AddCard from './AddCard';
 import config from '../../../../config';
 
@@ -65,42 +66,6 @@ const Wrapper = styled.div`
       content: '>';
   }
 `;
-
-function NextArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-    <div
-      className={className}
-      style={{
-        position: 'absolute',
-        right: '10px',
-        width: '40px',
-        height: '40px',
-        display: 'block',
-      }}
-      onClick={onClick}
-    />
-  );
-}
-
-function PrevArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-    <div
-      className={className}
-      style={{
-        zIndex: '1',
-        position: 'absolute',
-        left: '10px',
-        width: '40px',
-        height: '40px',
-      }}
-      onClick={onClick}
-    />
-  );
-}
 
 function RelatedProducts(props) {
   const settings = {
@@ -171,8 +136,6 @@ function RelatedProducts(props) {
       {loading ? <div>...loading</div> : (
         <Wrapper>
           <h4>RELATED PRODUCTS</h4>
-          {/* {console.log('related', relatedItems)}
-          {console.log('outfits', outfits)} */}
           <Slider {...settings}>
             {relatedItems.map((item) => (
               <Card productId={item} cardType="related" />
