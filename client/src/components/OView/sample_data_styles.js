@@ -448,3 +448,51 @@ export const otherProduct = {
       }
   ]
 }
+
+// the following const productReview is an API call to the endpoint https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/reviews/?product_id=23145&count=1000, with parameters:
+//product_id set to value 23145, and
+//count set to value 1000 (I put 1000 just so it's likely that we are capturing all the reviews for this specific product)
+
+export const productReview = {
+    "product": "23145",
+    "page": 0,
+    "count": 5,
+    "results": [
+        {
+            "review_id": 308885,
+            "rating": 5,
+            "summary": "This product was great!",
+            "recommend": true,
+            "response": "",
+            "body": "I really did or did not like this product based on whether it was sustainably sourced. Then I found out that its made from nothing at all.",
+            "date": "2019-01-01T00:00:00.000Z",
+            "reviewer_name": "funtime",
+            "helpfulness": 9,
+            "photos": []
+        },
+        {
+            "review_id": 308886,
+            "rating": 4,
+            "summary": "This product was ok!",
+            "recommend": false,
+            "response": "",
+            "body": "I really did not like this product solely because I am tiny and do not fit into it.",
+            "date": "2019-01-11T00:00:00.000Z",
+            "reviewer_name": "mymainstreammother",
+            "helpfulness": 2,
+            "photos": []
+        },
+        {
+            "review_id": 348044,
+            "rating": 4,
+            "summary": "Solid",
+            "recommend": true,
+            "response": null,
+            "body": "I think it was alright",
+            "date": "2021-04-21T00:00:00.000Z",
+            "reviewer_name": "Daniel",
+            "helpfulness": 1,
+            "photos": []
+        }
+    ]
+}
