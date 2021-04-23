@@ -11,13 +11,21 @@ export const ProductImageDiv = styled.div`
   display: flex;
   justify-content: center;
   // align-self: center;
+
 `;
 
 export const ProductImage = styled.img`
-  max-height: 550px;
-  max-width: 550px;
+  max-height: ${props => props.size || 550}px;
+  max-width: ${props => props.size || 550}px;
   object-fit: cover;
+  &:hover {
+    cursor: ${props => props.cursorType || 'zoom-in'};
+  }
 `;
+
+export const ThumbnailImage = styled.img`
+
+`
 
 // export default ProductImage;
 // export default ProductImageDiv;

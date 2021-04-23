@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styled, {css} from 'styled-components';
-
+// import dataFirstProduct from
 const RoundedImageDiv = styled.div`
   border: 20px;
 
@@ -16,6 +16,8 @@ const RoundedImageDiv = styled.div`
 const Style = (props) => {
   const [clicked, setClicked] = useState(false);
   // const [isCurrentlyHovering, setIsCurrentlyHovering] = useState(false);
+
+  const [test, setTest] = useState(false);
 
   const RoundedImage = styled.img`
   width: 80px;
@@ -55,7 +57,17 @@ const Style = (props) => {
 
   const handleClick = () => {
     props.setCurrentImageURL(props.styleURL);
+    if (props.dataFirstProduct['results'][props.index] !== undefined) {
+      props.setCurrentGroupOfImageURLs(props.dataFirstProduct['results'].map(item => item)[props.index]);
+    }
+    // props.resetSliderToFirstImage();
+
+    setTest(!test);
+    console.log('props.index is', props.index);
     // setClicked(true);
+    // props.setCurrentStyleImages(props.styleURL)
+    // props.setCurrentStyleID(props.)
+
   }
 
   const handleMouseEnter = () => {
