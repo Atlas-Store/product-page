@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   margin-top: 0;
   margin-bottom: auto;
   align-items: center;
+  font-family: 'Arial'
 `;
 
 const Loader = styled.div`
@@ -43,6 +44,7 @@ function App() {
   const [relatedItems, setRelatedItems] = useState([]);
   const [QA, setQA] = useState({});
   const [loading, setLoading] = useState(true);
+  const [rating, setRating] = useState(null);
 
   useEffect(() => {
     const productsRequest = axios.get('/products');
@@ -50,14 +52,17 @@ function App() {
     const stylesRequest = axios.get(`/products/${currentProductId}/styles`);
     const relatedRequest = axios.get(`/products/${currentProductId}/related`);
     const qaRequest = axios.get(`/qa/questions/${currentProductId}`);
+    const ratingRequest = axios.get(`/reviews/meta/${currentProductId}`);
 
-    Promise.all([productsRequest, currentProductRequest, stylesRequest, relatedRequest, qaRequest])
+    Promise.all([productsRequest, currentProductRequest,
+      stylesRequest, relatedRequest, qaRequest, ratingRequest])
       .then(axios.spread((...responses) => {
         setProducts(responses[0].data);
         setCurrentProduct(responses[1].data);
         setStyles(responses[2].data);
         setRelatedItems(responses[3].data);
         setQA(responses[4].data);
+        setRating(responses[5].data);
         setLoading(false);
       }))
       .catch((err) => {
@@ -78,13 +83,20 @@ function App() {
             {console.log('currentProduct:', currentProduct)}
             {console.log('relatedItems:', relatedItems)}
             {console.log('QA:', QA)}
+            {console.log('Ratings:', rating)}
           </p>
           <section>
             <Overview currentProduct={currentProduct} />
           </section>
 
           <section>
-            <RelatedProducts productId={23145} />
+            <RelatedProducts
+              productId={currentProductId}
+              setCurrentProductId={setCurrentProductId}
+              currentProduct={currentProduct}
+              currentStyle={styles}
+              relatedItems={relatedItems}
+            />
           </section>
 
           <section>

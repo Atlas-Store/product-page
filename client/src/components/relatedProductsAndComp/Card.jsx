@@ -96,12 +96,12 @@ function Card(props) {
         console.log(res);
       },
     });
-  }, []);
+  }, [props.productId]);
   return (
 
     <>
       {loading ? <div className="loader" /> : (
-        <Wrapper>
+        <Wrapper onClick={() => props.setCurrentProductId(props.productId)}>
           {
             props.cardType === 'outfit' ? (
               <img
