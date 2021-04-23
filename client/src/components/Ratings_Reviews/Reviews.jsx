@@ -1,15 +1,14 @@
 /* eslint-disable no-param-reassign */
 import React, { useState } from 'react';
-import moment from 'moment';
 import styled from 'styled-components';
 import sampleReviews from './sampleReviews';
-import ReviewBody from './ReviewBody';
-import Helpful from './Helpful';
+
 import AddReview from './AddReview';
-import ReviewPhotos from './ReviewPhotos';
+
 import Stars from '../OView/StarRating';
 import BarRatings from './BarRatings';
 import SizeComfort from './SizeComfort';
+import ReviewTiles from './ReviewTiles';
 
 const renderFunc = require('./renderFunc.js');
 
@@ -28,13 +27,6 @@ const StyledReviewSection = styled.div`
   width: 672px;
 `;
 
-const StyledReview = styled.div`
-  border-bottom: 2.5px solid black;
-  margin-top: 40px;
-  margin-bottom: 40px;
-  font-family: Arial;
-`;
-
 const StyledReviewButton = styled.button`
   background-color: transparent;
   border: 2.5px solid black;
@@ -44,32 +36,6 @@ const StyledReviewButton = styled.button`
   padding-top: 20px;
   padding-bottom: 20px;
   margin: 10px;
-`;
-
-const ReviewInfo = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-
-const ReviewUserDate = styled.span`
-  display: flex;
-  justify-content: flex-end;
-`;
-
-const ReviewResponse = styled.p`
-  width: 432px;
-  background-color: lightgrey;
-`;
-
-const UserName = styled.span`
-  font-size: smaller;
-  padding-right: 5px;
-  font-family: Arial;
-`;
-
-const TimeOfReview = styled.span`
-  font-size: smaller;
-  font-family: Arial;
 `;
 
 const SortMenu = styled.select`
@@ -104,64 +70,18 @@ const RatingNum = styled.div`
   color: rgb(211, 211, 211);
 `;
 
+const StyledOption = styled.option`
+  font-family: 'Arial';
+`;
+
 const Review = () => {
   const [numReviews, updateNumReviews] = useState(sampleReviews.results.length);
   const [reviewsToShow, updateToShow] = useState(2);
   const [writeReview, toggleWR] = useState(false);
   const [sort, updateSort] = useState('Helpful');
+  const [reviewsToRender, updateReviewsRender] = useState(sampleReviews.results);
   const averageRating = renderFunc.calcAvg(sampleReviews.results);
   const fracRecs = renderFunc.numRecommenders(sampleReviews.results);
-  let sortedReviews;
-
-  const reviewsSamp = (input) => (input.map((review) => (
-    <StyledReview>
-      <ReviewInfo>
-        <Stars rating={review.rating} />
-        <ReviewUserDate>
-          <UserName>
-            {review.reviewer_name}
-            ,
-          </UserName>
-          <TimeOfReview>
-            {moment(review.date).format('MMMM DD, YYYY')}
-          </TimeOfReview>
-        </ReviewUserDate>
-      </ReviewInfo>
-      <h4>
-        {review.summary}
-      </h4>
-      <p>
-        <ReviewBody body={review.body} />
-      </p>
-      {(review.photos.length > 0)
-      && (
-      <p>
-        <ReviewPhotos images={review.photos} />
-      </p>
-      )}
-      {review.recommend
-        && <p> ✓ I recommend this product </p>}
-      {review.response
-        && (
-        <div>
-          <ReviewResponse>
-            <h4>Response:</h4>
-            {review.response}
-          </ReviewResponse>
-        </div>
-        )}
-      <p>
-        <Helpful countYes={review.helpfulness} />
-      </p>
-    </StyledReview>
-  )));
-  const [reviewsToRender, updateReviewsRender] = useState(reviewsSamp(sampleReviews.results));
-
-  // if (sort === 'Helpful') {
-  //   sortedReviews = renderFunc.sortByHelpful(sampleReviews.results);
-  //   updateReviewsRender(reviewsSamp(sortedReviews));
-  // }
-  // eslint-disable-next-line no-unused-vars
 
   return (
     <section>
@@ -194,18 +114,17 @@ const Review = () => {
             {'  '}
             reviews sorted by
             <SortMenu onChange={(event) => {
-              // eslint-disable-next-line max-len
-              updateSort(event.target.value); sortedReviews = renderFunc.sortByTime(sampleReviews.results);
-              updateReviewsRender(reviewsSamp(sortedReviews));
+              updateSort(event.target.value);
+              updateReviewsRender(renderFunc[sort](sampleReviews.results));
             }}
             >
-              <option value="Helpful" selected> Helpful </option>
-              <option value="Newest">  Newest  </option>
-              <option value="Relevant">  Relevant  </option>
+              <StyledOption value="Helpful" selected>Helpful</StyledOption>
+              <StyledOption value="Newest">Newest</StyledOption>
+              <StyledOption value="Relevant">Relevant</StyledOption>
             </SortMenu>
           </h3>
           <div>
-            {reviewsToRender.slice(0, reviewsToShow)}
+            <ReviewTiles reviews={reviewsToRender} />
           </div>
           <div id="writeRev">
             {(reviewsToShow < numReviews) && (

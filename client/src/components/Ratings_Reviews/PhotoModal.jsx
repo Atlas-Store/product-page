@@ -18,7 +18,7 @@ const PhotoModal = ({ open, children, onClose }) => {
     <PicModal>
       <button type="button" onClick={() => { onClose(); }}> x</button>
       {children}
-    </PicModal>, document.getElementById('photoPortal'),
+    </PicModal>, document.getElementById('portal'),
   );
 };
 export default PhotoModal;

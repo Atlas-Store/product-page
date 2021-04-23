@@ -1,13 +1,13 @@
 /* eslint-disable no-param-reassign */
 module.exports = {
-  sortByHelpful: (reviews) => (
+  Helpful: (reviews) => (
     reviews.sort((a, b) => {
       const y = a.helpfulness;
       const z = b.helpfulness;
       return z - y;
     })
   ),
-  sortByTime: (reviews) => (
+  Newest: (reviews) => (
     reviews.sort((a, b) => {
       const y = new Date(a.date);
       const z = new Date(b.date);
