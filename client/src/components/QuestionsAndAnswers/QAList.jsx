@@ -5,6 +5,7 @@ import QAEntry from './QAEntry';
 
 const QAListStyled = styled.div`
   border:1px solid #000;
+  max-height: 90vh;
   overflow: auto;
 `;
 
