@@ -42,53 +42,49 @@ const ReviewResponse = styled.p`
 
 const ReviewTiles = (props) => {
   // eslint-disable-next-line react/prop-types
-  const { reviews } = props;
-  const tiles = reviews.map((review) => (
-    <StyledReview>
-      <ReviewInfo>
-        <Stars rating={review.rating} />
-        <ReviewUserDate>
-          <UserName>
-            {review.reviewer_name}
-            ,
-          </UserName>
-          <TimeOfReview>
-            {moment(review.date).format('MMMM DD, YYYY')}
-          </TimeOfReview>
-        </ReviewUserDate>
-      </ReviewInfo>
-      <h4>
-        {review.summary}
-      </h4>
-      <p>
-        <ReviewBody body={review.body} />
-      </p>
-      {(review.photos.length > 0)
-      && (
-      <p>
-        <ReviewPhotos images={review.photos} />
-      </p>
-      )}
-      {review.recommend
-        && <p> ✓ I recommend this product </p>}
-      {review.response
-        && (
-        <div>
-          <ReviewResponse>
-            <h4>Response:</h4>
-            {review.response}
-          </ReviewResponse>
-        </div>
-        )}
-      <p>
-        <Helpful countYes={review.helpfulness} />
-      </p>
-    </StyledReview>
-  ));
-
+  const { review } = props;
   return (
     <div>
-      {tiles}
+      <StyledReview>
+        <ReviewInfo>
+          <Stars rating={review.rating} />
+          <ReviewUserDate>
+            <UserName>
+              {review.reviewer_name}
+              ,
+            </UserName>
+            <TimeOfReview>
+              {moment(review.date).format('MMMM DD, YYYY')}
+            </TimeOfReview>
+          </ReviewUserDate>
+        </ReviewInfo>
+        <h4>
+          {review.summary}
+        </h4>
+        <p>
+          <ReviewBody body={review.body} />
+        </p>
+        {(review.photos.length > 0)
+        && (
+        <p>
+          {review.photos.map((aPhoto) => <ReviewPhotos image={aPhoto.url} />)}
+        </p>
+        )}
+        {review.recommend
+          && <p> ✓ I recommend this product </p>}
+        {review.response
+          && (
+          <div>
+            <ReviewResponse>
+              <h4>Response:</h4>
+              {review.response}
+            </ReviewResponse>
+          </div>
+          )}
+        <p>
+          <Helpful countYes={review.helpfulness} />
+        </p>
+      </StyledReview>
     </div>
   );
 };

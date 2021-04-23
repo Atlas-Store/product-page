@@ -2,9 +2,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import sampleReviews from './sampleReviews';
-
 import AddReview from './AddReview';
-
 import Stars from '../OView/StarRating';
 import BarRatings from './BarRatings';
 import SizeComfort from './SizeComfort';
@@ -67,7 +65,7 @@ const StarsContent = styled.div`
 const RatingNum = styled.div`
   font-size: 36px;
   padding-left: 10px;
-  color: rgb(211, 211, 211);
+  color: #FFF;
 `;
 
 const StyledOption = styled.option`
@@ -116,6 +114,7 @@ const Review = () => {
             <SortMenu onChange={(event) => {
               updateSort(event.target.value);
               updateReviewsRender(renderFunc[sort](sampleReviews.results));
+              console.log(reviewsToRender);
             }}
             >
               <StyledOption value="Helpful" selected>Helpful</StyledOption>
@@ -124,7 +123,7 @@ const Review = () => {
             </SortMenu>
           </h3>
           <div>
-            <ReviewTiles reviews={reviewsToRender} />
+            {reviewsToRender.map((aReview) => <ReviewTiles review={aReview} />)}
           </div>
           <div id="writeRev">
             {(reviewsToShow < numReviews) && (
@@ -132,8 +131,10 @@ const Review = () => {
               MORE REVIEWS
             </StyledReviewButton>
             )}
-            <StyledReviewButton type="button" onClick={() => { toggleWR(!writeReview); }}> ADD A REVIEW + </StyledReviewButton>
-            {writeReview && <AddReview isOpen={writeReview} />}
+            <StyledReviewButton type="button" onClick={() => { toggleWR(true); }}>
+              ADD A REVIEW +
+            </StyledReviewButton>
+            <AddReview open={writeReview} onClose={() => { toggleWR(false); }} />
           </div>
         </StyledReviewSection>
       </StyledRRBox>
