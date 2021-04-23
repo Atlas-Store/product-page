@@ -1,23 +1,17 @@
 const express = require('express');
 
 const app = express();
-const { getAPIdata } = require('./helpers/api.js');
+const products = require('./helpers/productsAPI');
+const reviews = require('./helpers/reviewsAPI');
+const qa = require('./helpers/qaAPI');
 
 app.use(express.static(`${__dirname}/client/dist`));
 
 app.use(express.urlencoded({ extended: false }));
 
-app.get('/*', (req, res) => {
-  console.log('we hit the wildcard route');
-  getAPIdata((err, data) => {
-    if (err) {
-      res.status(400).send(err);
-      res.end();
-    } else {
-      res.status(200).send(data);
-    }
-  });
-});
+app.use('/products', products);
+app.use('/reviews', reviews);
+app.use('/qa', qa);
 
 app.listen(3000, () => {
   // eslint-disable-next-line no-console
