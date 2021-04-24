@@ -24,7 +24,25 @@ function Answer({ answers }) {
   const [aCount, setACount] = useState(2);
 
   const handleMoreAnswersClick = () => {
-    setACount((state) => state + 2);
+    setACount(Object.keys(answers).length);
+  };
+
+  const handleLessAnswer = () => {
+    setACount(2);
+  };
+
+  const renderAnswerButtons = () => {
+    if (Object.keys(answers).length === 0) {
+      return <button type="button">add an answer</button>;
+    }
+
+    if (Object.keys(answers).length > aCount) {
+      return <button type="button" onClick={handleMoreAnswersClick}>Load More Answers</button>;
+    }
+
+    if (Object.keys(answers).length === aCount && Object.keys(answers).length > 2) {
+      return <button type="button" onClick={handleLessAnswer}>Show Less Answers</button>;
+    }
   };
 
   const sortedIds = Object.keys(answers).sort((a, b) => (
@@ -33,8 +51,8 @@ function Answer({ answers }) {
 
   return (
     <div>
-      {sortedIds.map((id, i) => (
-        <AnswerWrapper>
+      {sortedIds.slice(0, aCount).map((id, i) => (
+        <AnswerWrapper key={answers[id].id}>
           {i === 0 && (
           <ALabel>
             A:
@@ -48,8 +66,7 @@ function Answer({ answers }) {
           </AnswerInfo>
         </AnswerWrapper>
       ))}
-      {Object.keys(answers).length > aCount
-            && <button type="button" onClick={handleMoreAnswersClick}>Load More Answers</button>}
+      {renderAnswerButtons()}
     </div>
   );
 }

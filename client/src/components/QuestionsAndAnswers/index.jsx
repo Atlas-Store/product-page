@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import SearchBar from './SearchBar';
 import QAList from './QAList';
 import MoreQuestionsButton from './MoreQuestionsButton';
 import AddQuestionButton from './AddQuestionButton';
-import testData from './dummyData';
-
-const dummyData = testData.results;
 
 const QAWrapper = styled.div`
   // border: 2px solid palevioletred;
@@ -31,13 +29,13 @@ const ConditionalWrapper = styled.div`
   overflow: auto;
 `;
 
-function QuestionsAnswers({ productId }) {
-  const [questions, setQuestions] = useState([]);
+function QuestionsAnswers({ qaResults }) {
+  const [questions, setQuestions] = useState(qaResults);
   const [qCount, setQCount] = useState(2);
 
   useEffect(() => {
-    setQuestions(dummyData);
-  }, []);
+    setQuestions(qaResults);
+  }, [questions]);
 
   const handleMoreQuestionsClick = () => {
     setQCount((state) => state + 2);
@@ -57,5 +55,25 @@ function QuestionsAnswers({ productId }) {
     </QAWrapper>
   );
 }
+
+QuestionsAnswers.propTypes = {
+  qaResults: PropTypes.arrayOf(PropTypes.shape({
+    question_id: PropTypes.number,
+    question_body: PropTypes.string,
+    question_date: PropTypes.string,
+    asker_name: PropTypes.string,
+    question_helpfulness: PropTypes.number,
+    reported: PropTypes.bool,
+    answers: PropTypes.shape({
+      id: PropTypes.shape({
+        id: PropTypes.number,
+        body: PropTypes.string,
+        date: PropTypes.string,
+        answerer_name: PropTypes.string,
+        helpfulness: PropTypes.number,
+      }),
+    }).isRequired,
+  })).isRequired,
+};
 
 export default QuestionsAnswers;
