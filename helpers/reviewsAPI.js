@@ -5,7 +5,21 @@ const router = express.Router();
 const { getAPIdata } = require('./getAPIdata');
 
 router.get('/meta/:product_id', (req, res) => {
+  console.log('made it to reviewsAPI');
   const endpoint = `reviews/meta/?product_id=${req.params.product_id}`;
+  getAPIdata(endpoint, (err, data) => {
+    if (err) {
+      res.status(400).send(err);
+      res.end();
+    } else {
+      res.status(200).send(data);
+    }
+  });
+});
+
+router.get('/:product_id', (req, res) => {
+  console.log('hello');
+  const endpoint = `reviews/?product_id=${req.params.product_id}`;
   getAPIdata(endpoint, (err, data) => {
     if (err) {
       res.status(400).send(err);

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-param-reassign */
 import React, { useState } from 'react';
 import styled from 'styled-components';
@@ -72,14 +73,14 @@ const StyledOption = styled.option`
   font-family: 'Arial';
 `;
 
-const Review = () => {
+const Review = ({ reviews, ratings }) => {
   const [numReviews, updateNumReviews] = useState(sampleReviews.results.length);
   const [reviewsToShow, updateToShow] = useState(2);
   const [writeReview, toggleWR] = useState(false);
   const [sort, updateSort] = useState('Helpful');
-  const [reviewsToRender, updateReviewsRender] = useState(sampleReviews.results);
-  const averageRating = renderFunc.calcAvg(sampleReviews.results);
-  const fracRecs = renderFunc.numRecommenders(sampleReviews.results);
+  const [reviewsToRender, updateReviewsRender] = useState(reviews.results);
+  const [averageRating, setAvgRating] = useState(renderFunc.calcAvg(ratings.ratings));
+  const [fracRecs, setFracRecs] = useState(renderFunc.numRecommenders(ratings.recommended));
 
   return (
     <section>
@@ -103,18 +104,17 @@ const Review = () => {
             {fracRecs}
             % reviewers recommend this product
           </FractionRecs>
-          <BarRatings reviews={sampleReviews.results} />
+          <BarRatings starStats={ratings.ratings} />
           <SizeComfort />
         </RatingsSection>
         <StyledReviewSection>
           <h3>
-            { sampleReviews.results.length }
+            { reviews.results.length }
             {'  '}
             reviews sorted by
             <SortMenu onChange={(event) => {
               updateSort(event.target.value);
               updateReviewsRender(renderFunc[sort](sampleReviews.results));
-              console.log(reviewsToRender);
             }}
             >
               <StyledOption value="Helpful" selected>Helpful</StyledOption>

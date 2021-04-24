@@ -48,7 +48,19 @@ const ReviewComponent = styled.div`
 const SummaryInput = styled.input`
   background: rgb(248,248,255);
   border-bottom: 1.5px solid black;
-  width: 200px;
+`;
+
+const SubmitButton = styled.button`
+  position: absolute;
+  margin: 5px;
+  background: transparent;
+  border: none;
+  bottom: 10%;
+  right: 10%;
+  &:hover {
+    background: lightgreen;
+    padding: 5px;
+  }
 `;
 
 const AddReview = ({ open, onClose }) => {
@@ -67,12 +79,12 @@ const AddReview = ({ open, onClose }) => {
           <form>
             Would you recommend this product?
             <div>
-              <input type="radio" id="Yes" name="Yes" value="Yes" checked />
-              <label htmlFor="Yes"> Yes </label>
+              <input type="radio" name="recommend" value="Yes" checked />
+              <label for="Yes"> Yes </label>
             </div>
             <div>
-              <input type="radio" id="No" name="No" value="No" />
-              <label htmlFor="No"> No </label>
+              <input type="radio" name="recommend" value="No" />
+              <label for="No"> No </label>
             </div>
           </form>
         </ReviewComponent>
@@ -86,16 +98,31 @@ const AddReview = ({ open, onClose }) => {
         <ReviewComponent>
           <form>
             Review Summary:
+            {' '}
             <SummaryInput type="text" required value={reviewSummary} onChange={(event) => updateSummary(event.target.value)} placeHolder="Love it" maxLength="60" />
           </form>
         </ReviewComponent>
         <ReviewComponent>
           <form>
             Details:
+            {' '}
             <SummaryInput type="text" required value={reviewBody} onChange={(event) => updateBody(event.target.value)} placeHolder="Best purchase ever!" maxLength="1000" />
           </form>
         </ReviewComponent>
-        <Close type="button" onClick={onClose}> x </Close>
+        <Close type="button" onClick={onClose}>
+          <strong>
+            <u>
+              x
+            </u>
+          </strong>
+        </Close>
+        <SubmitButton type="button" onClick={onClose}>
+          <strong>
+            <u>
+              SUBMIT
+            </u>
+          </strong>
+        </SubmitButton>
       </WriteModal>
     </>, document.getElementById('portal'),
   );

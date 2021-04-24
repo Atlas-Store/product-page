@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import PhotoModal from './PhotoModal';
 
 const ImageButton = styled.button`
-  background-color: transparent;
+  background: transparent;
   border: none;
 
 `;
@@ -12,8 +12,7 @@ const Thumbnail = styled.img`
   height: 96px;
   width: 144px;
   ${ImageButton}:hover & {
-    height: 120px;
-    width: 168px;
+    border: 2.5px solid black;
   }
 `;
 
