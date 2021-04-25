@@ -2,6 +2,7 @@
 /* eslint-disable no-param-reassign */
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 import sampleReviews from './sampleReviews';
 import AddReview from './AddReview';
 import Stars from '../OView/StarRating';
@@ -74,14 +75,22 @@ const StyledOption = styled.option`
 `;
 
 const Review = ({ reviews, ratings }) => {
-  const [numReviews, updateNumReviews] = useState(sampleReviews.results.length);
+  const [numReviews, updateNumReviews] = useState(reviews.results.length);
   const [reviewsToShow, updateToShow] = useState(2);
   const [writeReview, toggleWR] = useState(false);
-  const [sort, updateSort] = useState('Helpful');
   const [reviewsToRender, updateReviewsRender] = useState(reviews.results);
   const [averageRating, setAvgRating] = useState(renderFunc.calcAvg(ratings.ratings));
   const [fracRecs, setFracRecs] = useState(renderFunc.numRecommenders(ratings.recommended));
-
+  const productID = reviews.product;
+  const grabSortedReviews = (byWhat) => {
+    const sortBy = byWhat.toLowerCase();
+    axios.get(`/reviews/${productID}/${sortBy}`)
+      .then((results) => {
+        console.log(results.data.results);
+        updateReviewsRender(results.data.results);
+      })
+      .catch((error) => console.log(error));
+  };
   return (
     <section>
       <h2>
@@ -113,8 +122,7 @@ const Review = ({ reviews, ratings }) => {
             {'  '}
             reviews sorted by
             <SortMenu onChange={(event) => {
-              updateSort(event.target.value);
-              updateReviewsRender(renderFunc[sort](sampleReviews.results));
+              grabSortedReviews(event.target.value);
             }}
             >
               <StyledOption value="Helpful" selected>Helpful</StyledOption>

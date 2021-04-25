@@ -28,7 +28,6 @@ const BarSection = styled.section`
 // eslint-disable-next-line react/prop-types
 const BarRatings = ({ starStats }) => {
   const freqOfRatings = renderFunc.frequency(starStats);
-  console.log(freqOfRatings);
   return (
     <BarSection>
       <StarBars>
