@@ -106,7 +106,7 @@ function App() {
             <QuestionsAnswers />
           </section>
           <section>
-            <Reviews reviews={reviews} ratings={ratings} />
+            <Reviews reviews={reviews} ratings={ratings} currentProduct={currentProduct} />
           </section>
 
         </Wrapper>

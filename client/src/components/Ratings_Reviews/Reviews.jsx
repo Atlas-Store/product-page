@@ -74,7 +74,7 @@ const StyledOption = styled.option`
   font-family: 'Arial';
 `;
 
-const Review = ({ reviews, ratings }) => {
+const Review = ({ reviews, ratings, currentProduct }) => {
   const [numReviews, updateNumReviews] = useState(reviews.results.length);
   const [reviewsToShow, updateToShow] = useState(2);
   const [writeReview, toggleWR] = useState(false);
@@ -142,7 +142,11 @@ const Review = ({ reviews, ratings }) => {
             <StyledReviewButton type="button" onClick={() => { toggleWR(true); }}>
               ADD A REVIEW +
             </StyledReviewButton>
-            <AddReview open={writeReview} onClose={() => { toggleWR(false); }} />
+            <AddReview
+              open={writeReview}
+              onClose={() => { toggleWR(false); }}
+              currentProduct={currentProduct}
+            />
           </div>
         </StyledReviewSection>
       </StyledRRBox>

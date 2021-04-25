@@ -7,6 +7,7 @@ const WriteModal = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-evenly;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -16,7 +17,8 @@ const WriteModal = styled.div`
   zIndex=1000;
   border: 2.5px solid black;
   width: fit-content;
-  height: fit-content;
+  height: 75%;
+  font-family: Arial;
 `;
 
 const Overlay = styled.div`
@@ -41,13 +43,25 @@ const Close = styled.button`
   }
 `;
 
+const Title = styled.h2`
+  padding: 10px;
+`;
+
 const ReviewComponent = styled.div`
-  margin: 56px;
+  margin-top: 28px;
+  margin-bottom: 28px;
+  margin-right: 56px;
 `;
 
 const SummaryInput = styled.input`
   background: rgb(248,248,255);
-  border-bottom: 1.5px solid black;
+  border: none;
+  width: 2in;
+`;
+
+const UserInput = styled.input`
+  background: rgb(248,248,255);
+  border: none;
 `;
 
 const SubmitButton = styled.button`
@@ -62,19 +76,28 @@ const SubmitButton = styled.button`
     padding: 5px;
   }
 `;
-
-const AddReview = ({ open, onClose }) => {
+const starCategory = {
+  1: 'Poor',
+  2: 'Fair',
+  3: 'Average',
+  4: 'Good',
+  5: 'Great',
+};
+const AddReview = ({ open, onClose, currentProduct }) => {
   if (!open) return null;
   const [reviewStars, updateRStars] = useState(5);
   const [reviewSummary, updateSummary] = useState('');
   const [reviewBody, updateBody] = useState('');
+  const [userName, updateUserName] = useState('');
+  const [email, updateEmail] = useState('');
   return ReactDOM.createPortal(
     <>
       <Overlay />
       <WriteModal>
-        <ReviewComponent>
-          WRITE A REVIEW
-        </ReviewComponent>
+        <Title>
+          WRITE YOUR REVIEW
+          <div><u>{currentProduct.name}</u></div>
+        </Title>
         <ReviewComponent>
           <form>
             Would you recommend this product?
@@ -91,22 +114,37 @@ const AddReview = ({ open, onClose }) => {
         <ReviewComponent>
           How would you rate this product?
           <form>
-            <input type="range" name="rating" min="0" max="5" step="1" required onChange={(event) => updateRStars(event.target.value)} />
+            <input type="range" name="rating" min="1" max="5" step="1" required onChange={(event) => updateRStars(event.target.value)} />
             <Stars rating={reviewStars} />
+            <div>{starCategory[reviewStars]}</div>
           </form>
         </ReviewComponent>
         <ReviewComponent>
           <form>
-            Review Summary:
+            <div>Review Summary:</div>
             {' '}
-            <SummaryInput type="text" required value={reviewSummary} onChange={(event) => updateSummary(event.target.value)} placeHolder="Love it" maxLength="60" />
+            <SummaryInput type="text" required value={reviewSummary} onChange={(event) => updateSummary(event.target.value)} placeholder="Love it" maxLength="60" />
           </form>
         </ReviewComponent>
         <ReviewComponent>
           <form>
-            Details:
+            <div>Details:</div>
             {' '}
-            <SummaryInput type="text" required value={reviewBody} onChange={(event) => updateBody(event.target.value)} placeHolder="Best purchase ever!" maxLength="1000" />
+            <SummaryInput type="text" required value={reviewBody} onChange={(event) => updateBody(event.target.value)} placeholder="Best purchase ever!" maxLength="1000" minLength="50" />
+          </form>
+        </ReviewComponent>
+        <ReviewComponent>
+          <form>
+            <div>Username:</div>
+            {' '}
+            <UserInput type="text" required value={userName} onChange={(event) => updateUserName(event.target.value)} placeholder="Username" maxLength="60" />
+          </form>
+        </ReviewComponent>
+        <ReviewComponent>
+          <form>
+            <div>Email:</div>
+            {' '}
+            <UserInput type="text" required value={email} onChange={(event) => updateEmail(event.target.value)} placeholder="Email" maxLength="250" />
           </form>
         </ReviewComponent>
         <Close type="button" onClick={onClose}>

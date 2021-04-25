@@ -69,6 +69,9 @@ const SizeComfort = ({ reviews }) => (
         <Classification location="left">
           Too Narrow
         </Classification>
+        <Classification location="center">
+          Perfect
+        </Classification>
         <Classification location="right">
           Too Wide
         </Classification>
