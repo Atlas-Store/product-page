@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
@@ -15,15 +15,12 @@ function SearchBar({ handleSearch }) {
 
   function handleChange(event) {
     setSearchTerm(event.target.value);
-    if (searchTerm.length > 2) {
-      handleSearch(searchTerm);
-    }
+    handleSearch(event.target.value);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
     handleSearch(searchTerm);
-    console.log('handleSubmit', event.target.value);
   }
 
   return (

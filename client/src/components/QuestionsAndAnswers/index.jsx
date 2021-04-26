@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import SearchBar from './SearchBar';
@@ -33,10 +33,6 @@ function QuestionsAnswers({ qaResults }) {
   const [questions, setQuestions] = useState(qaResults);
   const [qCount, setQCount] = useState(2);
 
-  useEffect(() => {
-    setQuestions(qaResults);
-  }, [questions]);
-
   const handleMoreQuestionsClick = () => {
     setQCount((state) => state + 2);
   };
@@ -44,11 +40,15 @@ function QuestionsAnswers({ qaResults }) {
   const handleSearch = (searchTerm) => {
     const lowerCaseST = searchTerm.toLowerCase();
 
-    const filteredQs = questions.filter((question) => {
-      const lowerCaseQ = question.question_body.toLowerCase();
-      return lowerCaseQ.includes(lowerCaseST);
-    });
-    console.log('filteredQuestions inside handle Search: ', filteredQs);
+    if (searchTerm.length > 2) {
+      const filteredQs = questions.filter((question) => {
+        const lowerCaseQ = question.question_body.toLowerCase();
+        return lowerCaseQ.includes(lowerCaseST);
+      });
+      setQuestions(filteredQs);
+    } else {
+      setQuestions(qaResults);
+    }
   };
 
   return (
