@@ -45,8 +45,10 @@ function App() {
   const [QA, setQA] = useState({});
   const [loading, setLoading] = useState(true);
   const [rating, setRating] = useState(null);
+  const [outfits, setOutfits] = useState({});
 
   useEffect(() => {
+    setLoading(true);
     const productsRequest = axios.get('/products');
     const currentProductRequest = axios.get(`/products/${currentProductId}`);
     const stylesRequest = axios.get(`/products/${currentProductId}/styles`);
@@ -96,6 +98,8 @@ function App() {
               currentProduct={currentProduct}
               currentStyle={styles}
               relatedItems={relatedItems}
+              outfits={outfits}
+              setOutfits={setOutfits}
             />
           </section>
 

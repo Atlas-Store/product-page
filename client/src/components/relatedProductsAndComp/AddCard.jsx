@@ -8,14 +8,14 @@ const Wrapper = styled.div`
   flex-direction: column;
   border: 1px solid transparent;
   margin-right: 20px;
-  width: 150px;
-  height: 235px;
+  width: 170px;
+  height: 275px;
   img {
     display: block;
     object-fit: cover;
     width: 100px;
     height: 100px;
-    padding: 40px 25px 30px 25px;
+    padding: 55px 25px 30px 35px;
   };
   .addOutfit {
     text-align: center;
@@ -30,7 +30,7 @@ function AddCard({currentProduct, setOutfits, outfits}) {
   newOutfit[currentProduct] = 1;
   return (
     <Wrapper onClick={() => { setOutfits({ ...outfits, ...newOutfit }); }}>
-      <img src="https://icons-for-free.com/iconfiles/png/512/circle+create+new+plus+sign+icon-1320085936892806512.png" alt="add item icon" />
+      <img src="./addCard.png" alt="add item icon" />
       <span className="addOutfit">Add To Outfit</span>
     </Wrapper>
   );

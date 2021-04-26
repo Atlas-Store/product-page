@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import $ from 'jquery';
+import axios from 'axios';
 import Modal from './Modal';
-import config from '../../../../config';
 import Star from '../OView/StarRating';
 
 const Wrapper = styled.div`
@@ -11,17 +10,18 @@ const Wrapper = styled.div`
   flex-direction: column;
   border: 1px solid transparent;
   margin-right: 20px;
-  width: 150px;
-  height: 245px;
+  width: 170px;
+  height: 275px;
   img {
     display: block;
     object-fit: cover;
-    width:150px;
-    height:150px;
+    width:170px;
+    height:170px;
   };
   .icon {
     position: absolute;
-    right: 0px;
+    right: 4px;
+    top: 4px;
     height: 20px;
     width: 20px;
     margin: 4px 4px;
@@ -47,6 +47,27 @@ const Wrapper = styled.div`
   }
 `;
 
+const Description = styled.div`
+  padding-left: 4px;
+`;
+
+const Category = styled.div`
+  color: grey;
+  text-transform: uppercase;
+  font-size: 80%;
+  padding-top: 6px;
+`;
+
+const ProductName = styled.div`
+  padding-top: 5px;
+`;
+
+const Price = styled.div`
+  padding-top: 3px;
+  padding-bottom: 1px;
+  font-size: 85%;
+`;
+
 const useMove = () => {
   const [state, setState] = useState({ x: 0, y: 0 });
 
@@ -64,44 +85,33 @@ const useMove = () => {
 function Card(props) {
   const [styles, setStyles] = useState(null);
   const [product, setProduct] = useState(null);
+  const [rating, setRating] = useState(null);
   const [loading, setLoading] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
-  const {x, y, handleMouseMove} = useMove();
+  const { x, y, handleMouseMove } = useMove();
 
   useEffect(() => {
-    $.ajax({
-      method: 'GET',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/products/${props.productId}/styles`,
-      headers: {
-        Authorization: config.TOKEN,
-      },
-      success: (res) => {
-        setStyles(res);
-        $.ajax({
-          method: 'GET',
-          url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/products/${props.productId}`,
-          headers: {
-            Authorization: config.TOKEN,
-          },
-          success: (res) => {
-            setProduct(res);
-            setLoading(false);
-          },
-          failure: (res) => {
-            console.log(res);
-          },
-        });
-      },
-      failure: (res) => {
-        console.log(res);
-      },
-    });
-  }, [props.productId]);
-  return (
+    const stylesRequest = axios.get(`/products/${props.productId}/styles`);
+    const currentProductRequest = axios.get(`/products/${props.productId}`);
+    const ratingRequest = axios.get(`/reviews/meta/${props.productId}`);
 
+    Promise.all([stylesRequest, currentProductRequest, ratingRequest])
+      .then(axios.spread((...responses) => {
+        setStyles(responses[0].data);
+        setProduct(responses[1].data);
+        setRating(responses[2].data);
+        setLoading(false);
+      }))
+      .catch((err) => {
+        setLoading(true);
+        console.log(err);
+      });
+  }, [props.productId]);
+
+  return (
     <>
       {loading ? <div className="loader" /> : (
-        <Wrapper onClick={() => props.setCurrentProductId(props.productId)}>
+        <Wrapper>
           {
             props.cardType === 'outfit' ? (
               <img
@@ -132,16 +142,26 @@ function Card(props) {
             x={x}
             y={y}
             open={isOpen}
+            product={product}
+            currentProduct={props.currentProduct}
             onClose={() => setIsOpen(false)}
           />
-          <img src={styles.results[0].photos[0].thumbnail_url === null ? './noImg.jpg' : styles.results[0].photos[0].thumbnail_url} alt="product thumbnail" />
-          <span>{product.category}</span>
-          <span><b>{product.name}</b></span>
-          <span>
-            {`$${styles.results[0].original_price}`}
-            {' '}
-          </span>
-          <Star rating={0} />
+          <img
+            src={styles.results[0].photos[0].thumbnail_url === null ? './noImg.jpg' : styles.results[0].photos[0].thumbnail_url}
+            alt="product thumbnail"
+            onClick={() => props.setCurrentProductId(props.productId)}
+          />
+          <Description>
+            <Category>{product.category}</Category>
+            <ProductName onClick={() => props.setCurrentProductId(props.productId)}>
+              <b>{product.name}</b>
+            </ProductName>
+            <Price>
+              {`$${styles.results[0].original_price}`}
+              {' '}
+            </Price>
+            <Star rating={4.1} />
+          </Description>
         </Wrapper>
       )}
     </>

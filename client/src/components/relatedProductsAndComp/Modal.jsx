@@ -35,11 +35,15 @@ const ProductNames = styled.div`
   padding-bottom: 20px;
   font-weight: bold;
   span :first-of-type {
-    padding-right: 40px;
+    padding-left: 3px;
+    padding-right: 50px;
+  }
+  span :second-of-type {
+    padding-left:3px;
   }
 `;
 
-export default function Modal({ open, children, onClose, x, y }) {
+export default function Modal({ open, children, onClose, x, y, product, currentProduct }) {
   if (!open) return null;
 
   return ReactDom.createPortal(
@@ -48,8 +52,8 @@ export default function Modal({ open, children, onClose, x, y }) {
       <ModalWrapper style={{ top: `${y}px`, left: `${x}px` }}>
         <Comparing>COMPARING</Comparing>
         <ProductNames>
-          <span>Product Short Name 1</span>
-          <span>Product Short Name 2</span>
+          <span>{currentProduct.name}</span>
+          <span>{product.name}</span>
         </ProductNames>
         <table>
           <tr>
