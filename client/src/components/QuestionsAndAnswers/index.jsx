@@ -10,8 +10,8 @@ const QAWrapper = styled.div`
   // border: 2px solid palevioletred;
   // margin: 1em;
   // padding: 0.25em 1em;
-  border-top: 20px solid blue;
-  border-bottom: 20px solid blue;
+  border-top: 2px solid grey;
+  border-bottom: 2px solid grey;
   max-height: 100vh;
   max-width: 100vh;
   min-width: 50vh;
@@ -22,8 +22,8 @@ const ConditionalWrapper = styled.div`
   // border: 2px solid palevioletred;
   margin: 10px;
   // padding: 0.25em 1em;
-  border-top: 10px solid green;
-  border-bottom: 10px solid green;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
   max-height: 100vh;
   max-width: 100vh;
   overflow: auto;
