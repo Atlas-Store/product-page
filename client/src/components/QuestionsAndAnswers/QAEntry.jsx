@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Container, Row, Col } from './Layout';
+
+const Row = styled.div`
+  display:flex;
+`;
+
+const Col = styled.div`
+  flex: ${(props) => props.size};
+  margin: 20ev;
+  padding: 20ev;
+`;
 
 function QAEntry({ question }) {
   const [aCount, setACount] = useState(2);
@@ -8,15 +18,17 @@ function QAEntry({ question }) {
   const handleMoreAnswersClick = () => {
     setACount((state) => state + 2);
   };
+  // const sortedAnswers = Object.keys(question.answers);
+  // sortedAnswers.sort((a, b) => {})
 
   return (
-    <Container>
+    <div>
       <Row>
-        <Col size={2}>
+        <Col size={2} padding={10}>
           Q:
           {question.question_body}
         </Col>
-        <Col size={1}>
+        <Col size={1} padding={100}>
           helpful? yes
           (
           {question.question_helpfulness}
@@ -26,16 +38,16 @@ function QAEntry({ question }) {
       {Object.keys(question.answers).slice(0, aCount).map((key) => {
         const answer = question.answers[key];
         return (
-          <Container>
-            <Row>
+          <div key={key}>
+            <div>
               <Col size={2}>
                 <p>
                   A:
                   {answer.body}
                 </p>
               </Col>
-            </Row>
-            <Row>
+            </div>
+            <div>
               <Col size={2}>
                 <span>
                   {answer.answerer_name}
@@ -48,13 +60,13 @@ function QAEntry({ question }) {
                   | report
                 </span>
               </Col>
-            </Row>
-          </Container>
+            </div>
+          </div>
         );
       })}
       {Object.keys(question.answers).length > aCount
-            && <Row><Col onClick={handleMoreAnswersClick}>Load More Question</Col></Row>}
-    </Container>
+        && <button type="button" onClick={handleMoreAnswersClick}>Load More Answers</button>}
+    </div>
   );
 }
 

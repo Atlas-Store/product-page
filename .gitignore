@@ -4,3 +4,4 @@ client/.DS_Store
 client/dist/.DS_Store
 package-lock.json
 .DS_Store
+client/dist/bundle.js

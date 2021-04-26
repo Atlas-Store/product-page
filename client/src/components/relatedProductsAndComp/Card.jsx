@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-
 import $ from 'jquery';
+import Modal from './Modal';
 import config from '../../../../config';
+import Star from '../OView/StarRating';
 
 const Wrapper = styled.div`
   display: flex;
@@ -11,7 +12,7 @@ const Wrapper = styled.div`
   border: 1px solid transparent;
   margin-right: 20px;
   width: 150px;
-  height: 235px;
+  height: 245px;
   img {
     display: block;
     object-fit: cover;
@@ -46,10 +47,26 @@ const Wrapper = styled.div`
   }
 `;
 
+const useMove = () => {
+  const [state, setState] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    e.persist();
+    setState((state) => ({ ...state, x: e.clientX, y: e.clientY }));
+  };
+  return {
+    x: state.x,
+    y: state.y,
+    handleMouseMove,
+  };
+};
+
 function Card(props) {
   const [styles, setStyles] = useState(null);
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const {x, y, handleMouseMove} = useMove();
 
   useEffect(() => {
     $.ajax({
@@ -79,12 +96,12 @@ function Card(props) {
         console.log(res);
       },
     });
-  }, []);
+  }, [props.productId]);
   return (
 
     <>
       {loading ? <div className="loader" /> : (
-        <Wrapper>
+        <Wrapper onClick={() => props.setCurrentProductId(props.productId)}>
           {
             props.cardType === 'outfit' ? (
               <img
@@ -105,19 +122,26 @@ function Card(props) {
                   src="./star.png"
                   alt="star icon"
                   onClick={() => {
-                    console.log(props.productId);
+                    setIsOpen(true);
                   }}
+                  onMouseMove={handleMouseMove}
                 />
               )
           }
+          <Modal
+            x={x}
+            y={y}
+            open={isOpen}
+            onClose={() => setIsOpen(false)}
+          />
           <img src={styles.results[0].photos[0].thumbnail_url === null ? './noImg.jpg' : styles.results[0].photos[0].thumbnail_url} alt="product thumbnail" />
           <span>{product.category}</span>
-          <span><b>{styles.results[0].name}</b></span>
+          <span><b>{product.name}</b></span>
           <span>
             {`$${styles.results[0].original_price}`}
             {' '}
           </span>
-          <span> ***** </span>
+          <Star rating={0} />
         </Wrapper>
       )}
     </>

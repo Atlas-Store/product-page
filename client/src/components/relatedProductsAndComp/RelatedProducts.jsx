@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Slider from 'react-slick';
 import $ from 'jquery';
 import Card from './Card';
+import { PrevArrow, NextArrow } from './Arrows';
 import AddCard from './AddCard';
 import config from '../../../../config';
 
@@ -66,43 +67,7 @@ const Wrapper = styled.div`
   }
 `;
 
-function NextArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-    <div
-      className={className}
-      style={{
-        position: 'absolute',
-        right: '10px',
-        width: '40px',
-        height: '40px',
-        display: 'block',
-      }}
-      onClick={onClick}
-    />
-  );
-}
-
-function PrevArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-    <div
-      className={className}
-      style={{
-        zIndex: '1',
-        position: 'absolute',
-        left: '10px',
-        width: '40px',
-        height: '40px',
-      }}
-      onClick={onClick}
-    />
-  );
-}
-
-function RelatedProducts(props) {
+function RelatedProducts({ currentProduct, currentStyle, relatedItems, productId, setCurrentProductId}) {
   const settings = {
     className: 'slider variable-width',
     dots: false,
@@ -116,78 +81,74 @@ function RelatedProducts(props) {
     prevArrow: <PrevArrow />,
     draggable: false,
   };
-
-  const [currentProduct, setCurrentProduct] = useState(null);
-  const [currentStyle, setCurrentStyle] = useState(null);
   const [outfits, setOutfits] = useState({});
-  const [relatedItems, setRelatedItems] = useState(null);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    $.ajax({
-      method: 'GET',
-      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/products/23147',
-      headers: {
-        Authorization: config.TOKEN,
-      },
-      success: (res) => {
-        setCurrentProduct(res);
-        $.ajax({
-          method: 'GET',
-          url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/products/23147/styles',
-          headers: {
-            Authorization: config.TOKEN,
-          },
-          success: (res) => {
-            setCurrentStyle(res);
-            $.ajax({
-              method: 'GET',
-              url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/products/23147/related',
-              headers: {
-                Authorization: config.TOKEN,
-              },
-              success: (res) => {
-                setRelatedItems(res);
-                setLoading(false);
-              },
-              failure: (res) => {
-                console.log(res);
-              },
-            });
-          },
-          failure: (res) => {
-            console.log(res);
-          },
-        });
-      },
-      failure: (res) => {
-        console.log(res);
-      },
-    });
-  }, []);
+  // const [currentProduct, setCurrentProduct] = useState(null);
+  // const [currentStyle, setCurrentStyle] = useState(null);
+
+  // const [relatedItems, setRelatedItems] = useState(null);
+  // const [loading, setLoading] = useState(true);
+
+  // useEffect(() => {
+  //   $.ajax({
+  //     method: 'GET',
+  //     url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/products/23147',
+  //     headers: {
+  //       Authorization: config.TOKEN,
+  //     },
+  //     success: (res) => {
+  //       setCurrentProduct(res);
+  //       $.ajax({
+  //         method: 'GET',
+  //         url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/products/23147/styles',
+  //         headers: {
+  //           Authorization: config.TOKEN,
+  //         },
+  //         success: (res) => {
+  //           setCurrentStyle(res);
+  //           $.ajax({
+  //             method: 'GET',
+  //             url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/products/23147/related',
+  //             headers: {
+  //               Authorization: config.TOKEN,
+  //             },
+  //             success: (res) => {
+  //               setRelatedItems(res);
+  //               setLoading(false);
+  //             },
+  //             failure: (res) => {
+  //               console.log(res);
+  //             },
+  //           });
+  //         },
+  //         failure: (res) => {
+  //           console.log(res);
+  //         },
+  //       });
+  //     },
+  //     failure: (res) => {
+  //       console.log(res);
+  //     },
+  //   });
+  // }, []);
 
   return (
     <>
-      {loading ? <div>...loading</div> : (
-        <Wrapper>
-          <h4>RELATED PRODUCTS</h4>
-          {/* {console.log('related', relatedItems)}
-          {console.log('outfits', outfits)} */}
-          <Slider {...settings}>
-            {relatedItems.map((item) => (
-              <Card productId={item} cardType="related" />
-            ))}
-          </Slider>
-          <h4>YOUR OUTFIT</h4>
-          <Slider {...settings}>
-            {Object.keys(outfits).map((outfit) => (
-              <Card productId={outfit} setOutfits={setOutfits} outfits={outfits} cardType="outfit" />
-            ))}
-            <AddCard setOutfits={setOutfits} outfits={outfits} currentProduct={currentProduct.id} />
-          </Slider>
-        </Wrapper>
-
-      )}
+      <Wrapper>
+        <h4>RELATED PRODUCTS</h4>
+        <Slider {...settings}>
+          {relatedItems.map((item) => (
+            <Card productId={item} cardType="related" setCurrentProductId={setCurrentProductId} />
+          ))}
+        </Slider>
+        <h4>YOUR OUTFIT</h4>
+        <Slider {...settings}>
+          {Object.keys(outfits).map((outfit) => (
+            <Card productId={outfit} setOutfits={setOutfits} outfits={outfits} cardType="outfit" />
+          ))}
+          <AddCard setOutfits={setOutfits} outfits={outfits} currentProduct={productId} />
+        </Slider>
+      </Wrapper>
     </>
   );
 }

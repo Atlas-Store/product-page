@@ -1,15 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import QAEntry from './QAEntry';
-import { Col } from './Layout';
+
+const QAListStyled = styled.div`
+  border:1px solid #000;
+  overflow: auto;
+`;
 
 function QAList({ questions }) {
+  const sortedQs = questions;
+
+  sortedQs.sort((a, b) => (
+    b.question_helpfulness - a.question_helpfulness
+  ));
+
   return (
-    <Col>
+    <QAListStyled>
       {questions.map((question) => (
-        <QAEntry question={question} key={question.id} />
+        <QAEntry question={question} key={question.question_id} />
       ))}
-    </Col>
+    </QAListStyled>
   );
 }
 

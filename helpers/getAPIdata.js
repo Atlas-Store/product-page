@@ -1,9 +1,9 @@
 const axios = require('axios');
 const config = require('../config.js');
 
-const getAPIdata = (callback) => {
+const getAPIdata = (endpoint, callback) => {
   const options = {
-    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/products',
+    url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/${endpoint}`,
     headers: {
       'User-Agent': 'request',
       Authorization: config.TOKEN,

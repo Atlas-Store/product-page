@@ -26,16 +26,16 @@ const Style = (props) => {
   overflow: hidden;
   border-radius: 50%;
   border-style: solid;
-  border-width: thin;
+  border-width: 2px;
   border-color: gray;
   cursor: pointer;
   object-fit: cover;
 
   &:hover {
-    width: 100px;
-    height: 100px;
-    border-width: medium;
-    // border-color: yellow;
+    // width: 100px;
+    // height: 100px;
+    // border-width: medium;
+    border-color: black;
   }
 `
 
@@ -64,6 +64,8 @@ const Style = (props) => {
 
     setTest(!test);
     console.log('props.index is', props.index);
+    console.log('props.handleClickStyle is', props.handleClickStyle);
+    props.handleClickStyle();
     // setClicked(true);
     // props.setCurrentStyleImages(props.styleURL)
     // props.setCurrentStyleID(props.)
