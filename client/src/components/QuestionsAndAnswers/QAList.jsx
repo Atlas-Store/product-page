@@ -4,8 +4,11 @@ import styled from 'styled-components';
 import QAEntry from './QAEntry';
 
 const QAListStyled = styled.div`
-  border:1px solid #000;
-  max-height: 60vh;
+  display: flex;
+  flex-flow: column;
+  border:1px solid green;
+  max-height: 90vh;
+  min-width: 60vh;
   overflow: auto;
 `;
 

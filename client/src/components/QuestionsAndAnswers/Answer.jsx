@@ -2,20 +2,13 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-// const AnswerWrapper = styled.div`
-// background-color: grey;
-// // text-indent: 1.5em
-// // max-height: 50vh;
-// // overflow: auto;
-// `;
 
 const AnswerWrapper = styled.div`
-  background-color: grey;
   margin: 10px;
-  // padding: 0.25em 1em;
-  border-bottom: 10px solid green;
+  padding: 0.25em 1em;
+  border-bottom: 1px solid grey;
   max-height: 50vh;
-  max-width: 100vh;
+  min-width: 69vh;
   overflow: auto;
 `;
 
@@ -24,10 +17,24 @@ const Body = styled.span`
 `;
 const AnswerInfo = styled.p`
   padding-left: 15px
+  font-size: 10%;
 `;
 
 const ALabel = styled.span`
   margin-right: -10px;
+  font-weight: bold;
+`;
+
+const AnswerButton = styled.button`
+display: inline-block;
+font-weight: bold;
+color: black;
+font-size: 1em;
+margin: 1em;
+padding: 0;
+border: none;
+background: none;
+display: block;
 `;
 
 function Answer({ answers }) {
@@ -43,15 +50,15 @@ function Answer({ answers }) {
 
   const renderAnswerButtons = () => {
     if (Object.keys(answers).length === 0) {
-      return <button type="button">add an answer</button>;
+      return <AnswerButton type="button">Add Answer</AnswerButton>;
     }
 
     if (Object.keys(answers).length > aCount) {
-      return <button type="button" onClick={handleMoreAnswersClick}>Load More Answers</button>;
+      return <AnswerButton type="button" onClick={handleMoreAnswersClick}>Load More Answers</AnswerButton>;
     }
 
     if (Object.keys(answers).length === aCount && Object.keys(answers).length > 2) {
-      return <button type="button" onClick={handleLessAnswer}>Show Less Answers</button>;
+      return <AnswerButton type="button" onClick={handleLessAnswer}>Show Less Answers</AnswerButton>;
     }
   };
 
@@ -70,12 +77,13 @@ function Answer({ answers }) {
           )}
           <Body>{answers[id].body}</Body>
           <AnswerInfo>
-            {answers[id].answerer_name}
+            {`${answers[id].answerer_name} `}
             |
-            {moment(answers[id].date).format('MMM Do YY')}
-            | helpful?
+            {` ${moment(answers[id].date).format('MMM Do YY')} `}
+            | helpful? Yes
+            (
             {answers[id].helpfulness}
-            | report
+            ) | report
           </AnswerInfo>
         </AnswerWrapper>
       ))}

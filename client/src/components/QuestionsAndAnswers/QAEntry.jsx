@@ -5,31 +5,34 @@ import Answer from './Answer';
 
 const Row = styled.div`
   display:flex;
-  background-color: lightgreen;
+  margin: 1px
+  width: 69vh;
 `;
 
 const Col = styled.div`
   flex: ${(props) => props.size};
-  margin: 20ev;
+  margin: 5px;
   padding: 20ev;
 `;
 
-function QAEntry({ question }) {
-  // const sortedAnswers = Object.keys(question.answers);
-  // sortedAnswers.sort((a, b) => {})
+const Question = styled.p`
+  font-weight: bold;
+`;
 
+function QAEntry({ question }) {
   return (
     <div>
       <Row>
-        <Col size={2} padding={10}>
-          Q:
-          {question.question_body}
+        <Col size={2}>
+          <Question>
+            {`Q: ${question.question_body}`}
+          </Question>
         </Col>
-        <Col size={1} padding={100}>
+        <Col size={1}>
           helpful? yes
           (
           {question.question_helpfulness}
-          ) | add answer
+          ) | Add Answer
         </Col>
       </Row>
       <Answer answers={question.answers} />

@@ -10,22 +10,23 @@ const QAWrapper = styled.div`
   // border: 2px solid palevioletred;
   // margin: 1em;
   // padding: 0.25em 1em;
+  display:flex;
+  flex-direction: column;
   border-top: 2px solid grey;
   border-bottom: 2px solid grey;
-  max-height: 100vh;
-  max-width: 100vh;
+  height: 80vh;
+  min-width: 60vh;
   min-width: 50vh;
   overflow: auto;
 `;
 
 const ConditionalWrapper = styled.div`
-  // border: 2px solid palevioletred;
   margin: 10px;
-  // padding: 0.25em 1em;
-  border-top: 1px solid grey;
+  padding: 0.25em 1em;
+  border-top: 10px solid grey;
   border-bottom: 1px solid grey;
-  max-height: 100vh;
-  max-width: 100vh;
+  max-height: 80vh;
+  min-width: 60vh;
   overflow: auto;
 `;
 
@@ -58,8 +59,10 @@ function QuestionsAnswers({ qaResults }) {
       <ConditionalWrapper>
         <QAList questions={questions.slice(0, qCount)} />
       </ConditionalWrapper>
-      {questions.length > qCount && <MoreQuestionsButton onClick={handleMoreQuestionsClick} />}
-      <AddQuestionButton />
+      <div>
+        {questions.length > qCount && <MoreQuestionsButton onClick={handleMoreQuestionsClick} />}
+        <AddQuestionButton />
+      </div>
     </QAWrapper>
   );
 }
