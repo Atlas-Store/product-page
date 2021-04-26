@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import Modal from './Modal';
 
 const Button = styled.button`
   display: inline-block;
@@ -13,8 +14,31 @@ const Button = styled.button`
 `;
 
 function AddQuestionButton() {
+  const [showModal, setShowmodal] = useState(false);
+
+  const toggleModal = () => {
+    setShowmodal(!showModal);
+  };
+
   return (
-    <Button>Add a Question</Button>
+    <div>
+      <Button onClick={toggleModal}>Add a Question</Button>
+      {
+        showModal ? (
+          <Modal>
+            <h1>Heading</h1>
+            <p>Lorem ipsum </p>
+            <button
+              type="button"
+              className="modal-close"
+              onClick={toggleModal}
+            >
+              X
+            </button>
+          </Modal>
+        ) : null
+      }
+    </div>
   );
 }
 
