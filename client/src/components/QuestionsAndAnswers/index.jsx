@@ -41,16 +41,24 @@ function QuestionsAnswers({ qaResults }) {
     setQCount((state) => state + 2);
   };
 
+  const handleSearch = (searchTerm) => {
+    const lowerCaseST = searchTerm.toLowerCase();
+
+    const filteredQs = questions.filter((question) => {
+      const lowerCaseQ = question.question_body.toLowerCase();
+      return lowerCaseQ.includes(lowerCaseST);
+    });
+    console.log('filteredQuestions inside handle Search: ', filteredQs);
+  };
+
   return (
     <QAWrapper>
       <h1>Questions and Answers</h1>
-      <SearchBar />
+      <SearchBar handleSearch={handleSearch} />
       <ConditionalWrapper>
         <QAList questions={questions.slice(0, qCount)} />
-
       </ConditionalWrapper>
       {questions.length > qCount && <MoreQuestionsButton onClick={handleMoreQuestionsClick} />}
-
       <AddQuestionButton />
     </QAWrapper>
   );

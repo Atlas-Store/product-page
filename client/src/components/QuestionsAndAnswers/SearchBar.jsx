@@ -1,5 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const ModdedSearchBar = styled.input`
@@ -8,27 +10,36 @@ const ModdedSearchBar = styled.input`
   border: 1px solid #999999;
 `;
 
-function SearchBar() {
+function SearchBar({ handleSearch }) {
   const [searchTerm, setSearchTerm] = useState('');
 
   function handleChange(event) {
     setSearchTerm(event.target.value);
+    if (searchTerm.length > 2) {
+      handleSearch(searchTerm);
+    }
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    console.log('hello', event.target.value);
+    handleSearch(searchTerm);
+    console.log('handleSubmit', event.target.value);
   }
 
   return (
     <form onSubmit={handleSubmit}>
       <ModdedSearchBar
-        placeholder="ask me anything"
+        placeholder="“Have a question? Search for answers…”
+        "
         onChange={handleChange}
       />
       <input type="submit" value="submit" />
     </form>
   );
 }
+
+SearchBar.propTypes = {
+  handleSearch: PropTypes.func.isRequired,
+};
 
 export default SearchBar;

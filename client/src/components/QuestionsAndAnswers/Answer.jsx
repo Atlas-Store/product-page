@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import moment from 'moment';
+// const AnswerWrapper = styled.div`
+// background-color: grey;
+// // text-indent: 1.5em
+// // max-height: 50vh;
+// // overflow: auto;
+// `;
 
 const AnswerWrapper = styled.div`
-background-color: grey;
-// text-indent: 1.5em
-// max-height: 50vh;
-// overflow: auto;
+  background-color: grey;
+  margin: 10px;
+  // padding: 0.25em 1em;
+  border-bottom: 10px solid green;
+  max-height: 50vh;
+  max-width: 100vh;
+  overflow: auto;
 `;
 
 const Body = styled.span`
@@ -50,7 +60,7 @@ function Answer({ answers }) {
   ));
 
   return (
-    <div>
+    <AnswerWrapper>
       {sortedIds.slice(0, aCount).map((id, i) => (
         <AnswerWrapper key={answers[id].id}>
           {i === 0 && (
@@ -60,14 +70,17 @@ function Answer({ answers }) {
           )}
           <Body>{answers[id].body}</Body>
           <AnswerInfo>
-            userinfo and date |
+            {answers[id].answerer_name}
+            |
+            {moment(answers[id].date).format('MMM Do YY')}
+            | helpful?
             {answers[id].helpfulness}
             | report
           </AnswerInfo>
         </AnswerWrapper>
       ))}
       {renderAnswerButtons()}
-    </div>
+    </AnswerWrapper>
   );
 }
 
