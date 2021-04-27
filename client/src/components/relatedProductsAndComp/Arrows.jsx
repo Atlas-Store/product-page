@@ -1,25 +1,25 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export function NextArrow(props) {
-  const { className, style, onClick } = props;
+function NextArrow({ className, size, onClick }) {
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
       className={className}
       style={{
         position: 'absolute',
-        right: '10px',
-        width: '40px',
-        height: '40px',
+        right: `${size / 4}px`,
+        width: `${size}px`,
+        height: `${size}px`,
         display: 'block',
       }}
       onClick={onClick}
+      onKeyDown={onClick}
     />
   );
 }
 
-export function PrevArrow(props) {
-  const { className, style, onClick } = props;
+function PrevArrow({ className, size, onClick }) {
   return (
     // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
@@ -27,11 +27,26 @@ export function PrevArrow(props) {
       style={{
         zIndex: '1',
         position: 'absolute',
-        left: '10px',
-        width: '40px',
-        height: '40px',
+        left: `${size / 4}px`,
+        width: `${size}px`,
+        height: `${size}px`,
       }}
       onClick={onClick}
+      onKeyDown={onClick}
     />
   );
 }
+
+NextArrow.propTypes = {
+  className: PropTypes.string.isRequired,
+  size: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
+PrevArrow.propTypes = {
+  className: PropTypes.string.isRequired,
+  size: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
+};
+
+export { NextArrow, PrevArrow };

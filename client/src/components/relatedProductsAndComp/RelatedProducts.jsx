@@ -78,8 +78,8 @@ function RelatedProducts({
     slidesToScroll: 1,
     variableWidth: true,
     arrows: true,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
+    nextArrow: <NextArrow size={40} />,
+    prevArrow: <PrevArrow size={40} />,
     draggable: false,
   };
 

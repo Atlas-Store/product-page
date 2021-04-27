@@ -80,13 +80,6 @@ function App() {
           <br />
           <br />
           <br />
-          <p>
-            {console.log('products:', products)}
-            {console.log('currentProduct:', currentProduct)}
-            {console.log('relatedItems:', relatedItems)}
-            {console.log('QA:', QA)}
-            {console.log('Ratings:', rating)}
-          </p>
           <section>
             <Overview currentProduct={currentProduct} />
           </section>
