@@ -42,7 +42,7 @@ const ImageSlider = (props) => {
   // }
   // slideToContinueFrom = props.slideToContinueFrom || 0;
   const [isOpen, setIsOpen] = useState(false)
-  console.log('in ImageSlider, props.handleClickProductImageDiv is', props.handleClickProductImageDiv);
+  // console.log('in ImageSlider, props.handleClickProductImageDiv is', props.handleClickProductImageDiv);
 
   const nextClick = (e) => {
     console.log(e);
