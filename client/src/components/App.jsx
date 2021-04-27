@@ -44,10 +44,12 @@ function App() {
   const [relatedItems, setRelatedItems] = useState([]);
   const [QA, setQA] = useState({});
   const [loading, setLoading] = useState(true);
-  const [ratings, setRating] = useState(null);
+  const [outfits, setOutfits] = useState({});
+  const [ratings, setRatings] = useState(null);
   const [reviews, setReviews] = useState({});
 
   useEffect(() => {
+    setLoading(true);
     const productsRequest = axios.get('/products');
     const currentProductRequest = axios.get(`/products/${currentProductId}`);
     const stylesRequest = axios.get(`/products/${currentProductId}/styles`);
@@ -64,7 +66,7 @@ function App() {
         setStyles(responses[2].data);
         setRelatedItems(responses[3].data);
         setQA(responses[4].data);
-        setRating(responses[5].data);
+        setRatings(responses[5].data);
         setReviews(responses[6].data);
         setLoading(false);
       }))
@@ -81,15 +83,8 @@ function App() {
           <br />
           <br />
           <br />
-          <p>
-            {console.log('products:', products)}
-            {console.log('currentProduct:', currentProduct)}
-            {console.log('relatedItems:', relatedItems)}
-            {console.log('QA:', QA)}
-            {console.log('Ratings:', ratings)}
-          </p>
           <section>
-            <Overview currentProduct={currentProduct} styles={styles} starRating={rating} key={Date.now()}/>
+            <Overview currentProduct={currentProduct} styles={styles} starRating={ratings} key={Date.now()}/>
           </section>
 
           <section>
@@ -99,6 +94,8 @@ function App() {
               currentProduct={currentProduct}
               currentStyle={styles}
               relatedItems={relatedItems}
+              outfits={outfits}
+              setOutfits={setOutfits}
             />
           </section>
 

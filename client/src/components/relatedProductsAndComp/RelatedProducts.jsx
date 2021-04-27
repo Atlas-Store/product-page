@@ -2,14 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Slider from 'react-slick';
-import $ from 'jquery';
 import Card from './Card';
 import { PrevArrow, NextArrow } from './Arrows';
 import AddCard from './AddCard';
-import config from '../../../../config';
 
 const Wrapper = styled.div`
-  width: 600px;
+  width: 700px;
   position: relative;
 
   .slick-prev:hover,
@@ -67,7 +65,10 @@ const Wrapper = styled.div`
   }
 `;
 
-function RelatedProducts({ currentProduct, currentStyle, relatedItems, productId, setCurrentProductId}) {
+function RelatedProducts({
+  currentProduct, currentStyle,
+  relatedItems, productId, setCurrentProductId, outfits, setOutfits
+}) {
   const settings = {
     className: 'slider variable-width',
     dots: false,
@@ -77,60 +78,10 @@ function RelatedProducts({ currentProduct, currentStyle, relatedItems, productId
     slidesToScroll: 1,
     variableWidth: true,
     arrows: true,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
+    nextArrow: <NextArrow size={40} />,
+    prevArrow: <PrevArrow size={40} />,
     draggable: false,
   };
-  const [outfits, setOutfits] = useState({});
-
-  // const [currentProduct, setCurrentProduct] = useState(null);
-  // const [currentStyle, setCurrentStyle] = useState(null);
-
-  // const [relatedItems, setRelatedItems] = useState(null);
-  // const [loading, setLoading] = useState(true);
-
-  // useEffect(() => {
-  //   $.ajax({
-  //     method: 'GET',
-  //     url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/products/23147',
-  //     headers: {
-  //       Authorization: config.TOKEN,
-  //     },
-  //     success: (res) => {
-  //       setCurrentProduct(res);
-  //       $.ajax({
-  //         method: 'GET',
-  //         url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/products/23147/styles',
-  //         headers: {
-  //           Authorization: config.TOKEN,
-  //         },
-  //         success: (res) => {
-  //           setCurrentStyle(res);
-  //           $.ajax({
-  //             method: 'GET',
-  //             url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/products/23147/related',
-  //             headers: {
-  //               Authorization: config.TOKEN,
-  //             },
-  //             success: (res) => {
-  //               setRelatedItems(res);
-  //               setLoading(false);
-  //             },
-  //             failure: (res) => {
-  //               console.log(res);
-  //             },
-  //           });
-  //         },
-  //         failure: (res) => {
-  //           console.log(res);
-  //         },
-  //       });
-  //     },
-  //     failure: (res) => {
-  //       console.log(res);
-  //     },
-  //   });
-  // }, []);
 
   return (
     <>
@@ -138,7 +89,7 @@ function RelatedProducts({ currentProduct, currentStyle, relatedItems, productId
         <h4>RELATED PRODUCTS</h4>
         <Slider {...settings}>
           {relatedItems.map((item) => (
-            <Card productId={item} cardType="related" setCurrentProductId={setCurrentProductId} />
+            <Card productId={item} cardType="related" setCurrentProductId={setCurrentProductId} currentProduct={currentProduct} />
           ))}
         </Slider>
         <h4>YOUR OUTFIT</h4>

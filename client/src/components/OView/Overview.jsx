@@ -91,13 +91,15 @@ background: gray;
 
 .slick-prev
 {
-    left: ${props => props.left || -45}px;
+    left: ${props => props.left || 20}px;
+    z-index: 2;
 
 }
 
 .slick-next
 {
-  right: ${props => props.right || -25}px;
+  right: ${props => props.right || 35}px;
+  z-index: 2;
 }
 
 .slick-prev:before

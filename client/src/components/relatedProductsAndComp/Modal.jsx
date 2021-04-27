@@ -6,7 +6,6 @@ const ModalWrapper = styled.div`
   position: fixed;
   display: flex;
   flex-direction: column;
-  // transform: translate(2, 2);
   background-color: white;
   border: solid black 1px;
   padding: 15px;
@@ -15,6 +14,17 @@ const ModalWrapper = styled.div`
   td {
     text-align: center;
   };
+  .icon {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    height: 20px;
+    width: 20px;
+    margin: 4px 4px;
+    background: white;
+    border-radius: 30px;
+    z-Index: 4;
+  }
 `;
 
 const Overlay = styled.div`
@@ -35,36 +45,48 @@ const ProductNames = styled.div`
   padding-bottom: 20px;
   font-weight: bold;
   span :first-of-type {
-    padding-right: 40px;
+    padding-left: 3px;
+    padding-right: 50px;
+  }
+  span :n-of-type(2) {
+    padding-left:3px;
   }
 `;
 
-export default function Modal({ open, children, onClose, x, y }) {
+export default function Modal({
+  open, children, onClose, x, y, product, currentProduct,
+}) {
   if (!open) return null;
 
   return ReactDom.createPortal(
     <>
       <Overlay onClick={onClose} />
       <ModalWrapper style={{ top: `${y}px`, left: `${x}px` }}>
+        <img
+          className="icon"
+          src="./delete.png"
+          alt="delete icon"
+          onClick={onClose}
+        />
         <Comparing>COMPARING</Comparing>
         <ProductNames>
-          <span>Product Short Name 1</span>
-          <span>Product Short Name 2</span>
+          <span>{currentProduct.name}</span>
+          <span>{product.name}</span>
         </ProductNames>
         <table>
           <tr>
             <td>✓</td>
-            <td>GMO and Pesticide-free</td>
+            <td>Long-lasting durability</td>
             <td>✓</td>
           </tr>
           <tr>
             <td>✓</td>
-            <td>Made with 100% Genetic Modification</td>
+            <td>Made with 100% Cotton</td>
             <td> </td>
           </tr>
           <tr>
             <td>✓</td>
-            <td>This is made up</td>
+            <td>Water and Sweat Resistant</td>
             <td>✓</td>
           </tr>
           <tr>
@@ -74,7 +96,7 @@ export default function Modal({ open, children, onClose, x, y }) {
           </tr>
           <tr>
             <td> </td>
-            <td>Some other product comparision metrics</td>
+            <td>3-month Money-back Guarantee</td>
             <td>✓</td>
           </tr>
         </table>

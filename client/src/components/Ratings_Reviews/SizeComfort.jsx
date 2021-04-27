@@ -25,10 +25,9 @@ const Classification = styled.label`
 `;
 
 const Tick = styled.div`
-  position absolute;
+  position: relative;
   left: ${(props) => props.position}%;
   font-size: smaller;
-  z-index: 1000;
 `;
 
 const AvgRating = styled.div`
