@@ -79,8 +79,6 @@ const Review = ({ reviews, ratings, currentProduct }) => {
   const [reviewsToRender, updateReviewsRender] = useState(reviews.results);
   const [averageRating, setAvgRating] = useState(renderFunc.calcAvg(ratings.ratings));
   const [fracRecs, setFracRecs] = useState(renderFunc.numRecommenders(ratings.recommended));
-  console.log(fracRecs);
-  console.log(ratings.recommended);
   const productID = reviews.product;
   const grabSortedReviews = (byWhat) => {
     const sortBy = byWhat.toLowerCase();
