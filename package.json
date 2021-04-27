@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "build": "webpack --config webpack.config.js -w",
-    "server-dev": "npx nodemon server/index.js"
+    "server-dev": "npx nodemon server/index.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -18,8 +19,6 @@
   },
   "homepage": "https://github.com/Twobular/product-detail-page#readme",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.10",
-    "@testing-library/react": "^11.2.6",
     "ajax": "0.0.4",
     "axios": "^0.21.1",
     "express": "^4.17.1",
@@ -35,6 +34,8 @@
     "styled-components": "^5.2.3"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.10",
+    "@testing-library/react": "^11.2.6",
     "@babel/core": "^7.13.15",
     "@babel/preset-env": "^7.13.15",
     "@babel/preset-react": "^7.13.13",

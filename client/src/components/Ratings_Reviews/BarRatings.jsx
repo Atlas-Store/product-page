@@ -26,22 +26,22 @@ const BarSection = styled.section`
 `;
 
 // eslint-disable-next-line react/prop-types
-const BarRatings = ({ reviews }) => {
-  const freqOfRatings = renderFunc.frequency(reviews);
+const BarRatings = ({ starStats }) => {
+  const freqOfRatings = renderFunc.frequency(starStats);
   return (
     <BarSection>
       <StarBars>
         <Category>
           <u> 5 Stars </u>
         </Category>
-        <Bar percent={(freqOfRatings['5'] / reviews.length) * 100} />
+        <Bar percent={(freqOfRatings['5'] / freqOfRatings.divisor) * 100} />
       </StarBars>
       <div>
         <StarBars>
           <Category>
             <u> 4 Stars </u>
           </Category>
-          <Bar percent={(freqOfRatings['4'] / reviews.length) * 100} />
+          <Bar percent={(freqOfRatings['4'] / freqOfRatings.divisor) * 100} />
         </StarBars>
       </div>
       <div>
@@ -49,7 +49,7 @@ const BarRatings = ({ reviews }) => {
           <Category>
             <u> 3 Stars </u>
           </Category>
-          <Bar percent={(freqOfRatings['3'] / reviews.length) * 100} />
+          <Bar percent={(freqOfRatings['3'] / freqOfRatings.divisor) * 100} />
         </StarBars>
       </div>
       <div>
@@ -57,7 +57,7 @@ const BarRatings = ({ reviews }) => {
           <Category>
             <u> 2 Stars </u>
           </Category>
-          <Bar percent={(freqOfRatings['2'] / reviews.length) * 100} />
+          <Bar percent={(freqOfRatings['2'] / freqOfRatings.divisor) * 100} />
         </StarBars>
       </div>
       <div>
@@ -65,7 +65,7 @@ const BarRatings = ({ reviews }) => {
           <Category>
             <u> 1 Stars </u>
           </Category>
-          <Bar percent={(freqOfRatings['1'] / reviews.length) * 100} />
+          <Bar percent={(freqOfRatings['1'] / freqOfRatings.divisor) * 100} />
         </StarBars>
       </div>
     </BarSection>

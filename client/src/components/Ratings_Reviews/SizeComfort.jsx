@@ -19,14 +19,15 @@ const ClassBar = styled.div`
   margin-bottom: 25px;
 `;
 const Classification = styled.label`
+  margin-top: 7.5px;
   text-align: ${(props) => props.location};
   font-size: smaller;
 `;
 
 const Tick = styled.div`
-  text-align: ${(props) => props.location};
+  position: relative;
+  left: ${(props) => props.position}%;
   font-size: smaller;
-  z-index: 10;
 `;
 
 const AvgRating = styled.div`
@@ -35,35 +36,35 @@ const AvgRating = styled.div`
   left: 0;
 `;
 
-const SizeComfort = ({ reviews }) => (
+const SizeComfort = ({ ratings }) => (
   <ComparisonSection>
+    {ratings.characteristics.Size && (
     <div>
       <div>
         <strong> Size </strong>
       </div>
       <AvgRating>
         <CompBar />
-        <Tick location="center">▼</Tick>
+        <Tick position={(ratings.characteristics.Size.value * 5)}>▼</Tick>
       </AvgRating>
       <ClassBar>
         <Classification location="left">
           Too Small
-        </Classification>
-        <Classification location="center">
-          Perfect
         </Classification>
         <Classification location="right">
           Too Large
         </Classification>
       </ClassBar>
     </div>
+    ) }
+    {ratings.characteristics.Width && (
     <div>
       <div>
         <strong> Width </strong>
       </div>
       <AvgRating>
         <CompBar />
-        <Tick location="center">▼</Tick>
+        <Tick position={(ratings.characteristics.Width.value * 5)}>▼</Tick>
       </AvgRating>
       <ClassBar>
         <Classification location="left">
@@ -74,6 +75,45 @@ const SizeComfort = ({ reviews }) => (
         </Classification>
       </ClassBar>
     </div>
+    ) }
+    {ratings.characteristics.Comfort && (
+    <div>
+      <div>
+        <strong> Comfort </strong>
+      </div>
+      <AvgRating>
+        <CompBar />
+        <Tick position={(ratings.characteristics.Comfort.value * 5)}>▼</Tick>
+      </AvgRating>
+      <ClassBar>
+        <Classification location="left">
+          Uncomfortable
+        </Classification>
+        <Classification location="right">
+          Perfect
+        </Classification>
+      </ClassBar>
+    </div>
+    ) }
+    {ratings.characteristics.Quality && (
+    <div>
+      <div>
+        <strong> Quality </strong>
+      </div>
+      <AvgRating>
+        <CompBar />
+        <Tick position={(ratings.characteristics.Quality.value * 5)}>▼</Tick>
+      </AvgRating>
+      <ClassBar>
+        <Classification location="left">
+          Poor
+        </Classification>
+        <Classification location="right">
+          Perfect
+        </Classification>
+      </ClassBar>
+    </div>
+    ) }
 
   </ComparisonSection>
 );
