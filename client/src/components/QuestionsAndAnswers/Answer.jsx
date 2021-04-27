@@ -4,25 +4,26 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 
 const AnswerWrapper = styled.div`
-  margin: 10px;
+  // margin: 10px;
   padding: 0.25em 1em;
   border-bottom: 1px solid grey;
   max-height: 50vh;
-  min-width: 69vh;
+  min-width: 69vw;
   overflow: auto;
-`;
-
-const Body = styled.span`
-  padding-left: 15px;
-`;
-const AnswerInfo = styled.p`
-  padding-left: 15px
-  font-size: 10%;
 `;
 
 const ALabel = styled.span`
   margin-right: -10px;
   font-weight: bold;
+`;
+
+const Body = styled.span`
+  padding-left: 15px;
+`;
+
+const AnswerInfo = styled.p`
+  padding-left: 15px;
+  font-size: 80% !important;
 `;
 
 const AnswerButton = styled.button`

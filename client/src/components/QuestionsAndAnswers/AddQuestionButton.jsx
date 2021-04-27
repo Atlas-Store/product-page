@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Modal from './Modal';
 
@@ -20,22 +20,18 @@ function AddQuestionButton() {
     setShowmodal(!showModal);
   };
 
+  const handleSubmit = (event) => {
+    const question = event.target.id;
+    console.log('handlesubmit', question);
+    setShowmodal(!showModal);
+  };
+
   return (
     <div>
       <Button onClick={toggleModal}>Add a Question</Button>
       {
         showModal ? (
-          <Modal>
-            <h1>Heading</h1>
-            <p>Lorem ipsum </p>
-            <button
-              type="button"
-              className="modal-close"
-              onClick={toggleModal}
-            >
-              X
-            </button>
-          </Modal>
+          <Modal handleSubmit={handleSubmit} />
         ) : null
       }
     </div>

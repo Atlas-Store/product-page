@@ -8,7 +8,7 @@ const QAListStyled = styled.div`
   flex-flow: column;
   border:1px solid green;
   max-height: 90vh;
-  min-width: 60vh;
+  min-width: 69vw;
   overflow: auto;
 `;
 

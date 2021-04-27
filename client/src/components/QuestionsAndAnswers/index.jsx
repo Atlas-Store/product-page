@@ -14,19 +14,17 @@ const QAWrapper = styled.div`
   flex-direction: column;
   border-top: 2px solid grey;
   border-bottom: 2px solid grey;
-  height: 80vh;
-  min-width: 60vh;
-  min-width: 50vh;
+  height: 90vh;
+  min-width: 69vw;
   overflow: auto;
 `;
 
 const ConditionalWrapper = styled.div`
   margin: 10px;
   padding: 0.25em 1em;
-  border-top: 10px solid grey;
   border-bottom: 1px solid grey;
-  max-height: 80vh;
-  min-width: 60vh;
+  max-height: 90vh;
+  min-width: 69vw;
   overflow: auto;
 `;
 

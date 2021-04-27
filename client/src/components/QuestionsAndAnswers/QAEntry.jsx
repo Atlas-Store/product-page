@@ -5,18 +5,24 @@ import Answer from './Answer';
 
 const Row = styled.div`
   display:flex;
-  margin: 1px
-  width: 69vh;
+  // margin: 10px
+  min-width: 39vw;
 `;
 
 const Col = styled.div`
   flex: ${(props) => props.size};
-  margin: 5px;
+  margin-top: 10px;
   padding: 20ev;
 `;
 
 const Question = styled.p`
   font-weight: bold;
+  margin-left: 10px;
+`;
+
+const QuestionInfo = styled.p`
+  // padding-left: 15px;
+  font-size: 80% !important;
 `;
 
 function QAEntry({ question }) {
@@ -29,10 +35,12 @@ function QAEntry({ question }) {
           </Question>
         </Col>
         <Col size={1}>
-          helpful? yes
-          (
-          {question.question_helpfulness}
-          ) | Add Answer
+          <QuestionInfo>
+            helpful? yes
+            (
+            {question.question_helpfulness}
+            ) | Add Answer
+          </QuestionInfo>
         </Col>
       </Row>
       <Answer answers={question.answers} />

@@ -1,41 +1,41 @@
 import React, { useEffect } from 'react';
 import ReactDom from 'react-dom';
 import styled from 'styled-components';
+// import AddQuestionButton from './AddQuestionButton';
 
-const ModalOverlay = styled.div`
+const Background = styled.div`
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: black(0, 0, 0, .5);
-  padding: 15px;
-  z-Index: 1000;
-  max-width: 90vh;
-  max-height: 90vh;
-  min-width: 90vh;
-  min-height: 90vh;
-  td {
-    text-align: center;
-  };
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
-const FormWrapper = styled.div`
-  flex-direction: column;
-  // transform: translate(2, 2);
-  background-color: white;
-  border: solid black 1px;
-  padding: 15px;
-  max-width: 70vh;
-  max-height: 700vh;
-  min-width: 50vh;
-  min-height: 50vh;
-  td {
-    text-align: center;
-  };
+const ModalWrapper = styled.div`
+  margin-left: 50px;
+  width: 700px;
+  height: 400px;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
+  background: #fff;
+  color: #000;
+  position: relative;
+  z-index: 10;
+  border-radius: 10px;
+  h1 {
+    margin-left: 30%;
+  }
+  form {
+    margin-left: 30%;
+  }
 `;
 
-function Modal() {
+// const StyledForm = styled.form`
+
+//   `;
+
+function Modal({ handleSubmit }) {
   const element = document.createElement('div');
   const modalRoot = document.getElementById('QAPortal');
 
@@ -49,29 +49,35 @@ function Modal() {
 
   return ReactDom.createPortal(
     <>
-      <ModalOverlay>
-        <FormWrapper>
+      <Background>
+        <ModalWrapper>
           <h1>Ask Your Question</h1>
-          <h2>
-            About
-          </h2>
-          <form>
-            <label htmlFor="question">
-              What is your question?
-              <input placeholder="what is your question" type="text" id="question" />
-            </label>
-            <label htmlFor="nickname">
-              What is your nickname?
-              <input placeholder="Example: jackson11!" type="text" id="nickname" />
-            </label>
-            <label htmlFor="email">
-              What is your email?
-              <input placeholder="what is your email" type="text" id="email" />
-            </label>
-            <button type="button">submit</button>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor="question">
+                What is your question?
+                <textarea maxLength={1000} placeholder="what is your question" type="textarea" id="question" />
+              </label>
+            </div>
+            <br />
+            <div>
+              <label htmlFor="nickname">
+                What is your nickname?
+                <input placeholder="Example: jackson11!" type="text" id="nickname" />
+              </label>
+            </div>
+            <br />
+            <div>
+              <label htmlFor="email">
+                What is your email?
+                <input placeholder="what is your email" type="text" id="email" />
+              </label>
+            </div>
+            <br />
+            <button type="submit">submit</button>
           </form>
-        </FormWrapper>
-      </ModalOverlay>
+        </ModalWrapper>
+      </Background>
     </>,
     document.getElementById('QAPortal'),
   );
