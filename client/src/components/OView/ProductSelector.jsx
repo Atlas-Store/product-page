@@ -6,22 +6,35 @@ import QuantitySelector from './QuantitySelector.jsx';
 const AddToCart = styled.button`
     background: transparent;
     border-radius: 3px;
-    border: 2px solid green;
-    color: green;
+    border: 2px solid gray;
+    color: gray;
+
     font-size: 16px;
+
     margin: 0 1em;
     padding: 0.60em 1.35em;
     cursor: pointer;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+
+
 
     &:hover {
-      font-size: 22px;
+      // font-size: 22px;
+      border: 2px solid green;
+      color: green;
     }
   `
 
-function ProductSelector() {
+  const DisplaySideBySide = styled.div`
+    display: block;
+  `
+
+  const CenteredDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  `
+
+function ProductSelector(props) {
   const [color, setColor] = useState('green');
   const handleMouseEnter = (event) => {
     setColor('red');
@@ -29,11 +42,14 @@ function ProductSelector() {
   }
   return (
     <div>
-      <SizeSelector />
-      <QuantitySelector />
-      <br /><br /><br />
+    <DisplaySideBySide>
+      <SizeSelector /><QuantitySelector />
+      </DisplaySideBySide>
+      <br /><br />
+      <CenteredDiv>
       <AddToCart onMouseEnter={handleMouseEnter}>Add To Cart</AddToCart>
-    </div>
+      </CenteredDiv>
+      </div>
 
     // <button>Add to Cart</button>
   )

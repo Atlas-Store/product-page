@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled, {css} from 'styled-components';
 import StarRating from './StarRating.jsx';
 import ProductSelector from './ProductSelector.jsx';
@@ -14,6 +14,8 @@ import {productReview} from './sample_data_styles';
 import {ProductImage, ProductImageDiv} from './StyledItems.jsx';
 import $ from 'jquery';
 import ImageSlider from './ImageSlider.jsx';
+import Modal from './Modal.js';
+
 
 // import ThumbnailImage from '/ThumbnailImage.jsx';
 
@@ -33,6 +35,7 @@ export const Row = styled.div`
 
 export const Col = styled.div`
   flex: ${(props) => props.size};
+  // flex: 2;
 `
 
 
@@ -42,8 +45,10 @@ export const Col = styled.div`
 // }
 
 const Wrapper = styled.div`
-width: 400px;
+width: 600px;
 position: relative;
+// box-sizing: border-box;
+background: gray;
 
 .slick-prev:hover,
 .slick-prev:focus,
@@ -67,7 +72,7 @@ position: relative;
     opacity: 0;
 }
 
-.slick-prev:before,
+.slick-prev:before ,
 .slick-next:before
 {
     font-family: 'Monaco';
@@ -78,7 +83,7 @@ position: relative;
     color: gray;
     background: white;
     padding: 0px 10px;
-    // border: 1px solid black;
+    border: 1px solid black;
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -86,7 +91,7 @@ position: relative;
 
 .slick-prev
 {
-    left: ${props => props.left || -25}px;
+    left: ${props => props.left || -45}px;
 
 }
 
@@ -110,26 +115,15 @@ position: relative;
 
 
 
-let arrayOfRatings = [];
-for (let i = 0; i < productReview['results'].length; i++) {
-  // console.log('should be a rating', productReview['results'][i]['rating']);
-  arrayOfRatings.push(productReview['results'][i]['rating']);
-}
 
-const computeAverageRating = (arrayOfRatings) => {
-  let sum = 0;
-  for (let i = 0; i < arrayOfRatings.length; i++) {
-    sum += arrayOfRatings[i];
-  }
-  let avg = (sum / arrayOfRatings.length);
-  return avg;
-}
 
 let slideToStartFromInExpandedView = false;
 
-const Overview = ({currentProduct, styles}) => {
+const Overview = ({currentProduct, styles, starRating}) => {
   // console.log('average rating is', computeAverageRating(arrayOfRatings))
   // for (let i = 0; i < props.products.length; i++) {
+
+  console.log('starRating prop here is', starRating);
 
   console.log('styles twinkle twinkle little star inside Overview right now is ', styles);
   let stylesURLs = [];
@@ -145,19 +139,56 @@ const Overview = ({currentProduct, styles}) => {
   // console.log('currentProduct is ', currentProduct);
   console.log('stylesURLs is', stylesURLs);
 
-  const [rating, setRating] = useState(computeAverageRating(arrayOfRatings));
+  // let arrayOfRatings = [];
+  // for (let i = 0; i < productReview['results'].length; i++) {
+  //   // console.log('should be a rating', productReview['results'][i]['rating']);
+  //   arrayOfRatings.push(productReview['results'][i]['rating']);
+  // }
+
+  // const computeAverageRating = (arrayOfRatings) => {
+  //   let sum = 0;
+  //   for (let i = 0; i < arrayOfRatings.length; i++) {
+  //     sum += arrayOfRatings[i];
+  //   }
+  //   let avg = (sum / arrayOfRatings.length);
+  //   return avg;
+  // }
+
+  console.log('productReview finding nemo is', productReview);
+
+  let avgStarRating = 0;
+  let sum = 0;
+  let numOfRatings = 0;
+
+  for (var key in starRating['ratings']) {
+    numOfRatings += Number(starRating['ratings'][key]);
+  }
+
+  for (var key in starRating['ratings']) {
+    sum += Number(key)*Number(starRating['ratings'][key]);
+  }
+  avgStarRating = sum / numOfRatings;
+
+  console.log('numOfRatings elmo is', numOfRatings);
+  console.log('sum elmo is', sum);
+  console.log('the average star rating calculated is', avgStarRating);
+
+  const [rating, setRating] = useState(avgStarRating || 0);
   const [currentImageURL, setCurrentImageURL] = useState(stylesURLs[0]);
   const [currentStyleID, setCurrentStyleID] = useState(styles['results'][0]['style_id']);
   const [currentGroupOfImageURLs, setCurrentGroupOfImageURLs] = useState(styles['results'].map(item => item)[0]);
+
   console.log('current group of image urls is', currentGroupOfImageURLs);
   // const [currentImagesForSelectedStyle, setCurrentImagesForSelectedStyle] = useState(dataFirstProduct)
   // const [currentStyleID, setCurrentStyleID] = useState(dataFirstProduct['results'][0]['style_id']);
-  const [settingsCurrentSlideToZero, setSettingsCurrentSlideToZero] = useState(false);
-  const [renderExpandedView, setRenderExpandedView] = useState(false);
-  const [wasJustExpandedView, setWasJustExpandedView] = useState(false);
+  // const [settingsCurrentSlideToZero, setSettingsCurrentSlideToZero] = useState(false);
+  // const [renderExpandedView, setRenderExpandedView] = useState(false);
+  // const [wasJustExpandedView, setWasJustExpandedView] = useState(false);
+  // const [startFromFirstSlide, setStartFromFirstSlide] = useState(true);
   const [abc, setAbc] = useState(false);
+  const slideToContinueFrom = useRef(0);
   // const [slideToContinueFrom, setSlideToContinueFrom] = useState(0);
-  let slideToContinueFrom = 0;
+  // let slideToContinueFrom = 0;
 
   // useEffect( () => {
   //   if (wasJustExpandedView) {
@@ -165,7 +196,7 @@ const Overview = ({currentProduct, styles}) => {
   //   }
   // })
 
-
+  console.log('the current group of images URLs is', currentGroupOfImageURLs);
 
   const resetSliderToFirstImage = () => {
     settings.initialSlide = 3;
@@ -179,25 +210,32 @@ const Overview = ({currentProduct, styles}) => {
     // $('.productSlider').slick('slickGoTo', 0);
   }
 
-
+  // let makeSlideToContinueFromToZero = false;
   const handleClickStyle = () => {
-    setWasJustExpandedView(false);
-
+    // setWasJustExpandedView(false);
+    // setStartFromFirstSlide(true);
+    console.log('elmos world');
+    // makeSlideToContinueFromToZero = true;
+    // slideToContinueFrom.current = 17;
+    slideToContinueFrom.current = 0;
     setAbc(!abc);
 
     // slideToStartFromInExpandedView = true;
   }
 
   const handleClickProductImageDiv = () => {
-    if (renderExpandedView === true) { //if you just rendered the expanded view and now want to switch back to the default view
-      setWasJustExpandedView(true);
+    // if (renderExpandedView === true) { //if you just rendered the expanded view and now want to switch back to the default view
+    //   setWasJustExpandedView(true);
 
-    // if you just rendered the default view and now want to switch to the expanded view
-    }
-    // else if (wasJustExpandedView === false renderExpandedView === false)
-    //   setWasJustExpandedView(false);
+    // // if you just rendered the default view and now want to switch to the expanded view
     // }
-    setRenderExpandedView(!renderExpandedView);
+    // if (wasJustExpandedView === true) {
+    //   setWasJustExpandedView(false)
+    // }
+    // // else if (wasJustExpandedView === false renderExpandedView === false)
+    // //   setWasJustExpandedView(false);
+    // // }
+    // setRenderExpandedView(!renderExpandedView);
 
 
   }
@@ -214,56 +252,59 @@ const Overview = ({currentProduct, styles}) => {
     setRating(event.target.value);
   }
 
+  // const specifySlideToContinueFrom = (slide) => {
+  //   slideToContinueFrom.current = slide;
+  // }
   // console.log('current slide is', ImageSlider.initialSlide);
   // console.log('in Overview, props.handleClickStyle is', handleClickStyle);
   let defaultView = () => {
 
-    if (wasJustExpandedView) {
-    //   var whetherToStartFromBeginning = false;
+//     if (startFromFirstSlide === false) {
+//     //   var whetherToStartFromBeginning = false;
 
-    // } else {
-    //   var whetherToStartFromBeginning = true;
-    // }
+//     // } else {
+//     //   var whetherToStartFromBeginning = true;
+//     // }
 
-    return (
+//     return (
 
 
-    <div>
-    {currentProduct &&
-    <div>
-      <Grid>
-        <Row>
-          <Col size={1.5}>
-          <Wrapper>
-            <ImageSlider startFromBeginning={false} currentGroupOfImageURLs={currentGroupOfImageURLs} handleClickProductImageDiv={handleClickProductImageDiv}/>
-          </Wrapper>
+//     <div>
+//     {currentProduct &&
+//     <div>
+//       <Grid>
+//         <Row>
+//           <Col size={1}>
+//           <Wrapper>
+//             <ImageSlider startFromBeginning={false} currentGroupOfImageURLs={currentGroupOfImageURLs} handleClickProductImageDiv={handleClickProductImageDiv}/>
+//           </Wrapper>
 
-          </Col>
-          <Col size={1}>
-            {/* Double the size of */}
-            <StarRating handleSubmit={handleSubmit} changeHandler={changeHandler} rating={rating}/>
-            <ProductCategory category={currentProduct.category}/>
-            <ProductTitle title={currentProduct.name}/>
-            <Price price={currentProduct.default_price}/>
-            <br/><br/>
-            <StyleSelector stylesURLs={stylesURLs} setCurrentImageURL={setCurrentImageURL} setCurrentGroupOfImageURLs={setCurrentGroupOfImageURLs} dataFirstProduct={styles} resetSliderToFirstImage={resetSliderToFirstImage} handleClickStyle={handleClickStyle}/>
-            <br/><br/>
-            <ProductSelector />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-          <br/><br/>
-          <ProductDescription description={currentProduct.description}/>
-          </Col>
-        </Row>
-      </Grid>
-    </div>
-}
+//           </Col>
+//           <Col size={3}>
+//             {/* Double the size of */}
+//             <StarRating handleSubmit={handleSubmit} changeHandler={changeHandler} rating={rating}/>
+//             <ProductCategory category={currentProduct.category}/>
+//             <ProductTitle title={currentProduct.name}/>
+//             <Price price={currentProduct.default_price}/>
+//             <br/><br/>
+//             <StyleSelector setSlideToContinueFrom={setSlideToContinueFrom} stylesURLs={stylesURLs} setCurrentImageURL={setCurrentImageURL} setCurrentGroupOfImageURLs={setCurrentGroupOfImageURLs} dataFirstProduct={styles} resetSliderToFirstImage={resetSliderToFirstImage} handleClickStyle={handleClickStyle}/>
+//             <br/><br/>
+//             <ProductSelector />
+//           </Col>
+//         </Row>
+//         <Row>
+//           <Col>
+//           <br/><br/>
+//           <ProductDescription description={currentProduct.description}/>
+//           </Col>
+//         </Row>
+//       </Grid>
+//     </div>
+// }
 
-  </div>
-  )
-  } else {
+//   </div>
+//   )
+//   } else {
     return (
 
 
@@ -272,9 +313,13 @@ const Overview = ({currentProduct, styles}) => {
       <div>
         <Grid>
           <Row>
-            <Col size={1.5}>
+            <Col size={2.5}>
             <Wrapper>
-              <ImageSlider startFromBeginning={true} currentGroupOfImageURLs={currentGroupOfImageURLs} handleClickProductImageDiv={handleClickProductImageDiv} resetSliderForExpandedView={true}/>
+            {/* <div> */}
+            {/* specifySlideToContinueFrom={specifySlideToContinueFrom} slideToContinueFrom={slideToContinueFrom.current}  */}
+              <ImageSlider objSlideToContinueFrom={slideToContinueFrom} startFromBeginning={true} currentGroupOfImageURLs={currentGroupOfImageURLs} handleClickProductImageDiv={handleClickProductImageDiv} resetSliderForExpandedView={true} key={Date.now()}/>
+            {/* </div> */}
+            {/* <Modal /> */}
             </Wrapper>
 
             </Col>
@@ -303,30 +348,30 @@ const Overview = ({currentProduct, styles}) => {
     </div>
     )
   }
-}
 
-  console.log('slide to continue from is ', slideToContinueFrom);
 
-  let expandedView = () => (
-    <div>
-      {/* <Grid> */}
-        {/* <Row> */}
-          {/* <Col size={1.5}> */}
-          <Wrapper left={-250} right={-250}>
-          <ImageSlider startFromBeginning={slideToStartFromInExpandedView} currentGroupOfImageURLs={currentGroupOfImageURLs} handleClickProductImageDiv={handleClickProductImageDiv}/>
-          </Wrapper>
-          </div>
-  )
-  // console.log('settings current slide is', settings.currentSlide);
-  if (renderExpandedView === false) {
-    return(
+  // console.log('Overview slide to continue from is ', slideToContinueFrom);
+
+  // let expandedView = () => (
+  //   <div>
+  //     {/* <Grid> */}
+  //       {/* <Row> */}
+  //         {/* <Col size={1.5}> */}
+  //         <Wrapper left={-250} right={-250}>
+  //         <ImageSlider slideToContinueFrom={slideToContinueFrom.current} startFromBeginning={false} currentGroupOfImageURLs={currentGroupOfImageURLs} handleClickProductImageDiv={handleClickProductImageDiv}/>
+  //         </Wrapper>
+  //         </div>
+  // )
+  // // console.log('settings current slide is', settings.currentSlide);
+  // if (renderExpandedView === false) {
+    return (
       defaultView()
     )
-  } else {
-    return (
-      expandedView()
-    )
-  }
+  // } else {
+  //   return (
+  //     expandedView()
+  //   )
+  // }
 
 }
 

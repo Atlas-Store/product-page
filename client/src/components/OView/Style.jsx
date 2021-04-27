@@ -66,6 +66,7 @@ const Style = (props) => {
     console.log('props.index is', props.index);
     console.log('props.handleClickStyle is', props.handleClickStyle);
     props.handleClickStyle();
+    // props.specifySlideToContinueFrom(0);
     // setClicked(true);
     // props.setCurrentStyleImages(props.styleURL)
     // props.setCurrentStyleID(props.)
@@ -80,6 +81,11 @@ const Style = (props) => {
   //   height: isCurrentlyHovering ? 100px : 80px;
   // }
   // console.log('style URL is', props.styleURL);
+  // if (props.index === 0) {
+  //   if (props.dataFirstProduct['results'][props.index] !== undefined) {
+  //     props.setCurrentGroupOfImageURLs(props.dataFirstProduct['results'].map(item => item)[props.index]);
+  //   }
+  // }
   return (
 
     // <select>Select Size</select>
