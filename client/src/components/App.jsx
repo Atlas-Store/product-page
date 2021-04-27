@@ -37,14 +37,15 @@ const Loader = styled.div`
 `;
 
 function App() {
-  const [currentProductId, setCurrentProductId] = useState(23146);
+  const [currentProductId, setCurrentProductId] = useState(23145);
   const [products, setProducts] = useState([]);
   const [currentProduct, setCurrentProduct] = useState({});
   const [styles, setStyles] = useState({});
   const [relatedItems, setRelatedItems] = useState([]);
   const [QA, setQA] = useState({});
   const [loading, setLoading] = useState(true);
-  const [rating, setRating] = useState(null);
+  const [ratings, setRating] = useState(null);
+  const [reviews, setReviews] = useState({});
 
   useEffect(() => {
     const productsRequest = axios.get('/products');
@@ -53,9 +54,10 @@ function App() {
     const relatedRequest = axios.get(`/products/${currentProductId}/related`);
     const qaRequest = axios.get(`/qa/questions/${currentProductId}`);
     const ratingRequest = axios.get(`/reviews/meta/${currentProductId}`);
+    const reviewsRequest = axios.get(`/reviews/${currentProductId}`);
 
     Promise.all([productsRequest, currentProductRequest,
-      stylesRequest, relatedRequest, qaRequest, ratingRequest])
+      stylesRequest, relatedRequest, qaRequest, ratingRequest, reviewsRequest])
       .then(axios.spread((...responses) => {
         setProducts(responses[0].data);
         setCurrentProduct(responses[1].data);
@@ -63,6 +65,7 @@ function App() {
         setRelatedItems(responses[3].data);
         setQA(responses[4].data);
         setRating(responses[5].data);
+        setReviews(responses[6].data);
         setLoading(false);
       }))
       .catch((err) => {
@@ -83,10 +86,10 @@ function App() {
             {console.log('currentProduct:', currentProduct)}
             {console.log('relatedItems:', relatedItems)}
             {console.log('QA:', QA)}
-            {console.log('Ratings:', rating)}
+            {console.log('Ratings:', ratings)}
           </p>
           <section>
-            <Overview currentProduct={currentProduct} />
+            <Overview currentProduct={currentProduct} styles={styles} starRating={rating} key={Date.now()}/>
           </section>
 
           <section>
@@ -100,10 +103,10 @@ function App() {
           </section>
 
           <section>
-            <QuestionsAnswers />
+            <QuestionsAnswers qaResults={QA.results} />
           </section>
           <section>
-            <Reviews />
+            <Reviews reviews={reviews} ratings={ratings} currentProduct={currentProduct} />
           </section>
 
         </Wrapper>

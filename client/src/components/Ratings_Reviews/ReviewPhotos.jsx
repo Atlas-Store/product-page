@@ -2,30 +2,36 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import PhotoModal from './PhotoModal';
 
+const ImageButton = styled.button`
+  background: transparent;
+  border: none;
+
+`;
+
 const Thumbnail = styled.img`
   height: 96px;
   width: 144px;
+  ${ImageButton}:hover & {
+    border: 2.5px solid black;
+  }
 `;
-const ImageButton = styled.button`
-  background-color: transparent;
-  border: none;
+
+const ActualPhoto = styled.img`
+  height: 3in;
+  width: 5in;
 `;
 const ReviewPhotos = (props) => {
-  const { images } = props;
+  const { image } = props;
   const [isOpen, setIsOpen] = useState(false);
-  const photos = images.map((aPhoto) => (
+  return (
     <span>
       <ImageButton type="button" onClick={() => setIsOpen(true)}>
-        <Thumbnail alt="By a reviewer" src={aPhoto.url} />
+        <Thumbnail alt="By a reviewer" src={image} />
       </ImageButton>
       <PhotoModal open={isOpen} onClose={() => setIsOpen(false)}>
-        <Thumbnail alt="By a reviewer" src={aPhoto.url} />
+        <ActualPhoto alt="By a reviewer" src={image} />
       </PhotoModal>
     </span>
-
-  ));
-  return (
-    photos
   );
 };
 
