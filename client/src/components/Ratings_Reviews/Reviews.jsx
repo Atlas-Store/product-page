@@ -59,7 +59,7 @@ const StarsContent = styled.div`
   display: flex;
   padding-left: 36px;
   align-items: center;
-  background-color: black;
+  background-color: green;
 `;
 
 const RatingNum = styled.div`

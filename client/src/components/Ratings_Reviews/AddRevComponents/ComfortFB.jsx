@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 
@@ -28,25 +29,97 @@ const Feedback = {
   5: 'Perfect!',
 };
 
-const ComfortFB = ({ comfortFeedback, updateComfortF }) => (
+const ComfortFB = ({
+  comfortFeedback, updateComfortF, characteristics, updateChars,
+}) => (
   <div>
     <form>
       <h4>*COMFORT: </h4>
       <Info>{Feedback[comfortFeedback]}</Info>
       <RadioPlugs>
-        <input type="radio" name="size" value="1" onClick={(event) => updateComfortF(event.target.value)} />
+        <input
+          type="radio"
+          name="comfort"
+          value="1"
+          required
+          onClick={(event) => {
+            updateComfortF(event.target.value); updateChars({
+              ...characteristics,
+              Comfort: {
+                id: 17,
+                value: event.target.value,
+              },
+            });
+          }}
+        />
       </RadioPlugs>
       <RadioPlugs>
-        <input type="radio" name="size" value="2" onClick={(event) => updateComfortF(event.target.value)} />
+        <input
+          type="radio"
+          name="comfort"
+          value="2"
+          required
+          onClick={(event) => {
+            updateComfortF(event.target.value); updateChars({
+              ...characteristics,
+              Comfort: {
+                id: 17,
+                value: event.target.value,
+              },
+            });
+          }}
+        />
       </RadioPlugs>
       <RadioPlugs>
-        <input type="radio" name="size" value="3" onClick={(event) => updateComfortF(event.target.value)} />
+        <input
+          type="radio"
+          name="comfort"
+          value="3"
+          required
+          onClick={(event) => {
+            updateComfortF(event.target.value); updateChars({
+              ...characteristics,
+              Comfort: {
+                id: 17,
+                value: event.target.value,
+              },
+            });
+          }}
+        />
       </RadioPlugs>
       <RadioPlugs>
-        <input type="radio" name="size" value="4" onClick={(event) => updateComfortF(event.target.value)} />
+        <input
+          type="radio"
+          name="comfort"
+          value="4"
+          required
+          onClick={(event) => {
+            updateComfortF(event.target.value); updateChars({
+              ...characteristics,
+              Comfort: {
+                id: 17,
+                value: event.target.value,
+              },
+            });
+          }}
+        />
       </RadioPlugs>
       <RadioPlugs>
-        <input type="radio" name="size" value="5" onClick={(event) => updateComfortF(event.target.value)} />
+        <input
+          type="radio"
+          name="comfort"
+          value="5"
+          required
+          onClick={(event) => {
+            updateComfortF(event.target.value); updateChars({
+              ...characteristics,
+              Comfort: {
+                id: 17,
+                value: event.target.value,
+              },
+            });
+          }}
+        />
       </RadioPlugs>
     </form>
     <DescDiv>

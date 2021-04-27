@@ -29,7 +29,6 @@ router.get('/:product_id', (req, res) => {
 });
 
 router.get('/:product_id/:sort', (req, res) => {
-  console.log(req.params);
   const endpoint = `reviews/?product_id=${req.params.product_id}&sort=${req.params.sort}`;
   getAPIdata(endpoint, (err, data) => {
     if (err) {

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 
@@ -28,25 +29,102 @@ const Feedback = {
   5: 'Perfect!',
 };
 
-const QualityFB = ({ qualityFeedback, updateQualityF }) => (
+const QualityFB = ({
+  qualityFeedback, updateQualityF, characteristics, updateChars,
+}) => (
   <div>
     <form>
       <h4>*QUALITY: </h4>
       <Info>{Feedback[qualityFeedback]}</Info>
       <RadioPlugs>
-        <input type="radio" name="size" value="1" onClick={(event) => updateQualityF(event.target.value)} />
+        <input
+          type="radio"
+          name="quality"
+          value="1"
+          required
+          onClick={(event) => {
+            updateQualityF(event.target.value);
+            updateChars({
+              ...characteristics,
+              Quality: {
+                id: 16,
+                value: event.target.value,
+              },
+            });
+          }}
+        />
       </RadioPlugs>
       <RadioPlugs>
-        <input type="radio" name="size" value="2" onClick={(event) => updateQualityF(event.target.value)} />
+        <input
+          type="radio"
+          name="quality"
+          value="2"
+          required
+          onClick={(event) => {
+            updateQualityF(event.target.value);
+            updateChars({
+              ...characteristics,
+              Quality: {
+                id: 16,
+                value: event.target.value,
+              },
+            });
+          }}
+        />
       </RadioPlugs>
       <RadioPlugs>
-        <input type="radio" name="size" value="3" onClick={(event) => updateQualityF(event.target.value)} />
+        <input
+          type="radio"
+          name="quality"
+          value="3"
+          required
+          onClick={(event) => {
+            updateQualityF(event.target.value);
+            updateChars({
+              ...characteristics,
+              Quality: {
+                id: 16,
+                value: event.target.value,
+              },
+            });
+          }}
+        />
       </RadioPlugs>
       <RadioPlugs>
-        <input type="radio" name="size" value="4" onClick={(event) => updateQualityF(event.target.value)} />
+        <input
+          type="radio"
+          name="quality"
+          value="4"
+          required
+          onClick={(event) => {
+            updateQualityF(event.target.value);
+            updateChars({
+              ...characteristics,
+              Quality: {
+                id: 16,
+                value: event.target.value,
+              },
+            });
+          }}
+        />
       </RadioPlugs>
       <RadioPlugs>
-        <input type="radio" name="size" value="5" onClick={(event) => updateQualityF(event.target.value)} />
+        <input
+          type="radio"
+          name="quality"
+          value="5"
+          required
+          onClick={(event) => {
+            updateQualityF(event.target.value);
+            updateChars({
+              ...characteristics,
+              Quality: {
+                id: 16,
+                value: event.target.value,
+              },
+            });
+          }}
+        />
       </RadioPlugs>
     </form>
     <DescDiv>

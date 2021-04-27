@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import moment from 'moment';
@@ -83,5 +84,5 @@ const ReviewTiles = ({ review }) => (
       </p>
     </StyledReview>
   </div>
-  );
+);
 export default ReviewTiles;

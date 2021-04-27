@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
+import axios from 'axios';
 import Stars from '../OView/StarRating';
 
 import SizeFB from './AddRevComponents/SizeFB';
@@ -89,7 +90,6 @@ const UserInput = styled.textarea`
 
 const SubmitButton = styled.button`
   position: absolute;
-  text-align: right;
   margin: 5px;
   background: transparent;
   border: none;
@@ -106,12 +106,29 @@ const starCategory = {
   5: 'Great!',
 };
 
-const fileRead = new FileReader();
+const productChars = {
+  Size: {
+    id: 14,
+    value: 0,
+  },
+  Width: {
+    id: 15,
+    value: 0,
+  },
+  Quality: {
+    id: 16,
+    value: 0,
+  },
+  Comfort: {
+    id: 17,
+    value: 0,
+  },
+};
 
 const AddReview = ({ open, onClose, currentProduct }) => {
   if (!open) return null;
   const [reviewStars, updateRStars] = useState(5);
-  const [didRecommend, updateRec] = useState('');
+  const [didRecommend, updateRec] = useState(null);
   const [sizeFeedback, updateSizeF] = useState(0);
   const [widthFeedback, updateWidthF] = useState(0);
   const [comfortFeedback, updateComfortF] = useState(0);
@@ -121,6 +138,29 @@ const AddReview = ({ open, onClose, currentProduct }) => {
   const [userName, updateUserName] = useState('');
   const [email, updateEmail] = useState('');
   const [images, updateImages] = useState([]);
+  const [characteristics, updateChars] = useState(productChars);
+
+  // const postReview = () => {
+  //   const data = {
+  //     product_id: currentProduct.id,
+  //     rating: reviewStars,
+  //     summary: reviewSummary,
+  //     body: reviewBody,
+  //     recommend: didRecommend,
+  //     name: userName,
+  //     email,
+  //     photos: images,
+  //     characteristics,
+  //   };
+  //   axios.post('/reviews', data)
+  //     .then((response) => {
+  //       console.log('Upload successful!', response);
+  //     })
+  //     .catch((error) => {
+  //       console.log('Failed to Post', error);
+  //     });
+  // };
+
   return ReactDOM.createPortal(
     <>
       <Overlay />
@@ -130,72 +170,80 @@ const AddReview = ({ open, onClose, currentProduct }) => {
           {' '}
           <span><u>{currentProduct.name}</u></span>
         </Title>
-        <ClickableReview>
-          <ReviewComponent>
-            <form>
+        <form>
+          <ClickableReview>
+            <ReviewComponent>
               <h4>Would you recommend this product?</h4>
               <div>
-                <input type="radio" name="recommend" value="Yes" onClick={(event) => updateRec(event.target.value)} />
+                <input type="radio" name="recommend" value="Yes" required onClick={() => updateRec(true)} />
                 <label htmlFor="Yes"> Yes </label>
               </div>
               <div>
-                <input type="radio" name="recommend" value="No" onClick={(event) => updateRec(event.target.value)} />
+                <input type="radio" name="recommend" value="No" onClick={() => updateRec(false)} />
                 <label htmlFor="No"> No </label>
               </div>
-            </form>
-          </ReviewComponent>
-          <ReviewComponent>
-            <h4>*How would you rate this product?</h4>
-            <form>
+            </ReviewComponent>
+            <ReviewComponent>
+              <h4>*How would you rate this product?</h4>
               <input type="range" name="rating" min="1" max="5" step="1" required onChange={(event) => updateRStars(event.target.value)} />
               <div>{starCategory[reviewStars]}</div>
               <Stars rating={reviewStars} />
-            </form>
-          </ReviewComponent>
-          <ReviewComponent>
-            <SizeFB sizeFeedback={sizeFeedback} updateSizeF={updateSizeF} />
-          </ReviewComponent>
-          <ReviewComponent>
-            <WidthFB widthFeedback={widthFeedback} updateWidthF={updateWidthF} />
-          </ReviewComponent>
-          <ReviewComponent>
-            <ComfortFB comfortFeedback={comfortFeedback} updateComfortF={updateComfortF} />
-          </ReviewComponent>
-          <ReviewComponent>
-            <QualityFB qualityFeedback={qualityFeedback} updateQualityF={updateQualityF} />
-          </ReviewComponent>
-        </ClickableReview>
-        <Feedback>
-          <ReviewComponent>
-            <form>
+            </ReviewComponent>
+            <ReviewComponent>
+              <SizeFB
+                sizeFeedback={sizeFeedback}
+                updateSizeF={updateSizeF}
+                characteristics={characteristics}
+                updateChars={updateChars}
+              />
+            </ReviewComponent>
+            <ReviewComponent>
+              <WidthFB
+                widthFeedback={widthFeedback}
+                updateWidthF={updateWidthF}
+                characteristics={characteristics}
+                updateChars={updateChars}
+              />
+            </ReviewComponent>
+            <ReviewComponent>
+              <ComfortFB
+                comfortFeedback={comfortFeedback}
+                updateComfortF={updateComfortF}
+                characteristics={characteristics}
+                updateChars={updateChars}
+              />
+            </ReviewComponent>
+            <ReviewComponent>
+              <QualityFB
+                qualityFeedback={qualityFeedback}
+                updateQualityF={updateQualityF}
+                characteristics={characteristics}
+                updateChars={updateChars}
+              />
+            </ReviewComponent>
+          </ClickableReview>
+          <Feedback>
+            <ReviewComponent>
               <h5>Review Summary:</h5>
               {' '}
               <SummaryInput type="text" value={reviewSummary} onChange={(event) => updateSummary(event.target.value)} placeholder="Love it" maxLength="60" />
-            </form>
-          </ReviewComponent>
-          <ReviewComponent>
-            <form>
+            </ReviewComponent>
+            <ReviewComponent>
               <h5>*Details:</h5>
               {' '}
               <SummaryInput type="text" required value={reviewBody} onChange={(event) => updateBody(event.target.value)} placeholder="Best purchase ever!" maxLength="1000" minLength="50" />
-            </form>
-          </ReviewComponent>
-          <ReviewComponent>
-            <form>
+            </ReviewComponent>
+            <ReviewComponent>
               <h5>*Username:</h5>
               {' '}
-              <UserInput type="text" required value={userName} onChange={(event) => updateUserName(event.target.value)} placeholder="Username" maxLength="60" />
-            </form>
-          </ReviewComponent>
-          <ReviewComponent>
-            <form>
-              <h5>Email:</h5>
+              <UserInput type="text" required value={userName} onChange={(event) => updateUserName(event.target.value)} placeholder="Username" minlength="10" maxLength="60" />
+            </ReviewComponent>
+            <ReviewComponent>
+              <h5>*Email:</h5>
               {' '}
-              <UserInput type="text" required value={email} onChange={(event) => updateEmail(event.target.value)} placeholder="Email" maxLength="250" />
-            </form>
-          </ReviewComponent>
-          <ReviewComponent>
-            <form>
+              <UserInput type="text" required value={email} onChange={(event) => updateEmail(event.target.value)} placeholder="Email" minlength="10" maxLength="250" />
+            </ReviewComponent>
+            <ReviewComponent>
               <h5>Images: (Max 5) </h5>
               {' '}
               {images.length < 5 && (
@@ -212,9 +260,16 @@ const AddReview = ({ open, onClose, currentProduct }) => {
                 {' '}
                 added
               </div>
-            </form>
-          </ReviewComponent>
-        </Feedback>
+            </ReviewComponent>
+          </Feedback>
+          <SubmitButton type="submit">
+            <strong>
+              <u>
+                SUBMIT
+              </u>
+            </strong>
+          </SubmitButton>
+        </form>
         <Close type="button" onClick={onClose}>
           <strong>
             <u>
@@ -222,13 +277,7 @@ const AddReview = ({ open, onClose, currentProduct }) => {
             </u>
           </strong>
         </Close>
-        <SubmitButton type="submit" onClick={onClose}>
-          <strong>
-            <u>
-              SUBMIT
-            </u>
-          </strong>
-        </SubmitButton>
+
       </WriteModal>
     </>, document.getElementById('portal'),
   );

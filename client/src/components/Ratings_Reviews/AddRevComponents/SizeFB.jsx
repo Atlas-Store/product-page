@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 
@@ -28,25 +29,102 @@ const sizeFB = {
   5: 'A size too big',
 };
 
-const SizeFB = ({ sizeFeedback, updateSizeF }) => (
+const SizeFB = ({
+  sizeFeedback, updateSizeF, characteristics, updateChars,
+}) => (
   <div>
     <form>
       <h4>*SIZE: </h4>
       <SizeInfo>{sizeFB[sizeFeedback]}</SizeInfo>
       <RadioPlugs>
-        <input type="radio" name="size" value="1" onClick={(event) => updateSizeF(event.target.value)} />
+        <input
+          type="radio"
+          name="size"
+          value="1"
+          required
+          onClick={(event) => {
+            updateSizeF(event.target.value);
+            updateChars({
+              ...characteristics,
+              Size: {
+                id: 14,
+                value: event.target.value,
+              },
+            });
+          }}
+        />
       </RadioPlugs>
       <RadioPlugs>
-        <input type="radio" name="size" value="2" onClick={(event) => updateSizeF(event.target.value)} />
+        <input
+          type="radio"
+          name="size"
+          value="2"
+          required
+          onClick={(event) => {
+            updateSizeF(event.target.value);
+            updateChars({
+              ...characteristics,
+              Size: {
+                id: 14,
+                value: event.target.value,
+              },
+            });
+          }}
+        />
       </RadioPlugs>
       <RadioPlugs>
-        <input type="radio" name="size" value="3" onClick={(event) => updateSizeF(event.target.value)} />
+        <input
+          type="radio"
+          name="size"
+          value="3"
+          required
+          onClick={(event) => {
+            updateSizeF(event.target.value);
+            updateChars({
+              ...characteristics,
+              Size: {
+                id: 14,
+                value: event.target.value,
+              },
+            });
+          }}
+        />
       </RadioPlugs>
       <RadioPlugs>
-        <input type="radio" name="size" value="4" onClick={(event) => updateSizeF(event.target.value)} />
+        <input
+          type="radio"
+          name="size"
+          value="4"
+          required
+          onClick={(event) => {
+            updateSizeF(event.target.value);
+            updateChars({
+              ...characteristics,
+              Size: {
+                id: 14,
+                value: event.target.value,
+              },
+            });
+          }}
+        />
       </RadioPlugs>
       <RadioPlugs>
-        <input type="radio" name="size" value="5" onClick={(event) => updateSizeF(event.target.value)} />
+        <input
+          type="radio"
+          name="size"
+          value="5"
+          required
+          onClick={(event) => {
+            updateSizeF(event.target.value);
+            updateChars({
+              ...characteristics,
+              Size: {
+                id: 14,
+                value: event.target.value,
+              },
+            });
+          }}
+        />
       </RadioPlugs>
     </form>
     <SizeDescDiv>
