@@ -37,7 +37,7 @@ const Loader = styled.div`
 `;
 
 function App() {
-  const [currentProductId, setCurrentProductId] = useState(23146);
+  const [currentProductId, setCurrentProductId] = useState(23145);
   const [products, setProducts] = useState([]);
   const [currentProduct, setCurrentProduct] = useState({});
   const [styles, setStyles] = useState({});
@@ -86,7 +86,7 @@ function App() {
             {console.log('Ratings:', rating)}
           </p>
           <section>
-            <Overview currentProduct={currentProduct} />
+            <Overview currentProduct={currentProduct} styles={styles} starRating={rating} key={Date.now()}/>
           </section>
 
           <section>
