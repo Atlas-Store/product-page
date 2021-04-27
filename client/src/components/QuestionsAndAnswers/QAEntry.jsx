@@ -1,71 +1,49 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import Answer from './Answer';
 
 const Row = styled.div`
   display:flex;
+  // margin: 10px
+  min-width: 39vw;
 `;
 
 const Col = styled.div`
   flex: ${(props) => props.size};
-  margin: 20ev;
+  margin-top: 10px;
   padding: 20ev;
 `;
 
+const Question = styled.p`
+  font-weight: bold;
+  margin-left: 10px;
+`;
+
+const QuestionInfo = styled.p`
+  // padding-left: 15px;
+  font-size: 80% !important;
+`;
+
 function QAEntry({ question }) {
-  const [aCount, setACount] = useState(2);
-
-  const handleMoreAnswersClick = () => {
-    setACount((state) => state + 2);
-  };
-  // const sortedAnswers = Object.keys(question.answers);
-  // sortedAnswers.sort((a, b) => {})
-
   return (
     <div>
       <Row>
-        <Col size={2} padding={10}>
-          Q:
-          {question.question_body}
+        <Col size={2}>
+          <Question>
+            {`Q: ${question.question_body}`}
+          </Question>
         </Col>
-        <Col size={1} padding={100}>
-          helpful? yes
-          (
-          {question.question_helpfulness}
-          ) | add answer
+        <Col size={1}>
+          <QuestionInfo>
+            helpful? yes
+            (
+            {question.question_helpfulness}
+            ) | Add Answer
+          </QuestionInfo>
         </Col>
       </Row>
-      {Object.keys(question.answers).slice(0, aCount).map((key) => {
-        const answer = question.answers[key];
-        return (
-          <div key={key}>
-            <div>
-              <Col size={2}>
-                <p>
-                  A:
-                  {answer.body}
-                </p>
-              </Col>
-            </div>
-            <div>
-              <Col size={2}>
-                <span>
-                  {answer.answerer_name}
-                  |
-                  {answer.date}
-                  | helpful? yes
-                  (
-                  {answer.helpfulness}
-                  )
-                  | report
-                </span>
-              </Col>
-            </div>
-          </div>
-        );
-      })}
-      {Object.keys(question.answers).length > aCount
-        && <button type="button" onClick={handleMoreAnswersClick}>Load More Answers</button>}
+      <Answer answers={question.answers} />
     </div>
   );
 }
