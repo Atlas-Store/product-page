@@ -37,7 +37,7 @@ const Loader = styled.div`
 `;
 
 function App() {
-  const [currentProductId, setCurrentProductId] = useState(23146);
+  const [currentProductId, setCurrentProductId] = useState(23149);
   const [products, setProducts] = useState([]);
   const [currentProduct, setCurrentProduct] = useState({});
   const [styles, setStyles] = useState({});

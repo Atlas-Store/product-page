@@ -79,6 +79,8 @@ const Review = ({ reviews, ratings, currentProduct }) => {
   const [reviewsToRender, updateReviewsRender] = useState(reviews.results);
   const [averageRating, setAvgRating] = useState(renderFunc.calcAvg(ratings.ratings));
   const [fracRecs, setFracRecs] = useState(renderFunc.numRecommenders(ratings.recommended));
+  console.log(fracRecs);
+  console.log(ratings.recommended);
   const productID = reviews.product;
   const grabSortedReviews = (byWhat) => {
     const sortBy = byWhat.toLowerCase();
@@ -111,7 +113,7 @@ const Review = ({ reviews, ratings, currentProduct }) => {
             % reviewers recommend this product
           </FractionRecs>
           <BarRatings starStats={ratings.ratings} />
-          <SizeComfort />
+          <SizeComfort ratings={ratings} />
         </RatingsSection>
         <StyledReviewSection>
           <h3>

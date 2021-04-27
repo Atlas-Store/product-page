@@ -173,7 +173,7 @@ const AddReview = ({ open, onClose, currentProduct }) => {
         <form>
           <ClickableReview>
             <ReviewComponent>
-              <h4>Would you recommend this product?</h4>
+              <h4>*Would you recommend this product?</h4>
               <div>
                 <input type="radio" name="recommend" value="Yes" required onClick={() => updateRec(true)} />
                 <label htmlFor="Yes"> Yes </label>

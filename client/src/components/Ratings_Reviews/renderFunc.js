@@ -27,9 +27,10 @@ module.exports = {
   },
 
   numRecommenders: (recommendedStats) => {
-    const yes = recommendedStats.true;
-    const no = recommendedStats.false;
-    const percentRecommended = Math.round((yes / (yes + no)) * 100);
+    const yes = recommendedStats.true ? recommendedStats.true : 0;
+    const no = recommendedStats.false ? recommendedStats.false : 0;
+    const divisor = parseInt(yes, 10) + parseInt(no, 10);
+    const percentRecommended = Math.round((parseInt(yes, 10) / divisor) * 100);
     return percentRecommended;
   },
 
@@ -44,7 +45,7 @@ module.exports = {
     };
     for (const key in starStats) {
       freqRatings[key] = starStats[key];
-      freqRatings['divisor'] += parseInt(starStats[key]);
+      freqRatings.divisor += parseInt(starStats[key]);
     }
     return freqRatings;
   },
