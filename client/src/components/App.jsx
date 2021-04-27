@@ -37,7 +37,7 @@ const Loader = styled.div`
 `;
 
 function App() {
-  const [currentProductId, setCurrentProductId] = useState(23149);
+  const [currentProductId, setCurrentProductId] = useState(23145);
   const [products, setProducts] = useState([]);
   const [currentProduct, setCurrentProduct] = useState({});
   const [styles, setStyles] = useState({});
@@ -89,7 +89,7 @@ function App() {
             {console.log('Ratings:', ratings)}
           </p>
           <section>
-            <Overview currentProduct={currentProduct} />
+            <Overview currentProduct={currentProduct} styles={styles} starRating={rating} key={Date.now()}/>
           </section>
 
           <section>
@@ -103,7 +103,7 @@ function App() {
           </section>
 
           <section>
-            <QuestionsAnswers />
+            <QuestionsAnswers qaResults={QA.results} />
           </section>
           <section>
             <Reviews reviews={reviews} ratings={ratings} currentProduct={currentProduct} />

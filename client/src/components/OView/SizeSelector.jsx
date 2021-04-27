@@ -6,9 +6,9 @@ const SelectSize = styled.select`
   border-radius: 3px;
   border: 2px solid gray;
   color: gray;
-  font-size: 16px;
+  font-size: 14px;
   margin: 0 1em;
-  padding: 0.60em 1.35em;
+  padding: 0.70em 1.15em;
   cursor: pointer;
     option {
       color: red;
