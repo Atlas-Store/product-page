@@ -1,9 +1,7 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable no-param-reassign */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import sampleReviews from './sampleReviews';
 import AddReview from './AddReview';
 import Stars from '../OView/StarRating';
 import BarRatings from './BarRatings';
@@ -86,7 +84,6 @@ const Review = ({ reviews, ratings, currentProduct }) => {
     const sortBy = byWhat.toLowerCase();
     axios.get(`/reviews/${productID}/${sortBy}`)
       .then((results) => {
-        console.log(results.data.results);
         updateReviewsRender(results.data.results);
       })
       .catch((error) => console.log(error));
@@ -125,13 +122,18 @@ const Review = ({ reviews, ratings, currentProduct }) => {
               grabSortedReviews(event.target.value);
             }}
             >
-              <StyledOption value="Helpful" selected>Helpful</StyledOption>
+              <StyledOption value="Helpful">Helpful</StyledOption>
               <StyledOption value="Newest">Newest</StyledOption>
               <StyledOption value="Relevant">Relevant</StyledOption>
             </SortMenu>
           </h3>
           <div>
-            {reviewsToRender.map((aReview) => <ReviewTiles review={aReview} />)}
+            {reviewsToRender.map((aReview) => (
+              <ReviewTiles
+                review={aReview}
+                key={aReview.review_id}
+              />
+            )).slice(0, reviewsToShow)}
           </div>
           <div id="writeRev">
             {(reviewsToShow < numReviews) && (

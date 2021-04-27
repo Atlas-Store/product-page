@@ -40,53 +40,48 @@ const ReviewResponse = styled.p`
   background-color: lightgrey;
 `;
 
-const ReviewTiles = (props) => {
-  // eslint-disable-next-line react/prop-types
-  const { review } = props;
-  return (
-    <div>
-      <StyledReview>
-        <ReviewInfo>
-          <Stars rating={review.rating} />
-          <ReviewUserDate>
-            <UserName>
-              {review.reviewer_name}
-              ,
-            </UserName>
-            <TimeOfReview>
-              {moment(review.date).format('MMMM DD, YYYY')}
-            </TimeOfReview>
-          </ReviewUserDate>
-        </ReviewInfo>
-        <h4>
-          {review.summary}
-        </h4>
-        <p>
-          <ReviewBody body={review.body} />
-        </p>
-        {(review.photos.length > 0)
+const ReviewTiles = ({ review }) => (
+  <div>
+    <StyledReview>
+      <ReviewInfo>
+        <Stars rating={review.rating} />
+        <ReviewUserDate>
+          <UserName>
+            {review.reviewer_name}
+            ,
+          </UserName>
+          <TimeOfReview>
+            {moment(review.date).format('MMMM DD, YYYY')}
+          </TimeOfReview>
+        </ReviewUserDate>
+      </ReviewInfo>
+      <h4>
+        {review.summary}
+      </h4>
+      <p>
+        <ReviewBody body={review.body} />
+      </p>
+      {(review.photos.length > 0)
+      && (
+      <p>
+        {review.photos.map((aPhoto) => <ReviewPhotos image={aPhoto.url} key={aPhoto.id} />)}
+      </p>
+      )}
+      {review.recommend
+        && <p> ✓ I recommend this product </p>}
+      {review.response
         && (
-        <p>
-          {review.photos.map((aPhoto) => <ReviewPhotos image={aPhoto.url} />)}
-        </p>
+        <div>
+          <ReviewResponse>
+            <h4>Response:</h4>
+            {review.response}
+          </ReviewResponse>
+        </div>
         )}
-        {review.recommend
-          && <p> ✓ I recommend this product </p>}
-        {review.response
-          && (
-          <div>
-            <ReviewResponse>
-              <h4>Response:</h4>
-              {review.response}
-            </ReviewResponse>
-          </div>
-          )}
-        <p>
-          <Helpful countYes={review.helpfulness} />
-        </p>
-      </StyledReview>
-    </div>
+      <p>
+        <Helpful countYes={review.helpfulness} />
+      </p>
+    </StyledReview>
+  </div>
   );
-};
-
 export default ReviewTiles;
