@@ -23,7 +23,8 @@ export const ProductImageDiv = styled.div`
 
 export const ProductImage = styled.img`
   max-height: ${props => props.size || 550}px;
-  max-width: ${props => props.size || 550}px;
+  // max-width: auto;
+  max-width: ${props => props.size || 700}px;
   object-fit: cover;
   // display: flex;
   // flex-direction: column;

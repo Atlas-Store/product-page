@@ -18,11 +18,12 @@ const QuantitySelector = (props) => {
   return (
     <SelectQuantity name="selectQuantity" id="quantitySelect">
       <option value="">Select Quantity</option>
-      <option value="1">1</option>
+      {/* <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
       <option value="4">4</option>
-      <option value="5">5</option>
+      <option value="5">5</option> */}
+      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map(item => (<option value={item.toString}>{item}</option>))}
       </SelectQuantity>
   )
 }

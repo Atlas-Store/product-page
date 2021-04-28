@@ -27,6 +27,17 @@ const Wrapper = styled.div`
   // justify-content: safe center;
 `
 
+const NoImageAvailable = styled.img`
+  width: 500;
+  height: 500;
+`
+
+const CenteredDiv = styled.img`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+`
+
 // let slideToContinueFrom = 0;
 const ImageSlider = (props) => {
   // <Slider className='productSlider' {...settings}>
@@ -58,6 +69,7 @@ const ImageSlider = (props) => {
     slidesToScroll: 1,
     arrows: true,
     currentSlide: props.objSlideToContinueFrom.current,
+    // centerMode: true,
     // initialSlide: slideToContinueFrom,
     // currentSlide: props.currentSlide,
     afterChange: nextClick
@@ -69,15 +81,18 @@ const ImageSlider = (props) => {
 
   const sliderThatStartsFromBeginning = () => (
     <Slider {...settings} key={Date.now()}>
-
+      {/* <br/><br/><br/><br/> */}
     {[0, 1, 2, 3, 4, 5].map(item =>
-    (<div>
+
+    (<CenteredDiv>
+
       <ProductImageDiv >
+
       <ProductImage src={(props.currentGroupOfImageURLs['photos'][item]) ? (props.currentGroupOfImageURLs['photos'][item]['url']) : 'testPlus.png'} onClick={props.handleClickProductImageDiv} />
     </ProductImageDiv>
 
     {/* <ThumbnailImage /> */}
-    </div>)
+    </CenteredDiv>)
     )}
       </Slider>
   )
@@ -95,7 +110,7 @@ const ImageSlider = (props) => {
     {[0, 1, 2, 3, 4, 5].map(item =>
     (<div>
       <ProductImageDiv >
-      <ProductImage src={(props.currentGroupOfImageURLs['photos'][item]) ? (props.currentGroupOfImageURLs['photos'][item]['url']) : 'testPlus.png'} onClick={props.handleClickProductImageDiv} />
+      <ProductImage src={(props.currentGroupOfImageURLs['photos'][item]) ? (props.currentGroupOfImageURLs['photos'][item]['url']) : 'No image available'} onClick={props.handleClickProductImageDiv} />
     </ProductImageDiv>
 
     {/* <ThumbnailImage /> */}
@@ -104,18 +119,28 @@ const ImageSlider = (props) => {
       </Slider>
   )
 
+  let arrConsecutiveNums = new Array(40);
+  for (let i = 0; i < arrConsecutiveNums.length; i++) {
+    arrConsecutiveNums[i] = i;
+  }
+
   const regularSliderTwo = () => (
     // <Wrapper>
     <Slider {...settings} >
 
-    {[0, 1, 2, 3, 4, 5].map(item =>
-    (<div>
-      <ProductImageDiv >
-      <ProductImage src={(props.currentGroupOfImageURLs['photos'][item]) ? (props.currentGroupOfImageURLs['photos'][item]['url']) : 'testPlus.png'} onClick={props.handleClickProductImageDiv} onClick={() => setIsOpen(true)}/>
-    </ProductImageDiv>
+    {arrConsecutiveNums.map(item => {
+    if (props.currentGroupOfImageURLs['photos'][item]) {
+      return (<div>
+        <ProductImageDiv >
+        {/* <ProductImage src={(props.currentGroupOfImageURLs['photos'][item]) ? (props.currentGroupOfImageURLs['photos'][item]['url']) : 'imageSubstitute.png'} onClick={props.handleClickProductImageDiv} onClick={() => setIsOpen(true)}/> */}
+        <ProductImage src={props.currentGroupOfImageURLs['photos'][item]['url']} onClick={props.handleClickProductImageDiv} onClick={() => setIsOpen(true)}/>
+      </ProductImageDiv>
 
-    {/* <ThumbnailImage /> */}
-    </div>)
+      {/* <ThumbnailImage /> */}
+      </div>)
+    }
+  }
+
     )}
       </Slider>
       // </Wrapper>
@@ -137,7 +162,7 @@ const ImageSlider = (props) => {
         <Modal open={isOpen} onClose={() => setIsOpen(false)}>
           {/* Fancy Modal */}
           <ProductImageDiv >
-            <ProductImage src={(props.currentGroupOfImageURLs['photos'][props.objSlideToContinueFrom.current]) ? (props.currentGroupOfImageURLs['photos'][props.objSlideToContinueFrom.current]['url']) : 'testPlus.png'} size={650} onClick={props.handleClickProductImageDiv} />
+            <ProductImage src={(props.currentGroupOfImageURLs['photos'][props.objSlideToContinueFrom.current]) ? (props.currentGroupOfImageURLs['photos'][props.objSlideToContinueFrom.current]['url']) : 'imageSubstitute.png'} size={650} onClick={props.handleClickProductImageDiv} />
           </ProductImageDiv>
         </Modal>
       </div>

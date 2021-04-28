@@ -15,7 +15,7 @@ import {ProductImage, ProductImageDiv} from './StyledItems.jsx';
 import $ from 'jquery';
 import ImageSlider from './ImageSlider.jsx';
 import Modal from './Modal.js';
-
+// import asdf from  './setupTests.js';
 
 // import ThumbnailImage from '/ThumbnailImage.jsx';
 
@@ -26,6 +26,7 @@ export const Grid = styled.div`
 
 export const Row = styled.div`
   display: flex;
+  justify-content: center;
 `
 
 // export const RowForCurrentImage = styled.div`
@@ -34,10 +35,30 @@ export const Row = styled.div`
 // `
 
 export const Col = styled.div`
+  // display: flex;
   flex: ${(props) => props.size};
+  // justify-content: center;
   // flex: 2;
+
+`
+export const CenteredColImageGallery = styled.div`
+  display: flex;
+  flex: ${(props) => props.size};
+  justify-content: center;
+  align-items: center;
+  width: 1200;
+  height: 600;
+  // margin-right: 100px;
 `
 
+export const CenteredColRestOfOverview = styled.div`
+  display: flex;
+  flex: ${(props) => props.size};
+  justify-content: center;
+  // width: 1200;
+  // height: 600;
+  margin-left: 68px;
+`
 
 // let stylesIDs = [];
 // for (let i = 0; i < dataFirstProduct['results'].length; i++) {
@@ -45,8 +66,13 @@ export const Col = styled.div`
 // }
 
 const Wrapper = styled.div`
-width: 600px;
+width: 800px;
+// width: auto;
+height: 680px;
 position: relative;
+display: flex;
+flex-direction: column;
+justify-content: safe center;
 // box-sizing: border-box;
 background: gray;
 
@@ -112,10 +138,19 @@ background: gray;
     content: '>';
 }
 
+.slick-slide {
+  // min-width: 100%;
+  // margin-top: 1500px;
+  margin-top: 17px;
+  // margin-right: 100px;
+  // margin-left: 100px;
+}
 `;
 
 
-
+const WrapperForRestofOverview = styled.div`
+  width:
+`
 
 
 
@@ -136,8 +171,8 @@ const Overview = ({currentProduct, styles, starRating}) => {
   }
   // console.log('dataFirstProduct is', dataFirstProduct);
   // }
-  // console.log('blablabla currentProduct is ', currentProduct);
-  // console.log('blablabla styles is ', styles)
+  console.log('blablabla currentProduct is ', currentProduct);
+  console.log('blablabla styles is ', styles);
   // console.log('currentProduct is ', currentProduct);
   // console.log('stylesURLs is', stylesURLs);
 
@@ -315,17 +350,16 @@ const Overview = ({currentProduct, styles, starRating}) => {
       <div>
         <Grid>
           <Row>
-            <Col size={2.5}>
+            <CenteredColImageGallery size={2.5}>
             <Wrapper>
-            {/* <div> */}
-            {/* specifySlideToContinueFrom={specifySlideToContinueFrom} slideToContinueFrom={slideToContinueFrom.current}  */}
+
               <ImageSlider objSlideToContinueFrom={slideToContinueFrom} startFromBeginning={true} currentGroupOfImageURLs={currentGroupOfImageURLs} handleClickProductImageDiv={handleClickProductImageDiv} resetSliderForExpandedView={true} key={Date.now()}/>
-            {/* </div> */}
-            {/* <Modal /> */}
+
             </Wrapper>
 
-            </Col>
-            <Col size={1}>
+            </CenteredColImageGallery>
+            <CenteredColRestOfOverview size={1}>
+              <div>
               {/* Double the size of */}
               <StarRating handleSubmit={handleSubmit} changeHandler={changeHandler} rating={rating}/>
               <ProductCategory category={currentProduct.category}/>
@@ -334,8 +368,10 @@ const Overview = ({currentProduct, styles, starRating}) => {
               <br/><br/>
               <StyleSelector stylesURLs={stylesURLs} setCurrentImageURL={setCurrentImageURL} setCurrentGroupOfImageURLs={setCurrentGroupOfImageURLs} dataFirstProduct={styles} resetSliderToFirstImage={resetSliderToFirstImage} handleClickStyle={handleClickStyle}/>
               <br/><br/>
-              <ProductSelector />
-            </Col>
+              <ProductSelector/>
+              {/* <ProductSelector sizes={} quantities={}/> */}
+              </div>
+            </CenteredColRestOfOverview>
           </Row>
           <Row>
             <Col>
