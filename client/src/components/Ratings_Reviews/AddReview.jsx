@@ -19,7 +19,7 @@ const WriteModal = styled.div`
   padding: 50px;
   zIndex=1000;
   border: 2.5px solid black;
-  width: fit-content;
+  width: 50%;
   height: 85%;
   font-family: Arial;
 `;
@@ -59,7 +59,7 @@ const Feedback = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   background: rgb(248,248,255);
   border-bottom: 3.5px solid black
 `;
@@ -72,6 +72,13 @@ const ReviewComponent = styled.div`
   margin-top: 28px;
   margin-bottom: 28px;
   margin-right: 56px;
+
+`;
+const UserReviewComponent = styled.div`
+  margin-top: 28px;
+  margin-bottom: 28px;
+  margin-left: 56px;
+  width: 40%;
 `;
 
 const SummaryInput = styled.textarea`
@@ -85,19 +92,26 @@ const SummaryInput = styled.textarea`
 const UserInput = styled.textarea`
   background: rgb(248,248,255);
   border: none;
+  width: 2in;
+  height: fit-content;
   font-family: Arial;
 `;
 
 const SubmitButton = styled.button`
-  position: absolute;
   margin: 5px;
   background: transparent;
   border: none;
+  font-size: larger;
   &:hover {
     background: lightgreen;
     padding: 5px;
   }
 `;
+
+const SubmitDiv = styled.div`
+  text-align: center;
+`;
+
 const starCategory = {
   1: 'Poor',
   2: 'Fair',
@@ -185,8 +199,8 @@ const AddReview = ({ open, onClose, currentProduct }) => {
             </ReviewComponent>
             <ReviewComponent>
               <h4>*How would you rate this product?</h4>
-              <input type="range" name="rating" min="1" max="5" step="1" required onChange={(event) => updateRStars(event.target.value)} />
               <div>{starCategory[reviewStars]}</div>
+              <input type="range" name="rating" min="1" max="5" step="1" required onChange={(event) => updateRStars(event.target.value)} />
               <Stars rating={reviewStars} />
             </ReviewComponent>
             <ReviewComponent>
@@ -223,28 +237,28 @@ const AddReview = ({ open, onClose, currentProduct }) => {
             </ReviewComponent>
           </ClickableReview>
           <Feedback>
-            <ReviewComponent>
-              <h5>Review Summary:</h5>
+            <UserReviewComponent>
+              <h4>Review Summary:</h4>
               {' '}
               <SummaryInput type="text" value={reviewSummary} onChange={(event) => updateSummary(event.target.value)} placeholder="Love it" maxLength="60" />
-            </ReviewComponent>
-            <ReviewComponent>
-              <h5>*Details:</h5>
+            </UserReviewComponent>
+            <UserReviewComponent>
+              <h4>*Details:</h4>
               {' '}
               <SummaryInput type="text" required value={reviewBody} onChange={(event) => updateBody(event.target.value)} placeholder="Best purchase ever!" maxLength="1000" minLength="50" />
-            </ReviewComponent>
-            <ReviewComponent>
-              <h5>*Username:</h5>
+            </UserReviewComponent>
+            <UserReviewComponent>
+              <h4>*Username:</h4>
               {' '}
               <UserInput type="text" required value={userName} onChange={(event) => updateUserName(event.target.value)} placeholder="Username" minlength="10" maxLength="60" />
-            </ReviewComponent>
-            <ReviewComponent>
-              <h5>*Email:</h5>
+            </UserReviewComponent>
+            <UserReviewComponent>
+              <h4>*Email:</h4>
               {' '}
               <UserInput type="text" required value={email} onChange={(event) => updateEmail(event.target.value)} placeholder="Email" minlength="10" maxLength="250" />
-            </ReviewComponent>
-            <ReviewComponent>
-              <h5>Images: (Max 5) </h5>
+            </UserReviewComponent>
+            <UserReviewComponent>
+              <h4>Images: (Max 5) </h4>
               {' '}
               {images.length < 5 && (
               <input
@@ -260,15 +274,17 @@ const AddReview = ({ open, onClose, currentProduct }) => {
                 {' '}
                 added
               </div>
-            </ReviewComponent>
+            </UserReviewComponent>
           </Feedback>
-          <SubmitButton type="submit">
-            <strong>
-              <u>
-                SUBMIT
-              </u>
-            </strong>
-          </SubmitButton>
+          <SubmitDiv>
+            <SubmitButton type="submit">
+              <strong>
+                <u>
+                  SUBMIT
+                </u>
+              </strong>
+            </SubmitButton>
+          </SubmitDiv>
         </form>
         <Close type="button" onClick={onClose}>
           <strong>

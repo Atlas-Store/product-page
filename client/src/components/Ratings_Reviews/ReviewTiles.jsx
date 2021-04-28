@@ -41,6 +41,10 @@ const ReviewResponse = styled.p`
   background-color: lightgrey;
 `;
 
+const HelpfulDiv = styled.div`
+  margin-bottom: 3px;
+`;
+
 const ReviewTiles = ({ review }) => (
   <div>
     <StyledReview>
@@ -59,9 +63,9 @@ const ReviewTiles = ({ review }) => (
       <h4>
         {review.summary}
       </h4>
-      <p>
+      <div>
         <ReviewBody body={review.body} />
-      </p>
+      </div>
       {(review.photos.length > 0)
       && (
       <p>
@@ -79,9 +83,9 @@ const ReviewTiles = ({ review }) => (
           </ReviewResponse>
         </div>
         )}
-      <p>
+      <HelpfulDiv>
         <Helpful countYes={review.helpfulness} />
-      </p>
+      </HelpfulDiv>
     </StyledReview>
   </div>
 );

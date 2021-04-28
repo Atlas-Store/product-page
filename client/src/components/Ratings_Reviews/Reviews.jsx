@@ -11,14 +11,17 @@ import ReviewTiles from './ReviewTiles';
 const renderFunc = require('./renderFunc.js');
 
 const RatingsSection = styled.div`
+  min-width: 3in;
   padding-right: 48px;
 `;
 const StyledRRBox = styled.div`
   display: flex;
-  align-items: baseline;
+  padding: 20px;
   flex-wrap: wrap;
   flex-direction: row;
   font-family: Arial;
+  min-width: 672px;
+  overflow-x: scroll;
 `;
 
 const StyledReviewSection = styled.div`
@@ -57,15 +60,16 @@ const FractionRecs = styled.div`
 
 const StarsContent = styled.div`
   display: flex;
-  padding-left: 36px;
+  flex-direction: row;
   align-items: center;
   background-color: green;
+  padding-left: 72px;
 `;
 
 const RatingNum = styled.div`
   font-size: 36px;
   padding-left: 10px;
-  color: #FFF;
+  color: black;
 `;
 
 const StyledOption = styled.option`
@@ -73,6 +77,7 @@ const StyledOption = styled.option`
 `;
 
 const Review = ({ reviews, ratings, currentProduct }) => {
+
   const [numReviews, updateNumReviews] = useState(reviews.results.length);
   const [reviewsToShow, updateToShow] = useState(2);
   const [writeReview, toggleWR] = useState(false);
@@ -120,6 +125,7 @@ const Review = ({ reviews, ratings, currentProduct }) => {
             reviews sorted by
             <SortMenu onChange={(event) => {
               grabSortedReviews(event.target.value);
+              updateToShow(2);
             }}
             >
               <StyledOption value="Helpful">Helpful</StyledOption>
