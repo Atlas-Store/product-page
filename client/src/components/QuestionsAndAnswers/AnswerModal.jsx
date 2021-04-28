@@ -35,7 +35,7 @@ const ModalWrapper = styled.div`
 
 //   `;
 
-function Modal({ handleSubmit }) {
+function AnswerModal({ handleSubmit }) {
   const element = document.createElement('div');
   const modalRoot = document.getElementById('QAPortal');
 
@@ -51,12 +51,12 @@ function Modal({ handleSubmit }) {
     <>
       <Background>
         <ModalWrapper>
-          <h1>Ask Your Question</h1>
+          <h1>Submit your Answer</h1>
           <form onSubmit={handleSubmit}>
             <div>
-              <label htmlFor="question">
-                What is your question?
-                <textarea maxLength={1000} placeholder="what is your question" type="textarea" id="question" />
+              <label htmlFor="answer">
+                What is your Answer?
+                <textarea maxLength={1000} placeholder="what is your answer" type="textarea" id="answer" />
               </label>
             </div>
             <br />
@@ -83,4 +83,4 @@ function Modal({ handleSubmit }) {
   );
 }
 
-export default Modal;
+export default AnswerModal;

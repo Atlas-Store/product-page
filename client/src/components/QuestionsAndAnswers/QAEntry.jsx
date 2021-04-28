@@ -25,6 +25,10 @@ const QuestionInfo = styled.p`
   font-size: 80% !important;
 `;
 
+const AddAnswer = styled.span`
+  text-decoration: underline;
+`;
+
 function QAEntry({ question }) {
   return (
     <div>
@@ -39,7 +43,8 @@ function QAEntry({ question }) {
             helpful? yes
             (
             {question.question_helpfulness}
-            ) | Add Answer
+            ) |
+            <AddAnswer>Add Answer</AddAnswer>
           </QuestionInfo>
         </Col>
       </Row>
