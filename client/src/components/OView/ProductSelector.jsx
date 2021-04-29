@@ -8,6 +8,7 @@ const AddToCart = styled.button`
     border-radius: 3px;
     border: 2px solid gray;
     color: gray;
+    // margin-top: 800px;
 
     font-size: 16px;
 
@@ -42,10 +43,11 @@ function ProductSelector(props) {
   }
   return (
     <div>
+      <br />
     <DisplaySideBySide>
       <SizeSelector /><QuantitySelector />
       </DisplaySideBySide>
-      <br /><br />
+      <br /><br /><br />
       <CenteredDiv>
       <AddToCart onMouseEnter={handleMouseEnter}>Add To Cart</AddToCart>
       </CenteredDiv>
