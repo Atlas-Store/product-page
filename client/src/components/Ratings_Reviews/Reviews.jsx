@@ -11,21 +11,20 @@ import ReviewTiles from './ReviewTiles';
 const renderFunc = require('./renderFunc.js');
 
 const RatingsSection = styled.div`
-  min-width: 3in;
-  padding-right: 48px;
+  padding-right: 24px;
 `;
 const StyledRRBox = styled.div`
   display: flex;
-  padding: 20px;
   flex-wrap: wrap;
   flex-direction: row;
+  justify-content: space-between;
   font-family: Arial;
-  min-width: 672px;
   overflow-x: scroll;
+  width: 88vw;
 `;
 
 const StyledReviewSection = styled.div`
-  width: 672px;
+  width: 66vw;
 `;
 
 const StyledReviewButton = styled.button`
@@ -37,6 +36,10 @@ const StyledReviewButton = styled.button`
   padding-top: 20px;
   padding-bottom: 20px;
   margin: 10px;
+`;
+
+const CustomH3 = styled.h3`
+  margin-block-start: 0;
 `;
 
 const SortMenu = styled.select`
@@ -119,7 +122,7 @@ const Review = ({ reviews, ratings, currentProduct }) => {
           <SizeComfort ratings={ratings} />
         </RatingsSection>
         <StyledReviewSection>
-          <h3>
+          <CustomH3>
             { reviews.results.length }
             {'  '}
             reviews sorted by
@@ -132,7 +135,7 @@ const Review = ({ reviews, ratings, currentProduct }) => {
               <StyledOption value="Newest">Newest</StyledOption>
               <StyledOption value="Relevant">Relevant</StyledOption>
             </SortMenu>
-          </h3>
+          </CustomH3>
           <div>
             {reviewsToRender.map((aReview) => (
               <ReviewTiles
