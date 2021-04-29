@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import Modal from './Modal';
+import PropTypes from 'prop-types';
+import MoreQuestionsModal from './MoreQuestionsModal';
 
 const Button = styled.button`
 display: inline-block;
@@ -13,7 +14,7 @@ border-radius: 3px;
 // display: block;
 `;
 
-function AddQuestionButton() {
+function AddQuestionButton({ currentProductId }) {
   const [showModal, setShowmodal] = useState(false);
 
   const toggleModal = () => {
@@ -31,11 +32,15 @@ function AddQuestionButton() {
       <Button onClick={toggleModal}>Add a Question</Button>
       {
         showModal ? (
-          <Modal handleSubmit={handleSubmit} />
+          <MoreQuestionsModal currentProductId={currentProductId} handleSubmit={handleSubmit} />
         ) : null
       }
     </div>
   );
 }
+
+AddQuestionButton.propTypes = {
+  currentProductId: PropTypes.number.isRequired,
+};
 
 export default AddQuestionButton;

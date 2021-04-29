@@ -28,7 +28,7 @@ const ConditionalWrapper = styled.div`
   overflow: auto;
 `;
 
-function QuestionsAnswers({ qaResults }) {
+function QuestionsAnswers({ qaResults, currentProductId }) {
   const [questions, setQuestions] = useState(qaResults);
   const [qCount, setQCount] = useState(2);
 
@@ -59,13 +59,14 @@ function QuestionsAnswers({ qaResults }) {
       </ConditionalWrapper>
       <div>
         {questions.length > qCount && <MoreQuestionsButton onClick={handleMoreQuestionsClick} />}
-        <AddQuestionButton />
+        <AddQuestionButton currentProductId={currentProductId} />
       </div>
     </QAWrapper>
   );
 }
 
 QuestionsAnswers.propTypes = {
+  currentProductId: PropTypes.number.isRequired,
   qaResults: PropTypes.arrayOf(PropTypes.shape({
     question_id: PropTypes.number,
     question_body: PropTypes.string,

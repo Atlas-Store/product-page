@@ -100,7 +100,7 @@ function App() {
           </section>
 
           <section>
-            <QuestionsAnswers qaResults={QA.results} />
+            <QuestionsAnswers currentProductId={currentProductId} qaResults={QA.results} />
           </section>
           <section>
             <Reviews reviews={reviews} ratings={ratings} currentProduct={currentProduct} />

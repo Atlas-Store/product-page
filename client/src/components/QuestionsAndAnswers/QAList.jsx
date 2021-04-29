@@ -6,10 +6,10 @@ import QAEntry from './QAEntry';
 const QAListStyled = styled.div`
   display: flex;
   flex-flow: column;
-  border:1px solid green;
+  // border:1px solid green;
   max-height: 90vh;
   min-width: 69vw;
-  overflow: auto;
+  // overflow: auto;
 `;
 
 function QAList({ questions }) {
