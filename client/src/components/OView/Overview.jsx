@@ -154,9 +154,6 @@ const Overview = ({currentProduct, styles, starRating}) => {
 
   }
 
-  console.log('blablabla currentProduct is ', currentProduct);
-  console.log('blablabla styles is ', styles);
-
 
   let avgStarRating = 0;
   let sum = 0;
