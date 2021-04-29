@@ -5,18 +5,6 @@ import {Grid, Row, Col} from './Overview.jsx';
 
 const StyleSelector = (props) => {
 
-  // var abc = (
-  //   <Grid>
-  //     <Row>
-  //     {for (let i = 0; i < props.stylesURLs.length; i += 4) {
-  //      props.stylesURLs.slice(i, i + 4).map(item =>
-  //     <Col>
-  //         <Style styleURL={props.stylesURLs[0]} setCurrentImageURL={setCurrentImageURL}/>
-  //     </Col>)
-  //     }}
-  //     </Row>
-  //   </Grid>
-  // )
   console.log('in StyleSelector, props.handleClickStyle is', props.handleClickStyle);
   return (
     <Grid>

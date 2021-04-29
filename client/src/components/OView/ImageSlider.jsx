@@ -9,17 +9,7 @@ const BUTTON_WRAPPER_STYLES = {
   zIndex: 1
 }
 
-// const OTHER_CONTENT_STYLES = {
-//   position: 'relative',
-//   zIndex: 2,
-//   backgroundColor: 'red',
-//   padding: '10px'
-// }
 
-// const Slider = styled.Slider`
-//   display: flex,
-//   justify-content: safe center
-// `
 
 const Wrapper = styled.div`
   // display: flex;
@@ -38,7 +28,6 @@ const CenteredDiv = styled.img`
   justify-content: center;
 `
 
-// let slideToContinueFrom = 0;
 const ImageSlider = (props) => {
   // <Slider className='productSlider' {...settings}>
   //   <ProductImageDiv>
@@ -56,7 +45,7 @@ const ImageSlider = (props) => {
   // console.log('in ImageSlider, props.handleClickProductImageDiv is', props.handleClickProductImageDiv);
 
   const nextClick = (e) => {
-    console.log(e);
+    // console.log(e);
     props.objSlideToContinueFrom.current = e;
     // props.specifySlideToContinueFrom(e);
   }
@@ -79,52 +68,14 @@ const ImageSlider = (props) => {
     // pauseOnHover: true
   };
 
-  const sliderThatStartsFromBeginning = () => (
-    <Slider {...settings} key={Date.now()}>
-      {/* <br/><br/><br/><br/> */}
-    {[0, 1, 2, 3, 4, 5].map(item =>
 
-    (<CenteredDiv>
-
-      <ProductImageDiv >
-
-      <ProductImage src={(props.currentGroupOfImageURLs['photos'][item]) ? (props.currentGroupOfImageURLs['photos'][item]['url']) : 'testPlus.png'} onClick={props.handleClickProductImageDiv} />
-    </ProductImageDiv>
-
-    {/* <ThumbnailImage /> */}
-    </CenteredDiv>)
-    )}
-      </Slider>
-  )
-
-  // console.log('ImageSlider slideToContinueFrom is', slideToContinueFrom);
-  // if (props.slideToContinueFrom === 0 && slideToContinueFrom !== 0) {
-  //   slideToContinueFrom = props.slideToContinueFrom;
-  // }
-
-  // else if (props.slideToContinueFrom !== 0 && slideto)
-
-  const regularSlider = () => (
-    <Slider {...settings} initialSlide={slideToContinueFrom}>
-
-    {[0, 1, 2, 3, 4, 5].map(item =>
-    (<div>
-      <ProductImageDiv >
-      <ProductImage src={(props.currentGroupOfImageURLs['photos'][item]) ? (props.currentGroupOfImageURLs['photos'][item]['url']) : 'No image available'} onClick={props.handleClickProductImageDiv} />
-    </ProductImageDiv>
-
-    {/* <ThumbnailImage /> */}
-    </div>)
-    )}
-      </Slider>
-  )
 
   let arrConsecutiveNums = new Array(40);
   for (let i = 0; i < arrConsecutiveNums.length; i++) {
     arrConsecutiveNums[i] = i;
   }
 
-  const regularSliderTwo = () => (
+  const regularSlider = () => (
     // <Wrapper>
     <Slider {...settings} >
 
@@ -154,7 +105,7 @@ const ImageSlider = (props) => {
   return (
 
     <div>
-{regularSliderTwo()}
+{regularSlider()}
 
       <div style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
         {/* <StyledButton >Expand</StyledButton> */}
