@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const ModdedSearchBar = styled.input`
-  width: 85vw;
+  width: 80vw;
   height: 30px;
   border: 1px solid #999999;
 `;

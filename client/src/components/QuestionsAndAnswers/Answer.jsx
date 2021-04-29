@@ -5,6 +5,7 @@ import moment from 'moment';
 
 const AnswerWrapper = styled.div`
   // margin: 10px;
+  // background-color: silver (0, 0, 0, 0.5)!important;
   padding: 0.25em 1em;
   border-bottom: 1px solid grey;
   max-height: 50vh;
@@ -19,6 +20,7 @@ const ALabel = styled.span`
 
 const Body = styled.span`
   padding-left: 15px;
+  font-size: 95% !important;
 `;
 
 const AnswerInfo = styled.p`
@@ -38,6 +40,10 @@ background: none;
 display: block;
 `;
 
+const UnderlineText = styled.span`
+  text-decoration: underline;
+`;
+
 function Answer({ answers }) {
   const [aCount, setACount] = useState(2);
 
@@ -50,9 +56,9 @@ function Answer({ answers }) {
   };
 
   const renderAnswerButtons = () => {
-    if (Object.keys(answers).length === 0) {
-      return <AnswerButton type="button">Add Answer</AnswerButton>;
-    }
+    // if (Object.keys(answers).length === 0) {
+    //   return <AnswerButton type="button">Add Answer</AnswerButton>;
+    // }
 
     if (Object.keys(answers).length > aCount) {
       return <AnswerButton type="button" onClick={handleMoreAnswersClick}>Load More Answers</AnswerButton>;
@@ -81,10 +87,12 @@ function Answer({ answers }) {
             {`${answers[id].answerer_name} `}
             |
             {` ${moment(answers[id].date).format('MMM Do YY')} `}
-            | helpful? Yes
+            | helpful?&nbsp;&nbsp;
+            <UnderlineText>Yes&nbsp;</UnderlineText>
             (
             {answers[id].helpfulness}
-            ) | report
+            ) |&nbsp;&nbsp;
+            <UnderlineText>Report</UnderlineText>
           </AnswerInfo>
         </AnswerWrapper>
       ))}

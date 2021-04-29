@@ -23,6 +23,7 @@ const Question = styled.p`
 const QuestionInfo = styled.p`
   // padding-left: 15px;
   font-size: 80% !important;
+  align-self: end;
 `;
 
 const AddAnswer = styled.span`
