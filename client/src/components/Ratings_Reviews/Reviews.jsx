@@ -11,18 +11,20 @@ import ReviewTiles from './ReviewTiles';
 const renderFunc = require('./renderFunc.js');
 
 const RatingsSection = styled.div`
-  padding-right: 48px;
+  padding-right: 24px;
 `;
 const StyledRRBox = styled.div`
   display: flex;
-  align-items: baseline;
   flex-wrap: wrap;
   flex-direction: row;
+  justify-content: space-between;
   font-family: Arial;
+  overflow-x: scroll;
+  width: 88vw;
 `;
 
 const StyledReviewSection = styled.div`
-  width: 672px;
+  width: 66vw;
 `;
 
 const StyledReviewButton = styled.button`
@@ -34,6 +36,10 @@ const StyledReviewButton = styled.button`
   padding-top: 20px;
   padding-bottom: 20px;
   margin: 10px;
+`;
+
+const CustomH3 = styled.h3`
+  margin-block-start: 0;
 `;
 
 const SortMenu = styled.select`
@@ -57,15 +63,16 @@ const FractionRecs = styled.div`
 
 const StarsContent = styled.div`
   display: flex;
-  padding-left: 36px;
+  flex-direction: row;
   align-items: center;
   background-color: green;
+  padding-left: 72px;
 `;
 
 const RatingNum = styled.div`
   font-size: 36px;
   padding-left: 10px;
-  color: #FFF;
+  color: black;
 `;
 
 const StyledOption = styled.option`
@@ -73,6 +80,7 @@ const StyledOption = styled.option`
 `;
 
 const Review = ({ reviews, ratings, currentProduct }) => {
+
   const [numReviews, updateNumReviews] = useState(reviews.results.length);
   const [reviewsToShow, updateToShow] = useState(2);
   const [writeReview, toggleWR] = useState(false);
@@ -114,19 +122,20 @@ const Review = ({ reviews, ratings, currentProduct }) => {
           <SizeComfort ratings={ratings} />
         </RatingsSection>
         <StyledReviewSection>
-          <h3>
+          <CustomH3>
             { reviews.results.length }
             {'  '}
             reviews sorted by
             <SortMenu onChange={(event) => {
               grabSortedReviews(event.target.value);
+              updateToShow(2);
             }}
             >
               <StyledOption value="Helpful">Helpful</StyledOption>
               <StyledOption value="Newest">Newest</StyledOption>
               <StyledOption value="Relevant">Relevant</StyledOption>
             </SortMenu>
-          </h3>
+          </CustomH3>
           <div>
             {reviewsToRender.map((aReview) => (
               <ReviewTiles
