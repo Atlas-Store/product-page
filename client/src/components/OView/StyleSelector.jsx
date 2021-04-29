@@ -5,7 +5,6 @@ import {Grid, Row, Col} from './Overview.jsx';
 
 const StyleSelector = (props) => {
 
-  console.log('in StyleSelector, props.handleClickStyle is', props.handleClickStyle);
   return (
     <Grid>
       {/* {for (let i = 0; i < props.stylesURLs.length; i++) {
