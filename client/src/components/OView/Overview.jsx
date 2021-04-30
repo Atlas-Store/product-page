@@ -147,7 +147,6 @@ const WrapperForRestofOverview = styled.div`
 let slideToStartFromInExpandedView = false;
 
 const Overview = ({currentProduct, styles, starRating}) => {
-
   let stylesURLs = [];
   for (let i = 0; i < styles['results'].length; i++) {
   stylesURLs.push(styles['results'][i]['photos'][0]['url']);
@@ -174,7 +173,8 @@ const Overview = ({currentProduct, styles, starRating}) => {
   const [currentImageURL, setCurrentImageURL] = useState(stylesURLs[0]);
   const [currentStyleID, setCurrentStyleID] = useState(styles['results'][0]['style_id']);
   const [currentGroupOfImageURLs, setCurrentGroupOfImageURLs] = useState(styles['results'].map(item => item)[0]);
-
+  const [currentStyleIndex, setCurrentStyleIndex] = useState(0);
+  console.log('the current style index is, ', currentStyleIndex);
 
   const [abc, setAbc] = useState(false);
   const slideToContinueFrom = useRef(0);
@@ -188,8 +188,6 @@ const Overview = ({currentProduct, styles, starRating}) => {
 
 
   const handleClickStyle = () => {
-
-    console.log('elmos world');
 
     slideToContinueFrom.current = 0;
     setAbc(!abc);
@@ -237,9 +235,10 @@ const Overview = ({currentProduct, styles, starRating}) => {
               <ProductTitle title={currentProduct.name}/>
               <Price price={currentProduct.default_price}/>
               <br/><br/>
-              <StyleSelector stylesURLs={stylesURLs} setCurrentImageURL={setCurrentImageURL} setCurrentGroupOfImageURLs={setCurrentGroupOfImageURLs} dataFirstProduct={styles} resetSliderToFirstImage={resetSliderToFirstImage} handleClickStyle={handleClickStyle}/>
+              <StyleSelector setCurrentStyleIndex={setCurrentStyleIndex} stylesURLs={stylesURLs} setCurrentImageURL={setCurrentImageURL} setCurrentGroupOfImageURLs={setCurrentGroupOfImageURLs} dataFirstProduct={styles} resetSliderToFirstImage={resetSliderToFirstImage} handleClickStyle={handleClickStyle}/>
               <br/><br/>
-              <ProductSelector/>
+              {  console.log('in Overview, styles is', styles)}
+              <ProductSelector styles={styles} currentStyleIndex={currentStyleIndex}/>
               {/* <ProductSelector sizes={} quantities={}/> */}
               </div>
             </CenteredColRestOfOverview>

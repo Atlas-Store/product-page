@@ -60,6 +60,7 @@ const Style = (props) => {
     if (props.dataFirstProduct['results'][props.index] !== undefined) {
       props.setCurrentGroupOfImageURLs(props.dataFirstProduct['results'].map(item => item)[props.index]);
     }
+    props.setCurrentStyleIndex(props.index);
     // props.resetSliderToFirstImage();
 
     setTest(!test);

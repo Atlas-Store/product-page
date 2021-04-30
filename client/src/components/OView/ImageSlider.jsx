@@ -79,9 +79,9 @@ const ImageSlider = (props) => {
     // <Wrapper>
     <Slider {...settings} >
 
-    {arrConsecutiveNums.map(item => {
+    {arrConsecutiveNums.map((item, i) => {
     if (props.currentGroupOfImageURLs['photos'][item]) {
-      return (<div>
+      return (<div key={i}>
         <ProductImageDiv >
         {/* <ProductImage src={(props.currentGroupOfImageURLs['photos'][item]) ? (props.currentGroupOfImageURLs['photos'][item]['url']) : 'imageSubstitute.png'} onClick={props.handleClickProductImageDiv} onClick={() => setIsOpen(true)}/> */}
         <ProductImage src={props.currentGroupOfImageURLs['photos'][item]['url']} onClick={props.handleClickProductImageDiv} onClick={() => setIsOpen(true)}/>
