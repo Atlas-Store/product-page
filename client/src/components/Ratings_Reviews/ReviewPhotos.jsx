@@ -11,6 +11,7 @@ const ImageButton = styled.button`
 const Thumbnail = styled.img`
   height: 96px;
   width: 144px;
+  border: 2.5px solid transparent;
   ${ImageButton}:hover & {
     border: 2.5px solid black;
   }

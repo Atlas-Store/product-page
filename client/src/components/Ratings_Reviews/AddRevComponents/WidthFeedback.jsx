@@ -6,48 +6,47 @@ const RadioPlugs = styled.span`
   padding: 12px;
 `;
 
-const SizeInfo = styled.div`
+const Info = styled.div`
   font-size: smaller;
 `;
 
-const SizeDescDiv = styled.div`
+const DescDiv = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 5px;
   margin-bottom: 25px;
 `;
-const SizeDescription = styled.label`
+const Description = styled.label`
   text-align: ${(props) => props.location};
   font-size: smaller;
 `;
-const sizeFB = {
+const Feedback = {
   0: 'Please Select',
-  1: 'A size too small',
-  2: '1/2 size too small',
+  1: 'Too narrow',
+  2: 'Slightly narrow',
   3: 'Perfect',
-  4: '1/2 size too big',
-  5: 'A size too big',
+  4: 'Slighty wide',
+  5: 'Too wide',
 };
 
-const SizeFB = ({
-  sizeFeedback, updateSizeF, characteristics, updateChars,
+const WidthFeedback = ({
+  widthFeedback, updateWidthF, characteristics, updateChars,
 }) => (
   <div>
     <form>
-      <h4>*SIZE: </h4>
-      <SizeInfo>{sizeFB[sizeFeedback]}</SizeInfo>
+      <h4>*WIDTH: </h4>
+      <Info>{Feedback[widthFeedback]}</Info>
       <RadioPlugs>
         <input
           type="radio"
-          name="size"
+          name="width"
           value="1"
           required
           onClick={(event) => {
-            updateSizeF(event.target.value);
-            updateChars({
+            updateWidthF(event.target.value); updateChars({
               ...characteristics,
-              Size: {
-                id: 14,
+              Width: {
+                id: 15,
                 value: event.target.value,
               },
             });
@@ -57,15 +56,14 @@ const SizeFB = ({
       <RadioPlugs>
         <input
           type="radio"
-          name="size"
+          name="width"
           value="2"
           required
           onClick={(event) => {
-            updateSizeF(event.target.value);
-            updateChars({
+            updateWidthF(event.target.value); updateChars({
               ...characteristics,
-              Size: {
-                id: 14,
+              Width: {
+                id: 15,
                 value: event.target.value,
               },
             });
@@ -75,15 +73,14 @@ const SizeFB = ({
       <RadioPlugs>
         <input
           type="radio"
-          name="size"
+          name="width"
           value="3"
           required
           onClick={(event) => {
-            updateSizeF(event.target.value);
-            updateChars({
+            updateWidthF(event.target.value); updateChars({
               ...characteristics,
-              Size: {
-                id: 14,
+              Width: {
+                id: 15,
                 value: event.target.value,
               },
             });
@@ -93,15 +90,14 @@ const SizeFB = ({
       <RadioPlugs>
         <input
           type="radio"
-          name="size"
+          name="width"
           value="4"
           required
           onClick={(event) => {
-            updateSizeF(event.target.value);
-            updateChars({
+            updateWidthF(event.target.value); updateChars({
               ...characteristics,
-              Size: {
-                id: 14,
+              Width: {
+                id: 15,
                 value: event.target.value,
               },
             });
@@ -111,15 +107,14 @@ const SizeFB = ({
       <RadioPlugs>
         <input
           type="radio"
-          name="size"
+          name="width"
           value="5"
           required
           onClick={(event) => {
-            updateSizeF(event.target.value);
-            updateChars({
+            updateWidthF(event.target.value); updateChars({
               ...characteristics,
-              Size: {
-                id: 14,
+              Width: {
+                id: 15,
                 value: event.target.value,
               },
             });
@@ -127,12 +122,12 @@ const SizeFB = ({
         />
       </RadioPlugs>
     </form>
-    <SizeDescDiv>
-      <SizeDescription location="left">Too small</SizeDescription>
-      <SizeDescription location="center">Perfect</SizeDescription>
-      <SizeDescription location="right">Too big</SizeDescription>
-    </SizeDescDiv>
+    <DescDiv>
+      <Description location="left">Too small</Description>
+      <Description location="center">Perfect</Description>
+      <Description location="right">Too big</Description>
+    </DescDiv>
   </div>
 );
 
-export default SizeFB;
+export default WidthFeedback;

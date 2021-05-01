@@ -22,32 +22,31 @@ const Description = styled.label`
 `;
 const Feedback = {
   0: 'Please Select',
-  1: 'Poor',
-  2: 'Below average',
-  3: 'What I expected',
-  4: 'Pretty Great',
+  1: 'Uncomfortable',
+  2: 'Slightly uncomfortable',
+  3: 'Ok',
+  4: 'Comfortable',
   5: 'Perfect!',
 };
 
-const QualityFB = ({
-  qualityFeedback, updateQualityF, characteristics, updateChars,
+const ComfortFeedback = ({
+  comfortFeedback, updateComfortF, characteristics, updateChars,
 }) => (
   <div>
     <form>
-      <h4>*QUALITY: </h4>
-      <Info>{Feedback[qualityFeedback]}</Info>
+      <h4>*COMFORT: </h4>
+      <Info>{Feedback[comfortFeedback]}</Info>
       <RadioPlugs>
         <input
           type="radio"
-          name="quality"
+          name="comfort"
           value="1"
           required
           onClick={(event) => {
-            updateQualityF(event.target.value);
-            updateChars({
+            updateComfortF(event.target.value); updateChars({
               ...characteristics,
-              Quality: {
-                id: 16,
+              Comfort: {
+                id: 17,
                 value: event.target.value,
               },
             });
@@ -57,15 +56,14 @@ const QualityFB = ({
       <RadioPlugs>
         <input
           type="radio"
-          name="quality"
+          name="comfort"
           value="2"
           required
           onClick={(event) => {
-            updateQualityF(event.target.value);
-            updateChars({
+            updateComfortF(event.target.value); updateChars({
               ...characteristics,
-              Quality: {
-                id: 16,
+              Comfort: {
+                id: 17,
                 value: event.target.value,
               },
             });
@@ -75,15 +73,14 @@ const QualityFB = ({
       <RadioPlugs>
         <input
           type="radio"
-          name="quality"
+          name="comfort"
           value="3"
           required
           onClick={(event) => {
-            updateQualityF(event.target.value);
-            updateChars({
+            updateComfortF(event.target.value); updateChars({
               ...characteristics,
-              Quality: {
-                id: 16,
+              Comfort: {
+                id: 17,
                 value: event.target.value,
               },
             });
@@ -93,15 +90,14 @@ const QualityFB = ({
       <RadioPlugs>
         <input
           type="radio"
-          name="quality"
+          name="comfort"
           value="4"
           required
           onClick={(event) => {
-            updateQualityF(event.target.value);
-            updateChars({
+            updateComfortF(event.target.value); updateChars({
               ...characteristics,
-              Quality: {
-                id: 16,
+              Comfort: {
+                id: 17,
                 value: event.target.value,
               },
             });
@@ -111,15 +107,14 @@ const QualityFB = ({
       <RadioPlugs>
         <input
           type="radio"
-          name="quality"
+          name="comfort"
           value="5"
           required
           onClick={(event) => {
-            updateQualityF(event.target.value);
-            updateChars({
+            updateComfortF(event.target.value); updateChars({
               ...characteristics,
-              Quality: {
-                id: 16,
+              Comfort: {
+                id: 17,
                 value: event.target.value,
               },
             });
@@ -128,10 +123,10 @@ const QualityFB = ({
       </RadioPlugs>
     </form>
     <DescDiv>
-      <Description location="left">Poor</Description>
-      <Description location="right">Perfect</Description>
+      <Description location="left">Uncomfortable</Description>
+      <Description location="right">Comfortable</Description>
     </DescDiv>
   </div>
 );
 
-export default QualityFB;
+export default ComfortFeedback;

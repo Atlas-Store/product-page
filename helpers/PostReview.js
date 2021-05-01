@@ -2,6 +2,7 @@ const axios = require('axios');
 const config = require('../config.js');
 
 const PostReview = (endpointMeta, endpointPost, data, callback) => {
+  const postReviewData = data;
   const options = {
     url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/${endpointPost}`,
     headers: {
@@ -10,14 +11,15 @@ const PostReview = (endpointMeta, endpointPost, data, callback) => {
     },
   };
   axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/${endpointMeta}`, { headers: options.headers })
-    .then(() => {
-      // const productChars = response.data.characteristics;
-      // for (let char in productChars ) {
-      //   productChars[char]['value'] = parseInt(data.characteristics[char]['value']);
-      // }
-      // data.characteristics = productChars;
-      // console.log(data);
-      axios.post(options.url, data, { headers: options.headers })
+    .then((response) => {
+      const productChars = response.data.characteristics;
+      const characteristicsData = {};
+      for (const char in productChars) {
+        const { id } = productChars[char];
+        characteristicsData[id] = parseInt(postReviewData.characteristics[char].value);
+      }
+      postReviewData.characteristics = characteristicsData;
+      axios.post(options.url, postReviewData, { headers: options.headers })
         .then(() => {
           callback(null);
         });

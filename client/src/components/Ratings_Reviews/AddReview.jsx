@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import Stars from '../OView/StarRating';
 
-import SizeFB from './AddRevComponents/SizeFB';
-import WidthFB from './AddRevComponents/WidthFB';
-import ComfortFB from './AddRevComponents/ComfortFB';
-import QualityFB from './AddRevComponents/QualityFB';
-import FitFB from './AddRevComponents/FitFeedback';
-import LengthFB from './AddRevComponents/LengthFeedback';
+import SizeFeedback from './AddRevComponents/SizeFeedback';
+import WidthFeedback from './AddRevComponents/WidthFeedback';
+import ComfortFeedback from './AddRevComponents/ComfortFeedback';
+import QualityFeedback from './AddRevComponents/QualityFeedback';
+import FitFeedback from './AddRevComponents/FitFeedback';
+import LengthFeedback from './AddRevComponents/LengthFeedback';
 
 const WriteModal = styled.div`
   overflow-y: scroll;
@@ -151,7 +152,7 @@ const productChars = {
 
 const AddReview = ({ open, onClose, currentProduct }) => {
   if (!open) return null;
-  //const [inputs, updateInputs] = useState({});
+  // const [inputs, updateInputs] = useState({});
   const [reviewStars, updateRStars] = useState(5);
   const [didRecommend, updateRec] = useState(null);
   const [sizeFeedback, updateSizeF] = useState(0);
@@ -178,7 +179,7 @@ const AddReview = ({ open, onClose, currentProduct }) => {
       name: userName,
       email,
       photos: images,
-      characteristics: {},
+      characteristics,
     };
     axios.post('/reviews', data)
       .then(() => {
@@ -218,7 +219,7 @@ const AddReview = ({ open, onClose, currentProduct }) => {
               <Stars rating={reviewStars} />
             </ReviewComponent>
             <ReviewComponent>
-              <SizeFB
+              <SizeFeedback
                 sizeFeedback={sizeFeedback}
                 updateSizeF={updateSizeF}
                 characteristics={characteristics}
@@ -226,7 +227,7 @@ const AddReview = ({ open, onClose, currentProduct }) => {
               />
             </ReviewComponent>
             <ReviewComponent>
-              <WidthFB
+              <WidthFeedback
                 widthFeedback={widthFeedback}
                 updateWidthF={updateWidthF}
                 characteristics={characteristics}
@@ -234,7 +235,7 @@ const AddReview = ({ open, onClose, currentProduct }) => {
               />
             </ReviewComponent>
             <ReviewComponent>
-              <ComfortFB
+              <ComfortFeedback
                 comfortFeedback={comfortFeedback}
                 updateComfortF={updateComfortF}
                 characteristics={characteristics}
@@ -242,7 +243,7 @@ const AddReview = ({ open, onClose, currentProduct }) => {
               />
             </ReviewComponent>
             <ReviewComponent>
-              <QualityFB
+              <QualityFeedback
                 qualityFeedback={qualityFeedback}
                 updateQualityF={updateQualityF}
                 characteristics={characteristics}
@@ -250,7 +251,7 @@ const AddReview = ({ open, onClose, currentProduct }) => {
               />
             </ReviewComponent>
             <ReviewComponent>
-              <FitFB
+              <FitFeedback
                 fitFeedback={fitFeedback}
                 updateFitF={updateFitF}
                 characteristics={characteristics}
@@ -258,7 +259,7 @@ const AddReview = ({ open, onClose, currentProduct }) => {
               />
             </ReviewComponent>
             <ReviewComponent>
-              <LengthFB
+              <LengthFeedback
                 lengthFeedback={lengthFeedback}
                 updateLengthF={updateLengthF}
                 characteristics={characteristics}

@@ -6,47 +6,48 @@ const RadioPlugs = styled.span`
   padding: 12px;
 `;
 
-const Info = styled.div`
+const SizeInfo = styled.div`
   font-size: smaller;
 `;
 
-const DescDiv = styled.div`
+const SizeDescDiv = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 5px;
   margin-bottom: 25px;
 `;
-const Description = styled.label`
+const SizeDescription = styled.label`
   text-align: ${(props) => props.location};
   font-size: smaller;
 `;
-const Feedback = {
+const sizeFB = {
   0: 'Please Select',
-  1: 'Uncomfortable',
-  2: 'Slightly uncomfortable',
-  3: 'Ok',
-  4: 'Comfortable',
-  5: 'Perfect!',
+  1: 'A size too small',
+  2: '1/2 size too small',
+  3: 'Perfect',
+  4: '1/2 size too big',
+  5: 'A size too big',
 };
 
-const ComfortFB = ({
-  comfortFeedback, updateComfortF, characteristics, updateChars,
+const SizeFeedback = ({
+  sizeFeedback, updateSizeF, characteristics, updateChars,
 }) => (
   <div>
     <form>
-      <h4>*COMFORT: </h4>
-      <Info>{Feedback[comfortFeedback]}</Info>
+      <h4>*SIZE: </h4>
+      <SizeInfo>{sizeFB[sizeFeedback]}</SizeInfo>
       <RadioPlugs>
         <input
           type="radio"
-          name="comfort"
+          name="size"
           value="1"
           required
           onClick={(event) => {
-            updateComfortF(event.target.value); updateChars({
+            updateSizeF(event.target.value);
+            updateChars({
               ...characteristics,
-              Comfort: {
-                id: 17,
+              Size: {
+                id: 14,
                 value: event.target.value,
               },
             });
@@ -56,14 +57,15 @@ const ComfortFB = ({
       <RadioPlugs>
         <input
           type="radio"
-          name="comfort"
+          name="size"
           value="2"
           required
           onClick={(event) => {
-            updateComfortF(event.target.value); updateChars({
+            updateSizeF(event.target.value);
+            updateChars({
               ...characteristics,
-              Comfort: {
-                id: 17,
+              Size: {
+                id: 14,
                 value: event.target.value,
               },
             });
@@ -73,14 +75,15 @@ const ComfortFB = ({
       <RadioPlugs>
         <input
           type="radio"
-          name="comfort"
+          name="size"
           value="3"
           required
           onClick={(event) => {
-            updateComfortF(event.target.value); updateChars({
+            updateSizeF(event.target.value);
+            updateChars({
               ...characteristics,
-              Comfort: {
-                id: 17,
+              Size: {
+                id: 14,
                 value: event.target.value,
               },
             });
@@ -90,14 +93,15 @@ const ComfortFB = ({
       <RadioPlugs>
         <input
           type="radio"
-          name="comfort"
+          name="size"
           value="4"
           required
           onClick={(event) => {
-            updateComfortF(event.target.value); updateChars({
+            updateSizeF(event.target.value);
+            updateChars({
               ...characteristics,
-              Comfort: {
-                id: 17,
+              Size: {
+                id: 14,
                 value: event.target.value,
               },
             });
@@ -107,14 +111,15 @@ const ComfortFB = ({
       <RadioPlugs>
         <input
           type="radio"
-          name="comfort"
+          name="size"
           value="5"
           required
           onClick={(event) => {
-            updateComfortF(event.target.value); updateChars({
+            updateSizeF(event.target.value);
+            updateChars({
               ...characteristics,
-              Comfort: {
-                id: 17,
+              Size: {
+                id: 14,
                 value: event.target.value,
               },
             });
@@ -122,11 +127,12 @@ const ComfortFB = ({
         />
       </RadioPlugs>
     </form>
-    <DescDiv>
-      <Description location="left">Uncomfortable</Description>
-      <Description location="right">Comfortable</Description>
-    </DescDiv>
+    <SizeDescDiv>
+      <SizeDescription location="left">Too small</SizeDescription>
+      <SizeDescription location="center">Perfect</SizeDescription>
+      <SizeDescription location="right">Too big</SizeDescription>
+    </SizeDescDiv>
   </div>
 );
 
-export default ComfortFB;
+export default SizeFeedback;
