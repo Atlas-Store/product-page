@@ -33,7 +33,7 @@ const ComfortFeedback = ({
   comfortFeedback, updateComfortF, characteristics, updateChars,
 }) => (
   <div>
-    <form>
+    <div>
       <h4>*COMFORT: </h4>
       <Info>{Feedback[comfortFeedback]}</Info>
       <RadioPlugs>
@@ -121,7 +121,7 @@ const ComfortFeedback = ({
           }}
         />
       </RadioPlugs>
-    </form>
+    </div>
     <DescDiv>
       <Description location="left">Uncomfortable</Description>
       <Description location="right">Comfortable</Description>

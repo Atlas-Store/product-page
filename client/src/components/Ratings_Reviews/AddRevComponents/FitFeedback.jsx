@@ -33,7 +33,7 @@ const FitFeedback = ({
   fitFeedback, updateFitF, characteristics, updateChars,
 }) => (
   <div>
-    <form>
+    <div>
       <h4>*FIT: </h4>
       <Info>{Feedback[fitFeedback]}</Info>
       <RadioPlugs>
@@ -121,7 +121,7 @@ const FitFeedback = ({
           }}
         />
       </RadioPlugs>
-    </form>
+    </div>
     <DescDiv>
       <Description location="left">Too small</Description>
       <Description location="center">Perfect</Description>

@@ -33,7 +33,7 @@ const SizeFeedback = ({
   sizeFeedback, updateSizeF, characteristics, updateChars,
 }) => (
   <div>
-    <form>
+    <div>
       <h4>*SIZE: </h4>
       <SizeInfo>{sizeFB[sizeFeedback]}</SizeInfo>
       <RadioPlugs>
@@ -126,7 +126,7 @@ const SizeFeedback = ({
           }}
         />
       </RadioPlugs>
-    </form>
+    </div>
     <SizeDescDiv>
       <SizeDescription location="left">Too small</SizeDescription>
       <SizeDescription location="center">Perfect</SizeDescription>

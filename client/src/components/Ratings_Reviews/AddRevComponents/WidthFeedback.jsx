@@ -33,7 +33,7 @@ const WidthFeedback = ({
   widthFeedback, updateWidthF, characteristics, updateChars,
 }) => (
   <div>
-    <form>
+    <div>
       <h4>*WIDTH: </h4>
       <Info>{Feedback[widthFeedback]}</Info>
       <RadioPlugs>
@@ -121,7 +121,7 @@ const WidthFeedback = ({
           }}
         />
       </RadioPlugs>
-    </form>
+    </div>
     <DescDiv>
       <Description location="left">Too small</Description>
       <Description location="center">Perfect</Description>

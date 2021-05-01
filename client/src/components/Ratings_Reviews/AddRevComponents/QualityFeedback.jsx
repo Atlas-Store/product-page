@@ -33,7 +33,7 @@ const QualityFeedback = ({
   qualityFeedback, updateQualityF, characteristics, updateChars,
 }) => (
   <div>
-    <form>
+    <div>
       <h4>*QUALITY: </h4>
       <Info>{Feedback[qualityFeedback]}</Info>
       <RadioPlugs>
@@ -126,7 +126,7 @@ const QualityFeedback = ({
           }}
         />
       </RadioPlugs>
-    </form>
+    </div>
     <DescDiv>
       <Description location="left">Poor</Description>
       <Description location="right">Perfect</Description>

@@ -33,7 +33,7 @@ const LengthFeedback = ({
   lengthFeedback, updateLengthF, characteristics, updateChars,
 }) => (
   <div>
-    <form>
+    <div>
       <h4>*LENGTH: </h4>
       <Info>{Feedback[lengthFeedback]}</Info>
       <RadioPlugs>
@@ -121,7 +121,7 @@ const LengthFeedback = ({
           }}
         />
       </RadioPlugs>
-    </form>
+    </div>
     <DescDiv>
       <Description location="left">Too small</Description>
       <Description location="center">Perfect</Description>
