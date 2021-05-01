@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import ReactDom from 'react-dom';
 import styled from 'styled-components';
-// import AddQuestionButton from './AddQuestionButton';
 
 const Background = styled.div`
   width: 100%;

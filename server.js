@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
 const app = express();
 const products = require('./helpers/productsAPI');
@@ -6,7 +7,7 @@ const reviews = require('./helpers/reviewsAPI');
 const qa = require('./helpers/qaAPI');
 
 app.use(express.static(`${__dirname}/client/dist`));
-
+app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/products', products);

@@ -21,6 +21,7 @@
   "dependencies": {
     "ajax": "0.0.4",
     "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "jest": "^26.6.3",
     "jquery": "^3.6.0",
