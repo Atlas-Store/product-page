@@ -1,6 +1,6 @@
-import React from 'react'
-import ReactDom from 'react-dom'
-import styled, {css} from 'styled-components';
+import React from 'react';
+import ReactDom from 'react-dom';
+import styled, { css } from 'styled-components';
 
 const MODAL_STYLES = {
   position: 'fixed',
@@ -9,8 +9,8 @@ const MODAL_STYLES = {
   transform: 'translate(-50%, -50%)',
   backgroundColor: '#FFF',
   padding: '50px',
-  zIndex: 1000
-}
+  zIndex: 1000,
+};
 
 const OVERLAY_STYLES = {
   position: 'fixed',
@@ -19,8 +19,8 @@ const OVERLAY_STYLES = {
   right: 0,
   bottom: 0,
   backgroundColor: 'rgba(0, 0, 0, .7)',
-  zIndex: 1000
-}
+  zIndex: 1000,
+};
 
 const StyledButton = styled.button`
   background: transparent;
@@ -41,19 +41,22 @@ const StyledButton = styled.button`
     border: 2px solid black;
     color: black;
   }
-`
+`;
 
 export default function Modal({ open, children, onClose }) {
-  if (!open) return null
+  if (!open) return null;
 
   return ReactDom.createPortal(
     <>
       <div style={OVERLAY_STYLES} />
       <div style={MODAL_STYLES}>
-        <StyledButton onClick={onClose}>X</StyledButton> <br/><br/>
+        <StyledButton onClick={onClose}>X</StyledButton>
+        {' '}
+        <br />
+        <br />
         {children}
       </div>
     </>,
-    document.getElementById('portal')
-  )
+    document.getElementById('portal'),
+  );
 }

@@ -1,25 +1,16 @@
 import React from 'react';
-import styled, {css} from 'styled-components';
-import {ProductImage, ProductImageDiv} from './StyledItems.jsx';
+import styled, { css } from 'styled-components';
 import Slider from 'react-slick';
+import { ProductImage, ProductImageDiv } from './StyledItems.jsx';
 
+const ImageGallery = ({ currentImageURL }) => (
 
+  <ProductImageDiv>
 
-
-const ImageGallery = ({currentImageURL}) => {
-
-  return (
-
-    <ProductImageDiv>
-
-      <ProductImage src={currentImageURL} id='onesieImage'>
-      </ProductImage>
-
+    <ProductImage src={currentImageURL} id="onesieImage" />
 
   </ProductImageDiv>
 
-  )
-
-}
+);
 
 export default ImageGallery;

@@ -57,8 +57,8 @@ const Style = (props) => {
 
   const handleClick = () => {
     props.setCurrentImageURL(props.styleURL);
-    if (props.dataFirstProduct['results'][props.index] !== undefined) {
-      props.setCurrentGroupOfImageURLs(props.dataFirstProduct['results'].map(item => item)[props.index]);
+    if (props.styles['results'][props.index] !== undefined) {
+      props.setCurrentGroupOfImageURLs(props.styles['results'].map(item => item)[props.index]);
     }
     props.setCurrentStyleIndex(props.index);
     // props.resetSliderToFirstImage();
@@ -83,8 +83,8 @@ const Style = (props) => {
   // }
   // console.log('style URL is', props.styleURL);
   // if (props.index === 0) {
-  //   if (props.dataFirstProduct['results'][props.index] !== undefined) {
-  //     props.setCurrentGroupOfImageURLs(props.dataFirstProduct['results'].map(item => item)[props.index]);
+  //   if (props.styles['results'][props.index] !== undefined) {
+  //     props.setCurrentGroupOfImageURLs(props.styles['results'].map(item => item)[props.index]);
   //   }
   // }
   return (

@@ -84,7 +84,12 @@ function App() {
           <br />
           <br />
           <section>
-            <Overview currentProduct={currentProduct} styles={styles} starRating={ratings} key={Date.now()}/>
+            <Overview
+              currentProduct={currentProduct}
+              styles={styles}
+              starRating={ratings}
+              key={Date.now()}
+            />
           </section>
 
           <section>
