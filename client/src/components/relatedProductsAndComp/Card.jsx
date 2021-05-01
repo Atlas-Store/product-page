@@ -31,9 +31,6 @@ const Wrapper = styled.div`
     border-radius: 30px;
     z-Index: 4;
   }
-  // :hover {
-  //   border: 1px solid black;
-  // }
 
   .loader {
     border: 16px solid #f3f3f3; /* Light grey */
@@ -263,6 +260,8 @@ const Price = styled.div`
   font-size: 85%;
 `;
 
+const ProductImage = styled.img``;
+
 const useMove = () => {
   const [state, setState] = useState({ x: 0, y: 0 });
 
@@ -286,7 +285,8 @@ function Card(props) {
   const { x, y, handleMouseMove } = useMove();
 
   const [hovered, setHovered] = useState(false);
-  const toggleHover = () => setHovered(!hovered);
+  const toggleHoverOn = () => setHovered(true);
+  const toggleHoverOff = () => setHovered(false);
 
   useEffect(() => {
     const stylesRequest = axios.get(`/products/${props.productId}/styles`);
@@ -316,14 +316,13 @@ function Card(props) {
     arrows: true,
     nextArrow: <NextArrow size={20} />,
     prevArrow: <PrevArrow size={20} />,
-    // className: 'slider variable-width',
     draggable: false,
   };
 
   return (
     <>
       {loading ? <div className="loader" /> : (
-        <Wrapper onMouseEnter={toggleHover} onMouseLeave={toggleHover}>
+        <Wrapper onMouseEnter={toggleHoverOn} onMouseLeave={toggleHoverOff}>
           {
             props.cardType === 'outfit' ? (
               <img
@@ -356,15 +355,19 @@ function Card(props) {
             open={isOpen}
             product={product}
             currentProduct={props.currentProduct}
-            onClose={() => setIsOpen(false)}
+            onClose={() => {
+              setIsOpen(false);
+              toggleHoverOff();
+            }}
           />
           <Slider {...settings} dots={hovered ? true : false} className={hovered ? 'slider variable-width' : 'hide'}>
             {styles.results.map((item) => (
               <div>
-                <img
+                <ProductImage
                   src={item.photos[0].thumbnail_url === null ? './noImg.jpg' : item.photos[0].thumbnail_url}
                   alt="product thumbnail"
                   onClick={() => props.setCurrentProductId(props.productId)}
+                  loading="lazy"
                 />
               </div>
             ))}

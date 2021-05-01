@@ -1,32 +1,30 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Slider from 'react-slick';
-import {ProductImageDiv, ProductImage} from './StyledItems.jsx';
-import Modal from './Modal'
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
+import { ProductImageDiv, ProductImage } from './StyledItems.jsx';
+import Modal from './Modal';
 
 const BUTTON_WRAPPER_STYLES = {
   position: 'relative',
-  zIndex: 1
-}
-
-
+  zIndex: 1,
+};
 
 const Wrapper = styled.div`
   // display: flex;
   // flex-direction: row;
   // justify-content: safe center;
-`
+`;
 
 const NoImageAvailable = styled.img`
   width: 500;
   height: 500;
-`
+`;
 
 const CenteredDiv = styled.img`
   display: flex;
   flex-direction: row;
   justify-content: center;
-`
+`;
 
 const ImageSlider = (props) => {
   // <Slider className='productSlider' {...settings}>
@@ -41,16 +39,16 @@ const ImageSlider = (props) => {
   //   slideToContinueFrom = 0;
   // }
   // slideToContinueFrom = props.slideToContinueFrom || 0;
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
   // console.log('in ImageSlider, props.handleClickProductImageDiv is', props.handleClickProductImageDiv);
 
   const nextClick = (e) => {
     // console.log(e);
     props.objSlideToContinueFrom.current = e;
     // props.specifySlideToContinueFrom(e);
-  }
+  };
 
-  let settings = {
+  const settings = {
     dots: true,
     infinite: true,
     speed: 500,
@@ -61,41 +59,39 @@ const ImageSlider = (props) => {
     // centerMode: true,
     // initialSlide: slideToContinueFrom,
     // currentSlide: props.currentSlide,
-    afterChange: nextClick
+    afterChange: nextClick,
     // onReInit: () => (Slider.slickGoTo(0))
     // autoplay: true,
     // autoplaySpeed: 2000,
     // pauseOnHover: true
   };
 
-
-
-  let arrConsecutiveNums = new Array(40);
+  const arrConsecutiveNums = new Array(40);
   for (let i = 0; i < arrConsecutiveNums.length; i++) {
     arrConsecutiveNums[i] = i;
   }
 
   const regularSlider = () => (
     // <Wrapper>
-    <Slider {...settings} >
+    <Slider {...settings}>
 
-    {arrConsecutiveNums.map(item => {
-    if (props.currentGroupOfImageURLs['photos'][item]) {
-      return (<div>
-        <ProductImageDiv >
-        {/* <ProductImage src={(props.currentGroupOfImageURLs['photos'][item]) ? (props.currentGroupOfImageURLs['photos'][item]['url']) : 'imageSubstitute.png'} onClick={props.handleClickProductImageDiv} onClick={() => setIsOpen(true)}/> */}
-        <ProductImage src={props.currentGroupOfImageURLs['photos'][item]['url']} onClick={props.handleClickProductImageDiv} onClick={() => setIsOpen(true)}/>
-      </ProductImageDiv>
+      {arrConsecutiveNums.map((item) => {
+        if (props.currentGroupOfImageURLs.photos[item]) {
+          return (
+            <div>
+              <ProductImageDiv>
+                {/* <ProductImage src={(props.currentGroupOfImageURLs['photos'][item]) ? (props.currentGroupOfImageURLs['photos'][item]['url']) : 'imageSubstitute.png'} onClick={props.handleClickProductImageDiv} onClick={() => setIsOpen(true)}/> */}
+                <ProductImage src={props.currentGroupOfImageURLs.photos[item].url} onClick={props.handleClickProductImageDiv} onClick={() => setIsOpen(true)}/>
+              </ProductImageDiv>
 
-      {/* <ThumbnailImage /> */}
-      </div>)
-    }
-  }
-
-    )}
-      </Slider>
-      // </Wrapper>
-  )
+              {/* <ThumbnailImage /> */}
+            </div>
+          );
+        }
+      })}
+    </Slider>
+    // </Wrapper>
+  );
 
   // if (props.startFromBeginning === true) {
   //   return sliderThatStartsFromBeginning();
@@ -105,25 +101,24 @@ const ImageSlider = (props) => {
   return (
 
     <div>
-{regularSlider()}
+      {regularSlider()}
 
       <div style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
         {/* <StyledButton >Expand</StyledButton> */}
 
         <Modal open={isOpen} onClose={() => setIsOpen(false)}>
           {/* Fancy Modal */}
-          <ProductImageDiv >
-            <ProductImage src={(props.currentGroupOfImageURLs['photos'][props.objSlideToContinueFrom.current]) ? (props.currentGroupOfImageURLs['photos'][props.objSlideToContinueFrom.current]['url']) : 'imageSubstitute.png'} size={650} onClick={props.handleClickProductImageDiv} />
+          <ProductImageDiv>
+            <ProductImage src={(props.currentGroupOfImageURLs.photos[props.objSlideToContinueFrom.current]) ? (props.currentGroupOfImageURLs.photos[props.objSlideToContinueFrom.current].url) : 'imageSubstitute.png'} size={650} onClick={props.handleClickProductImageDiv} />
           </ProductImageDiv>
         </Modal>
       </div>
 
       {/* <div style={OTHER_CONTENT_STYLES}>Other Content</div> */}
 
-
     </div>
 
-  )
+  );
 
   // else if (!props.resetSliderForExpandedView) {
   //   return regularSlider();
@@ -131,9 +126,6 @@ const ImageSlider = (props) => {
   // else if (props.resetSliderForExpandedView) {
   //   slideToContinueFrom = 0;
   //   return regularSliderTwo();
-
-
-}
-
+};
 
 export default ImageSlider;
