@@ -11,14 +11,15 @@ const ImageButton = styled.button`
 const Thumbnail = styled.img`
   height: 96px;
   width: 144px;
+  border: 2.5px solid transparent;
   ${ImageButton}:hover & {
     border: 2.5px solid black;
   }
 `;
 
 const ActualPhoto = styled.img`
-  height: 3in;
-  width: 5in;
+  height: 100%;
+  width: 100%;
 `;
 const ReviewPhotos = (props) => {
   const { image } = props;

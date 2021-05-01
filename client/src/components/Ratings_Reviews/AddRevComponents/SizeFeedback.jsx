@@ -29,11 +29,11 @@ const sizeFB = {
   5: 'A size too big',
 };
 
-const SizeFB = ({
+const SizeFeedback = ({
   sizeFeedback, updateSizeF, characteristics, updateChars,
 }) => (
   <div>
-    <form>
+    <div>
       <h4>*SIZE: </h4>
       <SizeInfo>{sizeFB[sizeFeedback]}</SizeInfo>
       <RadioPlugs>
@@ -126,7 +126,7 @@ const SizeFB = ({
           }}
         />
       </RadioPlugs>
-    </form>
+    </div>
     <SizeDescDiv>
       <SizeDescription location="left">Too small</SizeDescription>
       <SizeDescription location="center">Perfect</SizeDescription>
@@ -135,4 +135,4 @@ const SizeFB = ({
   </div>
 );
 
-export default SizeFB;
+export default SizeFeedback;

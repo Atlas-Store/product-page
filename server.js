@@ -7,6 +7,9 @@ const reviews = require('./helpers/reviewsAPI');
 const qa = require('./helpers/qaAPI');
 
 app.use(express.static(`${__dirname}/client/dist`));
+
+// app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 

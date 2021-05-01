@@ -29,11 +29,11 @@ const Feedback = {
   5: 'Perfect!',
 };
 
-const QualityFB = ({
+const QualityFeedback = ({
   qualityFeedback, updateQualityF, characteristics, updateChars,
 }) => (
   <div>
-    <form>
+    <div>
       <h4>*QUALITY: </h4>
       <Info>{Feedback[qualityFeedback]}</Info>
       <RadioPlugs>
@@ -126,7 +126,7 @@ const QualityFB = ({
           }}
         />
       </RadioPlugs>
-    </form>
+    </div>
     <DescDiv>
       <Description location="left">Poor</Description>
       <Description location="right">Perfect</Description>
@@ -134,4 +134,4 @@ const QualityFB = ({
   </div>
 );
 
-export default QualityFB;
+export default QualityFeedback;

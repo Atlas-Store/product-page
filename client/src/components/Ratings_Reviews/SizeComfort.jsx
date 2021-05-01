@@ -26,7 +26,7 @@ const Classification = styled.label`
 
 const Tick = styled.div`
   position: relative;
-  left: ${(props) => props.position}%;
+  left: ${(props) => (props.position - 2.5)}%;
   font-size: smaller;
 `;
 
@@ -45,7 +45,7 @@ const SizeComfort = ({ ratings }) => (
       </div>
       <AvgRating>
         <CompBar />
-        <Tick position={(ratings.characteristics.Size.value * 5)}>▼</Tick>
+        <Tick position={(ratings.characteristics.Size.value * 20)}>▼</Tick>
       </AvgRating>
       <ClassBar>
         <Classification location="left">
@@ -64,7 +64,7 @@ const SizeComfort = ({ ratings }) => (
       </div>
       <AvgRating>
         <CompBar />
-        <Tick position={(ratings.characteristics.Width.value * 5)}>▼</Tick>
+        <Tick position={(ratings.characteristics.Width.value * 20)}>▼</Tick>
       </AvgRating>
       <ClassBar>
         <Classification location="left">
@@ -83,7 +83,7 @@ const SizeComfort = ({ ratings }) => (
       </div>
       <AvgRating>
         <CompBar />
-        <Tick position={(ratings.characteristics.Comfort.value * 5)}>▼</Tick>
+        <Tick position={(ratings.characteristics.Comfort.value * 20)}>▼</Tick>
       </AvgRating>
       <ClassBar>
         <Classification location="left">
@@ -102,7 +102,7 @@ const SizeComfort = ({ ratings }) => (
       </div>
       <AvgRating>
         <CompBar />
-        <Tick position={(ratings.characteristics.Quality.value * 5)}>▼</Tick>
+        <Tick position={(ratings.characteristics.Quality.value * 20)}>▼</Tick>
       </AvgRating>
       <ClassBar>
         <Classification location="left">
