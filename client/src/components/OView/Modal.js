@@ -37,7 +37,6 @@ const StyledButton = styled.button`
 
 
   &:hover {
-    // font-size: 22px;
     border: 2px solid black;
     color: black;
   }

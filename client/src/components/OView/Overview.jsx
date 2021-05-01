@@ -6,16 +6,15 @@ import $ from 'jquery';
 import StarRating from './StarRating';
 import ProductSelector from './ProductSelector';
 import ProductDescription from './ProductDescription';
-import ProductTitle from './ProductTitle';
-import Price from './Price';
-import ProductCategory from './ProductCategory';
+// import ProductTitle from './ProductTitle';
+// import Price from './Price';
+// import ProductCategory from './ProductCategory';
 import StyleSelector from './StyleSelector';
 import dataFirstProduct, { productReview } from './sample_data_styles';
-import ImageGallery from './ImageGallery';
-
 import { ProductImage, ProductImageDiv } from './StyledItems';
 import ImageSlider from './ImageSlider';
 import Modal from './Modal';
+import ProductHeader from './ProductHeader';
 
 export const Grid = styled.div`
 `;
@@ -26,10 +25,7 @@ export const Row = styled.div`
 `;
 
 export const Col = styled.div`
-  // display: flex;
   flex: ${(props) => props.size};
-  // justify-content: center;
-  // flex: 2;
 
 `;
 export const CenteredColImageGallery = styled.div`
@@ -39,15 +35,12 @@ export const CenteredColImageGallery = styled.div`
   align-items: center;
   width: 1200;
   height: 600;
-  // margin-right: 100px;
 `;
 
 export const CenteredColRestOfOverview = styled.div`
   display: flex;
   flex: ${(props) => props.size};
   justify-content: center;
-  // width: 1200;
-  // height: 600;
   margin-left: 68px;
 `;
 
@@ -89,8 +82,6 @@ const Overview = ({ currentProduct, styles, starRating }) => {
   const slideToContinueFrom = useRef(0);
 
   const resetSliderToFirstImage = () => {
-    // settings.initialSlide = 3;
-    // setSettingsCurrentSlideToZero(!settingsCurrentSlideToZero);
   };
 
   const handleClickStyle = () => {
@@ -118,31 +109,28 @@ const Overview = ({ currentProduct, styles, starRating }) => {
         <Grid>
           <Row>
             <CenteredColImageGallery size={2.5}>
-              {/* <Wrapper> */}
 
               <ImageSlider
                 objSlideToContinueFrom={slideToContinueFrom}
                 currentGroupOfImageURLs={currentGroupOfImageURLs}
                 handleClickProductImageDiv={handleClickProductImageDiv}
-                // resetSliderForExpandedView
                 objIsExpandedView={isExpandedView}
                 key={Date.now()}
               />
 
-              {/* </Wrapper> */}
-
             </CenteredColImageGallery>
             <CenteredColRestOfOverview size={1}>
               <div>
-                {/* Double the size of */}
                 <StarRating
                   handleSubmit={handleSubmit}
                   changeHandler={changeHandler}
                   rating={rating}
                 />
-                <ProductCategory category={currentProduct.category} />
-                <ProductTitle title={currentProduct.name} />
-                <Price price={currentProduct.default_price} />
+                <ProductHeader
+                  category={currentProduct.category}
+                  title={currentProduct.name}
+                  price={currentProduct.default_price}
+                />
                 <br />
                 <br />
                 <StyleSelector
@@ -156,9 +144,7 @@ const Overview = ({ currentProduct, styles, starRating }) => {
                 />
                 <br />
                 <br />
-                { console.log('in Overview, styles is', styles)}
                 <ProductSelector styles={styles} currentStyleIndex={currentStyleIndex} />
-                {/* <ProductSelector sizes={} quantities={}/> */}
               </div>
             </CenteredColRestOfOverview>
           </Row>
@@ -176,9 +162,5 @@ const Overview = ({ currentProduct, styles, starRating }) => {
     </div>
   );
 };
-
-// Overview.propTypes = {
-//   currentProduct: PropTypes.objectOf(PropTypes.object()).isRequired,
-// };
 
 export default Overview;
