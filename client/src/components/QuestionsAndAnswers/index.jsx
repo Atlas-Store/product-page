@@ -27,6 +27,10 @@ const ConditionalWrapper = styled.div`
   min-width: 69vw;
   overflow: auto;
 `;
+const Questions = styled.div`
+ display: flex;
+ flex-direction: row;
+`;
 
 function QuestionsAnswers({ qaResults, currentProductId, currentProduct }) {
   const [questions, setQuestions] = useState(qaResults);
@@ -57,10 +61,10 @@ function QuestionsAnswers({ qaResults, currentProductId, currentProduct }) {
       <ConditionalWrapper>
         <QAList questions={questions.slice(0, qCount)} />
       </ConditionalWrapper>
-      <div>
+      <Questions>
         {questions.length > qCount && <MoreQuestionsButton onClick={handleMoreQuestionsClick} />}
         <AddQuestionButton currentProductId={currentProductId} currentProduct={currentProduct} />
-      </div>
+      </Questions>
     </QAWrapper>
   );
 }

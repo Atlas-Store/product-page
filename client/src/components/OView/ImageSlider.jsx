@@ -19,7 +19,8 @@ position: relative;
 display: flex;
 flex-direction: column;
 justify-content: safe center;
-background: gray;
+background: white;
+border: 2.5px solid black;
 
 .slick-prev:hover,
 .slick-prev:focus,

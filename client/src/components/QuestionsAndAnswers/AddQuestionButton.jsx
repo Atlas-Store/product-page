@@ -7,12 +7,14 @@ import Modal from './Modal';
 const Button = styled.button`
 position: relative;
 display: inline-block;
-color: black;
-font-size: 1em;
-margin: 1em;
-padding: 0.25em 1em;
-border: 2px solid silver;
-border-radius: 3px;
+background-color: transparent;
+border: 2.5px solid black;
+cursor: pointer;
+padding-left: 10px;
+padding-right: 10px;
+padding-top: 20px;
+padding-bottom: 20px;
+margin: 10px;
 `;
 
 const InputContainer = styled.div`
@@ -76,7 +78,7 @@ function AddQuestionButton({ currentProductId, currentProduct }) {
           <button type="submit">submit</button>
         </form>
       </Modal>
-      <Button type onClick={() => setIsOpen(true)}>Add Question</Button>
+      <Button type onClick={() => setIsOpen(true)}>ADD QUESTION +</Button>
     </div>
   );
 }
