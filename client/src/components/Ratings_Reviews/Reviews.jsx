@@ -108,7 +108,7 @@ const Review = ({ reviews, ratings, currentProduct }) => {
         {/* Need to change 'AND' to & */}
         <RatingsSection>
           <StarsContent>
-            <Stars rating={averageRating} />
+            <Stars rating={averageRating} size={25} />
             <RatingNum>
               <strong>
                 {averageRating}

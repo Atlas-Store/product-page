@@ -49,7 +49,7 @@ const ReviewTiles = ({ review }) => (
   <div>
     <StyledReview>
       <ReviewInfo>
-        <Stars rating={review.rating} />
+        <Stars rating={review.rating} size={25} />
         <ReviewUserDate>
           <UserName>
             {review.reviewer_name}
