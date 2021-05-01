@@ -381,7 +381,7 @@ function Card(props) {
               {`$${styles.results[0].original_price}`}
               {' '}
             </Price>
-            <Star rating={4.1} />
+            <Star rating={4.1} size={15} />
           </Description>
         </Wrapper>
       )}

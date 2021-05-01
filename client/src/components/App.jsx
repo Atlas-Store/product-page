@@ -86,7 +86,12 @@ function App() {
           <br />
           <br />
           <section>
-            <Overview currentProduct={currentProduct} styles={styles} starRating={ratings} key={Date.now()}/>
+            <Overview
+              currentProduct={currentProduct}
+              styles={styles}
+              starRating={ratings}
+              key={Date.now()}
+            />
           </section>
 
           <section>
@@ -102,7 +107,11 @@ function App() {
           </section>
 
           <section>
-            <QuestionsAnswers currentProductId={currentProductId} qaResults={QA.results} />
+            <QuestionsAnswers
+              currentProduct={currentProduct}
+              currentProductId={currentProductId}
+              qaResults={QA.results}
+            />
           </section>
           <section>
             <Reviews reviews={reviews} ratings={ratings} currentProduct={currentProduct} />

@@ -29,6 +29,7 @@ function SearchBar({ handleSearch }) {
         placeholder="“Have a question? Search for answers…”
         "
         onChange={handleChange}
+        value={searchTerm}
       />
       <input type="submit" value="submit" />
     </form>

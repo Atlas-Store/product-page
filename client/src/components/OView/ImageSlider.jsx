@@ -15,6 +15,88 @@ const Wrapper = styled.div`
   // justify-content: safe center;
 `;
 
+const InitialWrapper = styled.div`
+width: 800px;
+// width: auto;
+height: 680px;
+position: relative;
+display: flex;
+flex-direction: column;
+justify-content: safe center;
+// box-sizing: border-box;
+background: gray;
+
+.slick-prev:hover,
+.slick-prev:focus,
+.slick-next:hover,
+.slick-next:focus
+{
+  color: white;
+  outline: none;
+  background: transparent;
+}
+.slick-prev:hover:before,
+.slick-prev:focus:before,
+.slick-next:hover:before,
+.slick-next:focus:before
+{
+    opacity: 1;
+}
+.slick-prev.slick-disabled:before,
+.slick-next.slick-disabled:before
+{
+    opacity: 0;
+}
+
+.slick-prev:before ,
+.slick-next:before
+{
+    font-family: 'Monaco';
+    font-size: 30px;
+    line-height: 1;
+
+    opacity: 1;
+    color: gray;
+    background: white;
+    padding: 0px 10px;
+    border: 1px solid black;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.slick-prev
+{
+    left: ${(props) => props.left || 20}px;
+    z-index: 2;
+
+}
+
+.slick-next
+{
+  right: ${(props) => props.right || 35}px;
+  z-index: 2;
+}
+
+.slick-prev:before
+{
+    content: '<';
+}
+
+.slick-next:before
+{
+    content: '>';
+}
+
+.slick-slide {
+  // min-width: 100%;
+  // margin-top: 1500px;
+  margin-top: 17px;
+  // margin-right: 100px;
+  // margin-left: 100px;
+}
+`;
+
 const NoImageAvailable = styled.img`
   width: 500;
   height: 500;
@@ -73,15 +155,16 @@ const ImageSlider = (props) => {
 
   const regularSlider = () => (
     // <Wrapper>
+    <InitialWrapper>
     <Slider {...settings}>
 
-      {arrConsecutiveNums.map((item) => {
+      {arrConsecutiveNums.map((item, i) => {
         if (props.currentGroupOfImageURLs.photos[item]) {
           return (
-            <div>
+            <div key={i}>
               <ProductImageDiv>
                 {/* <ProductImage src={(props.currentGroupOfImageURLs['photos'][item]) ? (props.currentGroupOfImageURLs['photos'][item]['url']) : 'imageSubstitute.png'} onClick={props.handleClickProductImageDiv} onClick={() => setIsOpen(true)}/> */}
-                <ProductImage src={props.currentGroupOfImageURLs.photos[item].url} onClick={props.handleClickProductImageDiv} onClick={() => setIsOpen(true)}/>
+                <ProductImage src={props.currentGroupOfImageURLs.photos[item].url} onClick={props.handleClickProductImageDiv} onClick={() => setIsOpen(true)} />
               </ProductImageDiv>
 
               {/* <ThumbnailImage /> */}
@@ -90,6 +173,7 @@ const ImageSlider = (props) => {
         }
       })}
     </Slider>
+    </InitialWrapper>
     // </Wrapper>
   );
 
@@ -111,6 +195,7 @@ const ImageSlider = (props) => {
           <ProductImageDiv>
             <ProductImage src={(props.currentGroupOfImageURLs.photos[props.objSlideToContinueFrom.current]) ? (props.currentGroupOfImageURLs.photos[props.objSlideToContinueFrom.current].url) : 'imageSubstitute.png'} size={650} onClick={props.handleClickProductImageDiv} />
           </ProductImageDiv>
+          {/* {regularSlider()} */}
         </Modal>
       </div>
 

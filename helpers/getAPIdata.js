@@ -19,4 +19,24 @@ const getAPIdata = (endpoint, callback) => {
     });
 };
 
+const postQuestion = (data, callback) => {
+  const options = {
+    url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/qa/questions',
+    headers: {
+      'User-Agent': 'request',
+      Authorization: config.TOKEN,
+    },
+  };
+
+  axios.post(options.url, { headers: options.headers })
+    .then(() => {
+      callback(null);
+    })
+    .catch((err) => {
+      console.log('error at post req', err);
+      callback(err);
+    });
+};
+
 module.exports.getAPIdata = getAPIdata;
+module.exports.postQuestion = postQuestion;

@@ -7,5 +7,5 @@ import Price from './Price';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
-  ReactDOM.render(<Price></Price>, div)
+  ReactDOM.render(<ProductHeader></ProductHeader>, div)
 });
