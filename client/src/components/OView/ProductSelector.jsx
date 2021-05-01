@@ -35,25 +35,37 @@ const AddToCart = styled.button`
   justify-content: center;
   `
 
-function ProductSelector(props) {
-  const [color, setColor] = useState('green');
+function ProductSelector({ styles, currentStyleIndex }) {
+  // const [color, setColor] = useState('green');
+  const [selectedSize, setSelectedSize] = useState(0);
+
   const handleMouseEnter = (event) => {
-    setColor('red');
+    // setColor('red');
     // event.target.color = color;
   }
+  console.log('in ProductSelector, styles is', styles);
   return (
     <div>
       <br />
     <DisplaySideBySide>
-      <SizeSelector /><QuantitySelector />
-      </DisplaySideBySide>
-      <br /><br /><br />
+      <SizeSelector
+        styles={styles}
+        setSelectedSize={setSelectedSize}
+        currentStyleIndex={currentStyleIndex}
+      />
+      <QuantitySelector
+        styles={styles}
+        selectedSize={selectedSize}
+        currentStyleIndex={currentStyleIndex}
+      />
+    </DisplaySideBySide>
+      <br />
+      <br />
+      <br />
       <CenteredDiv>
-      <AddToCart onMouseEnter={handleMouseEnter}>Add To Cart</AddToCart>
+        <AddToCart onMouseEnter={handleMouseEnter}>Add To Cart</AddToCart>
       </CenteredDiv>
-      </div>
-
-    // <button>Add to Cart</button>
+    </div>
   )
 }
 

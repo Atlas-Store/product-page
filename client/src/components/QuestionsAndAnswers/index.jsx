@@ -14,7 +14,7 @@ const QAWrapper = styled.div`
   flex-direction: column;
   border-top: 2px solid grey;
   border-bottom: 2px solid grey;
-  height: 90vh;
+  max-height: 90vh;
   min-width: 69vw;
   overflow: auto;
 `;
@@ -28,7 +28,7 @@ const ConditionalWrapper = styled.div`
   overflow: auto;
 `;
 
-function QuestionsAnswers({ qaResults }) {
+function QuestionsAnswers({ qaResults, currentProductId, currentProduct }) {
   const [questions, setQuestions] = useState(qaResults);
   const [qCount, setQCount] = useState(2);
 
@@ -59,13 +59,17 @@ function QuestionsAnswers({ qaResults }) {
       </ConditionalWrapper>
       <div>
         {questions.length > qCount && <MoreQuestionsButton onClick={handleMoreQuestionsClick} />}
-        <AddQuestionButton />
+        <AddQuestionButton currentProductId={currentProductId} currentProduct={currentProduct} />
       </div>
     </QAWrapper>
   );
 }
 
 QuestionsAnswers.propTypes = {
+  currentProduct: PropTypes.shape({
+    name: PropTypes.string,
+  }).isRequired,
+  currentProductId: PropTypes.number.isRequired,
   qaResults: PropTypes.arrayOf(PropTypes.shape({
     question_id: PropTypes.number,
     question_body: PropTypes.string,

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const ModdedSearchBar = styled.input`
-  width: 85vw;
+  width: 80vw;
   height: 30px;
   border: 1px solid #999999;
 `;
@@ -29,6 +29,7 @@ function SearchBar({ handleSearch }) {
         placeholder="“Have a question? Search for answers…”
         "
         onChange={handleChange}
+        value={searchTerm}
       />
       <input type="submit" value="submit" />
     </form>
