@@ -65,7 +65,7 @@ const StarsContent = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  background-color: green;
+  background-color: #2ada71;
   padding-left: 72px;
 `;
 
@@ -80,13 +80,14 @@ const StyledOption = styled.option`
 `;
 
 const Review = ({ reviews, ratings, currentProduct }) => {
-
   const [numReviews, updateNumReviews] = useState(reviews.results.length);
   const [reviewsToShow, updateToShow] = useState(2);
   const [writeReview, toggleWR] = useState(false);
   const [reviewsToRender, updateReviewsRender] = useState(reviews.results);
   const [averageRating, setAvgRating] = useState(renderFunc.calcAvg(ratings.ratings));
   const [fracRecs, setFracRecs] = useState(renderFunc.numRecommenders(ratings.recommended));
+  const [starFilterClicked, updateFilterClick] = useState(false);
+  const [filterByStars, updateByStars] = useState(null);
   const productID = reviews.product;
   const grabSortedReviews = (byWhat) => {
     const sortBy = byWhat.toLowerCase();
@@ -118,8 +119,17 @@ const Review = ({ reviews, ratings, currentProduct }) => {
             {fracRecs}
             % reviewers recommend this product
           </FractionRecs>
-          <BarRatings starStats={ratings.ratings} />
+          <BarRatings
+            starStats={ratings.ratings}
+            updateByStars={updateByStars}
+            updateFilterClick={updateFilterClick}
+          />
           <SizeComfort ratings={ratings} />
+          {starFilterClicked && (
+          <StyledReviewButton type="submit" onClick={() => { updateFilterClick(false); updateToShow(2); }}>
+            SHOW ALL
+          </StyledReviewButton>
+          )}
         </RatingsSection>
         <StyledReviewSection>
           <CustomH3>
@@ -137,7 +147,13 @@ const Review = ({ reviews, ratings, currentProduct }) => {
             </SortMenu>
           </CustomH3>
           <div>
-            {reviewsToRender.map((aReview) => (
+            {starFilterClicked && reviewsToRender.map((aReview) => {
+              if (aReview.rating <= filterByStars) {
+                return <ReviewTiles review={aReview} key={aReview.review_id} />;
+              }
+              return null;
+            })}
+            {!starFilterClicked && reviewsToRender.map((aReview) => (
               <ReviewTiles
                 review={aReview}
                 key={aReview.review_id}

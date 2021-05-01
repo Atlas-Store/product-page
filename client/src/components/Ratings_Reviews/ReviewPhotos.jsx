@@ -17,8 +17,8 @@ const Thumbnail = styled.img`
 `;
 
 const ActualPhoto = styled.img`
-  height: 3in;
-  width: 5in;
+  height: 100%;
+  width: 100%;
 `;
 const ReviewPhotos = (props) => {
   const { image } = props;

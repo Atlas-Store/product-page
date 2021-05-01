@@ -10,6 +10,8 @@ const PicModal = styled.div`
   transform: translate(-50%, -50%);
   background: white;
   padding: 24px;
+  height: 75%;
+  width: 40%;
   border: 2.5px solid black;
   zIndex=1000;
 `;

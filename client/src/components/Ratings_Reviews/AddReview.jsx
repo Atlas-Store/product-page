@@ -8,9 +8,11 @@ import SizeFB from './AddRevComponents/SizeFB';
 import WidthFB from './AddRevComponents/WidthFB';
 import ComfortFB from './AddRevComponents/ComfortFB';
 import QualityFB from './AddRevComponents/QualityFB';
+import FitFB from './AddRevComponents/FitFeedback';
+import LengthFB from './AddRevComponents/LengthFeedback';
 
 const WriteModal = styled.div`
-  overflow-y: auto;
+  overflow-y: scroll;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -20,7 +22,7 @@ const WriteModal = styled.div`
   zIndex=1000;
   border: 2.5px solid black;
   width: 50%;
-  height: 85%;
+  height: 75%;
   font-family: Arial;
 `;
 
@@ -137,16 +139,27 @@ const productChars = {
     id: 17,
     value: 0,
   },
+  Length: {
+    id: 18,
+    value: 0,
+  },
+  Fit: {
+    id: 19,
+    value: 0,
+  },
 };
 
 const AddReview = ({ open, onClose, currentProduct }) => {
   if (!open) return null;
+  //const [inputs, updateInputs] = useState({});
   const [reviewStars, updateRStars] = useState(5);
   const [didRecommend, updateRec] = useState(null);
   const [sizeFeedback, updateSizeF] = useState(0);
   const [widthFeedback, updateWidthF] = useState(0);
   const [comfortFeedback, updateComfortF] = useState(0);
   const [qualityFeedback, updateQualityF] = useState(0);
+  const [fitFeedback, updateFitF] = useState(0);
+  const [lengthFeedback, updateLengthF] = useState(0);
   const [reviewSummary, updateSummary] = useState('');
   const [reviewBody, updateBody] = useState('');
   const [userName, updateUserName] = useState('');
@@ -154,26 +167,27 @@ const AddReview = ({ open, onClose, currentProduct }) => {
   const [images, updateImages] = useState([]);
   const [characteristics, updateChars] = useState(productChars);
 
-  // const postReview = () => {
-  //   const data = {
-  //     product_id: currentProduct.id,
-  //     rating: reviewStars,
-  //     summary: reviewSummary,
-  //     body: reviewBody,
-  //     recommend: didRecommend,
-  //     name: userName,
-  //     email,
-  //     photos: images,
-  //     characteristics,
-  //   };
-  //   axios.post('/reviews', data)
-  //     .then((response) => {
-  //       console.log('Upload successful!', response);
-  //     })
-  //     .catch((error) => {
-  //       console.log('Failed to Post', error);
-  //     });
-  // };
+  const postReview = (event) => {
+    event.preventDefault();
+    const data = {
+      product_id: currentProduct.id,
+      rating: reviewStars,
+      summary: reviewSummary,
+      body: reviewBody,
+      recommend: didRecommend,
+      name: userName,
+      email,
+      photos: images,
+      characteristics: {},
+    };
+    axios.post('/reviews', data)
+      .then(() => {
+        console.log('Upload successful!');
+      })
+      .catch((error) => {
+        console.log('Failed to Post', error);
+      });
+  };
 
   return ReactDOM.createPortal(
     <>
@@ -235,6 +249,22 @@ const AddReview = ({ open, onClose, currentProduct }) => {
                 updateChars={updateChars}
               />
             </ReviewComponent>
+            <ReviewComponent>
+              <FitFB
+                fitFeedback={fitFeedback}
+                updateFitF={updateFitF}
+                characteristics={characteristics}
+                updateChars={updateChars}
+              />
+            </ReviewComponent>
+            <ReviewComponent>
+              <LengthFB
+                lengthFeedback={lengthFeedback}
+                updateLengthF={updateLengthF}
+                characteristics={characteristics}
+                updateChars={updateChars}
+              />
+            </ReviewComponent>
           </ClickableReview>
           <Feedback>
             <UserReviewComponent>
@@ -277,7 +307,7 @@ const AddReview = ({ open, onClose, currentProduct }) => {
             </UserReviewComponent>
           </Feedback>
           <SubmitDiv>
-            <SubmitButton type="submit">
+            <SubmitButton type="submit" onClick={(event) => postReview(event)}>
               <strong>
                 <u>
                   SUBMIT

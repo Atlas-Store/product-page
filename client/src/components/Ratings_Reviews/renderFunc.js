@@ -1,21 +1,5 @@
 /* eslint-disable no-param-reassign */
 module.exports = {
-  Helpful: (reviews) => (
-    reviews.sort((a, b) => {
-      const y = a.helpfulness;
-      const z = b.helpfulness;
-      return z - y;
-    })
-  ),
-  Newest: (reviews) => (
-    reviews.sort((a, b) => {
-      const y = new Date(a.date);
-      const z = new Date(b.date);
-      return z - y;
-    })
-
-  ),
-
   calcAvg: (ratingStats) => {
     let divisor = 0;
     let totalRating = 0;
@@ -44,7 +28,7 @@ module.exports = {
       divisor: 0,
     };
     for (const key in starStats) {
-      freqRatings[key] = starStats[key];
+      freqRatings[key] =parseInt(starStats[key]);
       freqRatings.divisor += parseInt(starStats[key]);
     }
     return freqRatings;

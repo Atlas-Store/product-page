@@ -21,32 +21,32 @@ const Description = styled.label`
   font-size: smaller;
 `;
 const Feedback = {
-  0: 'Please Select',
-  1: 'Too narrow',
-  2: 'Slightly narrow',
+  0: 'Please select',
+  1: 'Runs tight',
+  2: 'Runs slightly tight',
   3: 'Perfect',
-  4: 'Slighty wide',
-  5: 'Too wide',
+  4: 'Runs slightly loose',
+  5: 'Runs loose',
 };
 
-const WidthFB = ({
-  widthFeedback, updateWidthF, characteristics, updateChars,
+const FitFeedback = ({
+  fitFeedback, updateFitF, characteristics, updateChars,
 }) => (
   <div>
     <form>
-      <h4>*WIDTH: </h4>
-      <Info>{Feedback[widthFeedback]}</Info>
+      <h4>*FIT: </h4>
+      <Info>{Feedback[fitFeedback]}</Info>
       <RadioPlugs>
         <input
           type="radio"
-          name="width"
+          name="fit"
           value="1"
           required
           onClick={(event) => {
-            updateWidthF(event.target.value); updateChars({
+            updateFitF(event.target.value); updateChars({
               ...characteristics,
-              Width: {
-                id: 15,
+              Fit: {
+                id: 19,
                 value: event.target.value,
               },
             });
@@ -56,14 +56,14 @@ const WidthFB = ({
       <RadioPlugs>
         <input
           type="radio"
-          name="width"
+          name="fit"
           value="2"
           required
           onClick={(event) => {
-            updateWidthF(event.target.value); updateChars({
+            updateFitF(event.target.value); updateChars({
               ...characteristics,
-              Width: {
-                id: 15,
+              Fit: {
+                id: 19,
                 value: event.target.value,
               },
             });
@@ -73,14 +73,14 @@ const WidthFB = ({
       <RadioPlugs>
         <input
           type="radio"
-          name="width"
+          name="fit"
           value="3"
           required
           onClick={(event) => {
-            updateWidthF(event.target.value); updateChars({
+            updateFitF(event.target.value); updateChars({
               ...characteristics,
-              Width: {
-                id: 15,
+              Fit: {
+                id: 19,
                 value: event.target.value,
               },
             });
@@ -90,14 +90,14 @@ const WidthFB = ({
       <RadioPlugs>
         <input
           type="radio"
-          name="width"
+          name="fit"
           value="4"
           required
           onClick={(event) => {
-            updateWidthF(event.target.value); updateChars({
+            updateFitF(event.target.value); updateChars({
               ...characteristics,
-              Width: {
-                id: 15,
+              Fit: {
+                id: 19,
                 value: event.target.value,
               },
             });
@@ -107,14 +107,14 @@ const WidthFB = ({
       <RadioPlugs>
         <input
           type="radio"
-          name="width"
+          name="fit"
           value="5"
           required
           onClick={(event) => {
-            updateWidthF(event.target.value); updateChars({
+            updateFitF(event.target.value); updateChars({
               ...characteristics,
-              Width: {
-                id: 15,
+              Fit: {
+                id: 19,
                 value: event.target.value,
               },
             });
@@ -130,4 +130,4 @@ const WidthFB = ({
   </div>
 );
 
-export default WidthFB;
+export default FitFeedback;
