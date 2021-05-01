@@ -10,20 +10,15 @@ const BUTTON_WRAPPER_STYLES = {
 };
 
 const Wrapper = styled.div`
-  // display: flex;
-  // flex-direction: row;
-  // justify-content: safe center;
 `;
 
 const InitialWrapper = styled.div`
 width: 800px;
-// width: auto;
 height: 680px;
 position: relative;
 display: flex;
 flex-direction: column;
 justify-content: safe center;
-// box-sizing: border-box;
 background: gray;
 
 .slick-prev:hover,
@@ -89,11 +84,7 @@ background: gray;
 }
 
 .slick-slide {
-  // min-width: 100%;
-  // margin-top: 1500px;
   margin-top: 17px;
-  // margin-right: 100px;
-  // margin-left: 100px;
 }
 `;
 
@@ -109,25 +100,10 @@ const CenteredDiv = styled.img`
 `;
 
 const ImageSlider = (props) => {
-  // <Slider className='productSlider' {...settings}>
-  //   <ProductImageDiv>
-  //       <ProductImage src={props.currentGroupOfImageURLs['photos'][item]['url']} />
-  //     </ProductImageDiv>
-  // </Slider>
-
-  // , setSlideToContinueFrom] = useState(0);
-
-  // if (props.slideToContinueFrom) {
-  //   slideToContinueFrom = 0;
-  // }
-  // slideToContinueFrom = props.slideToContinueFrom || 0;
   const [isOpen, setIsOpen] = useState(false);
-  // console.log('in ImageSlider, props.handleClickProductImageDiv is', props.handleClickProductImageDiv);
 
   const nextClick = (e) => {
-    // console.log(e);
     props.objSlideToContinueFrom.current = e;
-    // props.specifySlideToContinueFrom(e);
   };
 
   const settings = {
@@ -138,14 +114,8 @@ const ImageSlider = (props) => {
     slidesToScroll: 1,
     arrows: true,
     currentSlide: props.objSlideToContinueFrom.current,
-    // centerMode: true,
-    // initialSlide: slideToContinueFrom,
-    // currentSlide: props.currentSlide,
+
     afterChange: nextClick,
-    // onReInit: () => (Slider.slickGoTo(0))
-    // autoplay: true,
-    // autoplaySpeed: 2000,
-    // pauseOnHover: true
   };
 
   const arrConsecutiveNums = new Array(40);
@@ -154,63 +124,46 @@ const ImageSlider = (props) => {
   }
 
   const regularSlider = () => (
-    // <Wrapper>
     <InitialWrapper>
-    <Slider {...settings}>
+      <Slider {...settings}>
 
-      {arrConsecutiveNums.map((item, i) => {
-        if (props.currentGroupOfImageURLs.photos[item]) {
-          return (
-            <div key={i}>
-              <ProductImageDiv>
-                {/* <ProductImage src={(props.currentGroupOfImageURLs['photos'][item]) ? (props.currentGroupOfImageURLs['photos'][item]['url']) : 'imageSubstitute.png'} onClick={props.handleClickProductImageDiv} onClick={() => setIsOpen(true)}/> */}
-                <ProductImage src={props.currentGroupOfImageURLs.photos[item].url} onClick={props.handleClickProductImageDiv} onClick={() => setIsOpen(true)} />
-              </ProductImageDiv>
+        {arrConsecutiveNums.map((item, i) => {
+          if (props.currentGroupOfImageURLs.photos[item]) {
+            return (
+              <div key={i}>
+                <ProductImageDiv>
+                  <ProductImage
+                    src={props.currentGroupOfImageURLs.photos[item].url}
+                    onClick={props.handleClickProductImageDiv}
+                    onClick={() => setIsOpen(true)}
+                  />
+                </ProductImageDiv>
 
-              {/* <ThumbnailImage /> */}
-            </div>
-          );
-        }
-      })}
-    </Slider>
+              </div>
+            );
+          }
+        })}
+      </Slider>
     </InitialWrapper>
-    // </Wrapper>
   );
 
-  // if (props.startFromBeginning === true) {
-  //   return sliderThatStartsFromBeginning();
-  // } else {
-  //   return regularSlider();
-  // }
   return (
 
     <div>
       {regularSlider()}
 
       <div style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
-        {/* <StyledButton >Expand</StyledButton> */}
 
         <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-          {/* Fancy Modal */}
           <ProductImageDiv>
             <ProductImage src={(props.currentGroupOfImageURLs.photos[props.objSlideToContinueFrom.current]) ? (props.currentGroupOfImageURLs.photos[props.objSlideToContinueFrom.current].url) : 'imageSubstitute.png'} size={650} onClick={props.handleClickProductImageDiv} />
           </ProductImageDiv>
-          {/* {regularSlider()} */}
         </Modal>
       </div>
-
-      {/* <div style={OTHER_CONTENT_STYLES}>Other Content</div> */}
 
     </div>
 
   );
-
-  // else if (!props.resetSliderForExpandedView) {
-  //   return regularSlider();
-  // }
-  // else if (props.resetSliderForExpandedView) {
-  //   slideToContinueFrom = 0;
-  //   return regularSliderTwo();
 };
 
 export default ImageSlider;
