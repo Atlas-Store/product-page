@@ -53,14 +53,7 @@ function StarRating({ rating }) {
   return (
 
     <div>
-      {/* <form onSubmit={handleSubmit}>
-        <Label>How many stars do you rate this item?</Label>
-        <input type='text' onChange={changeHandler}></input>
-        <button >Rate!</button>
-      </form> */}
-      {/* <div className="Stars" style={{'--rating': rating}} aria-label="Rating of this product is 2.3 out of 5." ></div> */}
       <Star className="Stars" style={{ '--rating': roundForStar(rating)}} />
-      {/* aria-label="Rating of this product is 4.2 out of 5." /> */}
     </div>
   );
 }

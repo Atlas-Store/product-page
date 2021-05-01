@@ -35,14 +35,12 @@ const AddToCart = styled.button`
   justify-content: center;
   `
 
-function ProductSelector({styles, currentStyleIndex}) {
-  const [color, setColor] = useState('green');
+function ProductSelector({ styles, currentStyleIndex }) {
+  // const [color, setColor] = useState('green');
   const [selectedSize, setSelectedSize] = useState(0);
 
-  console.log('in ProductSelector, the currently selected size is', selectedSize);
-
   const handleMouseEnter = (event) => {
-    setColor('red');
+    // setColor('red');
     // event.target.color = color;
   }
   console.log('in ProductSelector, styles is', styles);
@@ -50,15 +48,24 @@ function ProductSelector({styles, currentStyleIndex}) {
     <div>
       <br />
     <DisplaySideBySide>
-      <SizeSelector styles={styles} setSelectedSize={setSelectedSize} currentStyleIndex={currentStyleIndex}/><QuantitySelector styles={styles} selectedSize={selectedSize} currentStyleIndex={currentStyleIndex}/>
-      </DisplaySideBySide>
-      <br /><br /><br />
+      <SizeSelector
+        styles={styles}
+        setSelectedSize={setSelectedSize}
+        currentStyleIndex={currentStyleIndex}
+      />
+      <QuantitySelector
+        styles={styles}
+        selectedSize={selectedSize}
+        currentStyleIndex={currentStyleIndex}
+      />
+    </DisplaySideBySide>
+      <br />
+      <br />
+      <br />
       <CenteredDiv>
-      <AddToCart onMouseEnter={handleMouseEnter}>Add To Cart</AddToCart>
+        <AddToCart onMouseEnter={handleMouseEnter}>Add To Cart</AddToCart>
       </CenteredDiv>
-      </div>
-
-    // <button>Add to Cart</button>
+    </div>
   )
 }
 

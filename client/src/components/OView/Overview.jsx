@@ -6,9 +6,6 @@ import $ from 'jquery';
 import StarRating from './StarRating';
 import ProductSelector from './ProductSelector';
 import ProductDescription from './ProductDescription';
-// import ProductTitle from './ProductTitle';
-// import Price from './Price';
-// import ProductCategory from './ProductCategory';
 import StyleSelector from './StyleSelector';
 import dataFirstProduct, { productReview } from './sample_data_styles';
 import { ProductImage, ProductImageDiv } from './StyledItems';
@@ -51,11 +48,6 @@ const WrapperForRestofOverview = styled.div`
 const slideToStartFromInExpandedView = false;
 
 const Overview = ({ currentProduct, styles, starRating }) => {
-  const stylesURLs = [];
-  for (let i = 0; i < styles.results.length; i++) {
-    stylesURLs.push(styles.results[i].photos[0].url);
-  }
-  console.log('in Overview, currentProduct is', currentProduct);
   let avgStarRating = 0;
   let sum = 0;
   let numOfRatings = 0;
@@ -69,16 +61,29 @@ const Overview = ({ currentProduct, styles, starRating }) => {
   }
   avgStarRating = sum / numOfRatings;
 
+  const stylesURLs = [];
+  for (let i = 0; i < styles.results.length; i++) {
+    stylesURLs.push(styles.results[i].photos[0].url);
+  }
+
   const [rating, setRating] = useState(avgStarRating || 0);
   const [currentImageURL, setCurrentImageURL] = useState(stylesURLs[0]);
   const [currentStyleID, setCurrentStyleID] = useState(styles.results[0].style_id);
   const [currentGroupOfImageURLs, setCurrentGroupOfImageURLs] = useState(styles.results.map((item) => item)[0]);
   const [currentStyleIndex, setCurrentStyleIndex] = useState(0);
+  const [rerenderPage, setRerenderPage] = useState(false);
   const isExpandedView = useRef(false);
 
-  console.log('the current style index is, ', currentStyleIndex);
+  // console.log('in Overview, currentProduct is', currentProduct);
 
-  const [abc, setAbc] = useState(false);
+
+
+  // console.log('rating is', rating);
+
+
+  // console.log('the current style index is, ', currentStyleIndex);
+
+
   const slideToContinueFrom = useRef(0);
 
   const resetSliderToFirstImage = () => {
@@ -86,7 +91,7 @@ const Overview = ({ currentProduct, styles, starRating }) => {
 
   const handleClickStyle = () => {
     slideToContinueFrom.current = 0;
-    setAbc(!abc);
+    setRerenderPage(!rerenderPage);
   };
 
   const handleClickProductImageDiv = () => {
