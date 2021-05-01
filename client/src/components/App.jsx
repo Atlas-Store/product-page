@@ -12,8 +12,11 @@ const Wrapper = styled.div`
   flex-direction: column;
   margin-top: 0;
   margin-bottom: auto;
+  margin-left: 100px;
+  margin-right: 100px;
   align-items: center;
   font-family: 'Arial'
+
 `;
 
 const Loader = styled.div`
@@ -28,7 +31,6 @@ const Loader = styled.div`
   width: 120px;
   height: 120px;
   animation: spin 2s linear infinite;
-
 
   @keyframes spin {
     0% { transform: rotate(0deg); }

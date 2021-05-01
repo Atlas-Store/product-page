@@ -130,6 +130,7 @@ const Overview = ({ currentProduct, styles, starRating }) => {
                   handleSubmit={handleSubmit}
                   changeHandler={changeHandler}
                   rating={rating}
+                  size={25}
                 />
                 <ProductHeader
                   category={currentProduct.category}

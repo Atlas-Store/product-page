@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 
 const Star = styled.div`
-  --star-size: 25px;
+  --star-size: ${(props) => props.size}px;
   --star-color: rgb(211, 211, 211);
   --star-background: black;
   --percent: calc(var(--rating) / 5 * 100%);
@@ -36,7 +36,7 @@ const roundForStar = (num) => {
 
 // let bob = ;
 
-function StarRating({ rating }) {
+function StarRating({ rating, size }) {
   const [count, setCount] = useState(0);
 
   // const [rating, setRating] = useState(5);
@@ -53,7 +53,7 @@ function StarRating({ rating }) {
   return (
 
     <div>
-      <Star className="Stars" style={{ '--rating': roundForStar(rating)}} />
+      <Star className="Stars" style={{ '--rating': roundForStar(rating)}} size={size} />
     </div>
   );
 }

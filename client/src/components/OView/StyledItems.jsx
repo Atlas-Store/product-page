@@ -32,6 +32,7 @@ export const ProductImage = styled.img`
   &:hover {
     cursor: ${props => props.cursorType || 'zoom-in'};
   }
+  loading="lazy"
 `;
 
 export const ThumbnailImage = styled.img`

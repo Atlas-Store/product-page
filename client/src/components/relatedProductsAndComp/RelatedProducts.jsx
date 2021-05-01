@@ -9,6 +9,10 @@ import AddCard from './AddCard';
 const Wrapper = styled.div`
   width: 700px;
   position: relative;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
 
   .slick-prev:hover,
   .slick-prev:focus,
@@ -86,13 +90,13 @@ function RelatedProducts({
   return (
     <>
       <Wrapper>
-        <h4>RELATED PRODUCTS</h4>
+        <h3>RELATED PRODUCTS</h3>
         <Slider {...settings}>
           {relatedItems.map((item) => (
             <Card productId={item} cardType="related" setCurrentProductId={setCurrentProductId} currentProduct={currentProduct} />
           ))}
         </Slider>
-        <h4>YOUR OUTFIT</h4>
+        <h3>YOUR OUTFIT</h3>
         <Slider {...settings}>
           {Object.keys(outfits).map((outfit) => (
             <Card productId={outfit} setOutfits={setOutfits} outfits={outfits} cardType="outfit" />

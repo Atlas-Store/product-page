@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -35,11 +34,5 @@ function AddCard({currentProduct, setOutfits, outfits}) {
     </Wrapper>
   );
 }
-
-AddCard.propTypes = {
-  currentProduct: PropTypes.number.isRequired,
-  setOutfits: PropTypes.func.isRequired,
-  outfits: PropTypes.object.isRequired,
-};
 
 export default AddCard;
