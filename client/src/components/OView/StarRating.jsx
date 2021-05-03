@@ -13,7 +13,8 @@ const Star = styled.div`
   ::before {
     content: "★★★★★";
     letter-spacing: 0px;
-    background: linear-gradient(90deg, var(--star-background) var(--percent), var(--star-color) var(--percent));
+    background: linear-gradient(90deg, var(--star-background) var(--percent),
+    var(--star-color) var(--percent));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 `;
@@ -29,8 +30,6 @@ const roundForStar = (num) => {
 };
 
 function StarRating({ rating, size }) {
-  const [count, setCount] = useState(0);
-
   const Label = styled.label`
     font: 1.0em 'Arial', sans-serif;
   `;
