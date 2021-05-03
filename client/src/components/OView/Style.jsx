@@ -1,14 +1,13 @@
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const RoundedImageDiv = styled.div`
   border: 20px;
 
 `;
-
 const Style = (props) => {
+  const [clicked, setClicked] = useState(false);
+
   const [test, setTest] = useState(false);
 
   const RoundedImage = styled.img`
@@ -24,10 +23,12 @@ const Style = (props) => {
   object-fit: cover;
 
   &:hover {
+    // width: 100px;
+    // height: 100px;
+    // border-width: medium;
     border-color: black;
   }
 `;
-
   const handleClick = () => {
     props.setCurrentImageURL(props.styleURL);
     if (props.styles.results[props.index] !== undefined) {
@@ -36,11 +37,18 @@ const Style = (props) => {
     props.setCurrentStyleIndex(props.index);
 
     setTest(!test);
+    console.log('props.index is', props.index);
+    console.log('props.handleClickStyle is', props.handleClickStyle);
     props.handleClickStyle();
   };
 
+  const handleMouseEnter = () => {
+
+  };
   return (
-    <RoundedImageDiv onClick={handleClick}>
+
+    <RoundedImageDiv onClick={handleClick} onMouseEnter={handleMouseEnter}>
+
       <RoundedImage src={props.styleURL} />
     </RoundedImageDiv>
   );
