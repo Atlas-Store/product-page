@@ -153,15 +153,11 @@ const ImageSlider = (props) => {
     <div>
       {regularSlider()}
 
-      <div style={BUTTON_WRAPPER_STYLES}>
+      <div style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
 
         <Modal open={isOpen} onClose={() => setIsOpen(false)}>
           <ProductImageDiv>
-            <ProductImage
-              src={(props.currentGroupOfImageURLs.photos[props.objSlideToContinueFrom.current])
-                ? (props.currentGroupOfImageURLs.photos[props.objSlideToContinueFrom.current].url)
-                : 'imageSubstitute.png'} size={650} onClick={props.handleClickProductImageDiv}
-            />
+            <ProductImage src={(props.currentGroupOfImageURLs.photos[props.objSlideToContinueFrom.current]) ? (props.currentGroupOfImageURLs.photos[props.objSlideToContinueFrom.current].url) : 'imageSubstitute.png'} size={650} onClick={props.handleClickProductImageDiv} />
           </ProductImageDiv>
         </Modal>
       </div>
