@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const ProdCategory = styled.h4`
   color: black;
   font: 1.0em 'Arial', sans-serif;
-  // display: flex;
-  // justify-content: flex-start;
-  // flex: 2
 `;
 
 const ProdTitle = styled.h2`
   color: black;
   font: 2.5em 'Arial', sans-serif;
   display: flex;
-  // flex: 1;
   justify-content: flex-start;
 `;
 
@@ -22,14 +18,14 @@ color: black;
 font: 1.0em 'Arial', sans-serif;
 display: flex;
 justify-content: flex-start;
-`
+`;
 
 function ProductHeader(props) {
-
   return (
     <div>
       <ProdCategory
-      id='prodCategory'>
+        id="prodCategory"
+      >
         {props.category.toUpperCase()}
       </ProdCategory>
 
@@ -38,12 +34,10 @@ function ProductHeader(props) {
       </ProdTitle>
 
       <ProdPrice>
-      {'$' + props.price}
+        {`$${props.price}`}
       </ProdPrice>
     </div>
-  )
+  );
 }
-
-
 
 export default ProductHeader;

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled, {css} from 'styled-components';
-
-let arrOfQuantities = [1, 2, 3, 4, 5];
+import styled, { css } from 'styled-components';
 
 const SelectQuantity = styled.select`
   background: transparent;
@@ -12,36 +10,32 @@ const SelectQuantity = styled.select`
   margin: 0 1em;
   padding: 0.70em 1.15em;
   cursor: pointer;
-  `
+  `;
 
-// const Option = styled.option`
-// `
-
-const QuantitySelector = ({styles, selectedSize, currentStyleIndex}) => {
-  // if (selectedSize) {
-
-
-    let totalQuantityForSelectedStyleAndSelectedSize = 0;
-    for (let skuNum in styles['results'][currentStyleIndex]['skus']) {
-      if (styles['results'][currentStyleIndex]['skus'][skuNum]['size'] === selectedSize) {
-        totalQuantityForSelectedStyleAndSelectedSize += styles['results'][currentStyleIndex]['skus'][skuNum]['quantity']
-      }
+const QuantitySelector = ({ currentStylesUpdated, selectedSize }) => {
+  let totalQuantityForSelectedStyleAndSelectedSize = 0;
+  for (const skuNum in currentStylesUpdated) {
+    if (currentStylesUpdated[skuNum].size === selectedSize) {
+      totalQuantityForSelectedStyleAndSelectedSize
+      += currentStylesUpdated[skuNum].quantity;
     }
-    if (totalQuantityForSelectedStyleAndSelectedSize > 15) {
-      totalQuantityForSelectedStyleAndSelectedSize = 15;
-    }
-    let arrOfNumsQuantity = Array.from({length: totalQuantityForSelectedStyleAndSelectedSize},
-      (_, index ) => index + 1);
-  // }
+  }
+  if (totalQuantityForSelectedStyleAndSelectedSize > 15) {
+    totalQuantityForSelectedStyleAndSelectedSize = 15;
+  }
+  const arrOfNumsQuantity = Array.from(
+    { length: totalQuantityForSelectedStyleAndSelectedSize },
+    (_, index) => index + 1
+  );
 
   return (
-    <SelectQuantity name="selectQuantity" id="quantitySelect" >
+    <SelectQuantity name="selectQuantity" id="quantitySelect">
       <option value="">Select Quantity</option>
       {selectedSize ? arrOfNumsQuantity.map((quantityValue, i) => (
-       <option value={String(quantityValue)}>{quantityValue}</option>
-     )) : undefined}
-      </SelectQuantity>
-  )
-}
+        <option value={String(quantityValue)}>{quantityValue}</option>
+      )) : undefined}
+    </SelectQuantity>
+  );
+};
 
 export default QuantitySelector;
