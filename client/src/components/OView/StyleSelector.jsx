@@ -1,7 +1,10 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Style from './Style.jsx';
-import { Grid, Row, Col } from './Overview.jsx';
+import Style from './Style';
+// eslint-disable-next-line import/no-cycle
+import { Grid, Row, Col } from './Overview';
 
 const StyleSelector = (props) => {
   const arrOfNumsStyle = Array.from({ length: props.stylesURLs.length }, (_, index) => index);
@@ -14,6 +17,7 @@ const StyleSelector = (props) => {
   return (
     <Grid>
       {nestedArrOfNumsStyles.map((item, i) => (
+        // eslint-disable-next-line react/no-array-index-key
         <Row key={i}>
           <Col>
             {props.stylesURLs[item[0]]
