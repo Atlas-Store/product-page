@@ -1,16 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
-import Slider from 'react-slick';
 import $ from 'jquery';
 import StarRating from './StarRating';
 import ProductSelector from './ProductSelector';
 import ProductDescription from './ProductDescription';
 import StyleSelector from './StyleSelector';
-import dataFirstProduct, { productReview } from './sample_data_styles';
-import { ProductImage, ProductImageDiv } from './StyledItems';
 import ImageSlider from './ImageSlider';
-import Modal from './Modal';
 import ProductHeader from './ProductHeader';
 
 export const Grid = styled.div`
@@ -41,22 +36,18 @@ export const CenteredColRestOfOverview = styled.div`
   margin-left: 68px;
 `;
 
-const WrapperForRestofOverview = styled.div`
-  width:
-`;
 
-const slideToStartFromInExpandedView = false;
 
 const Overview = ({ currentProduct, styles, starRating }) => {
   let avgStarRating = 0;
   let sum = 0;
   let numOfRatings = 0;
 
-  for (var key in starRating.ratings) {
+  for (let key in starRating.ratings) {
     numOfRatings += Number(starRating.ratings[key]);
   }
 
-  for (var key in starRating.ratings) {
+  for (let key in starRating.ratings) {
     sum += Number(key) * Number(starRating.ratings[key]);
   }
   avgStarRating = sum / numOfRatings;
@@ -69,20 +60,11 @@ const Overview = ({ currentProduct, styles, starRating }) => {
   const [rating, setRating] = useState(avgStarRating || 0);
   const [currentImageURL, setCurrentImageURL] = useState(stylesURLs[0]);
   const [currentStyleID, setCurrentStyleID] = useState(styles.results[0].style_id);
-  const [currentGroupOfImageURLs, setCurrentGroupOfImageURLs] = useState(styles.results.map((item) => item)[0]);
+  const [currentGroupOfImageURLs,
+    setCurrentGroupOfImageURLs] = useState(styles.results.map((item) => item)[0]);
   const [currentStyleIndex, setCurrentStyleIndex] = useState(0);
   const [rerenderPage, setRerenderPage] = useState(false);
   const isExpandedView = useRef(false);
-
-  // console.log('in Overview, currentProduct is', currentProduct);
-
-
-
-  // console.log('rating is', rating);
-
-
-  // console.log('the current style index is, ', currentStyleIndex);
-
 
   const slideToContinueFrom = useRef(0);
 
@@ -106,7 +88,6 @@ const Overview = ({ currentProduct, styles, starRating }) => {
   };
 
   return (
-
     <div>
       {currentProduct
       && (
