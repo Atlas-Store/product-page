@@ -19,7 +19,8 @@ position: relative;
 display: flex;
 flex-direction: column;
 justify-content: safe center;
-background: gray;
+background: white;
+border: 2.5px solid black;
 
 .slick-prev:hover,
 .slick-prev:focus,
@@ -152,11 +153,15 @@ const ImageSlider = (props) => {
     <div>
       {regularSlider()}
 
-      <div style={BUTTON_WRAPPER_STYLES} onClick={() => console.log('clicked')}>
+      <div style={BUTTON_WRAPPER_STYLES}>
 
         <Modal open={isOpen} onClose={() => setIsOpen(false)}>
           <ProductImageDiv>
-            <ProductImage src={(props.currentGroupOfImageURLs.photos[props.objSlideToContinueFrom.current]) ? (props.currentGroupOfImageURLs.photos[props.objSlideToContinueFrom.current].url) : 'imageSubstitute.png'} size={650} onClick={props.handleClickProductImageDiv} />
+            <ProductImage
+              src={(props.currentGroupOfImageURLs.photos[props.objSlideToContinueFrom.current])
+                ? (props.currentGroupOfImageURLs.photos[props.objSlideToContinueFrom.current].url)
+                : 'imageSubstitute.png'} size={650} onClick={props.handleClickProductImageDiv}
+            />
           </ProductImageDiv>
         </Modal>
       </div>
