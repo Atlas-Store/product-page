@@ -1,2 +1,1 @@
-# product-detail-page
-front end capstone
+# Product Page for Atlas Store
