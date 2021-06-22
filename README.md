@@ -4,10 +4,10 @@
 
 ### This was a 4-person team project. 
 #### Team members: 
--Richard Yu 
--Peter Liu 
--Eddie Arrizon
--Anindya Mehta
+- Richard Yu 
+- Peter Liu 
+- Eddie Arrizon
+- Anindya Mehta
 
 Video demo of the Product Overview section, developed by Richard Yu:
 https://www.youtube.com/watch?v=bxkM_pdc_pU
