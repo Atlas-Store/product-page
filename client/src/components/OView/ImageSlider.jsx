@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import Slider from 'react-slick';
 import styled, { css } from 'styled-components';
 import { ProductImageDiv, ProductImage } from './StyledItems.jsx';
 import Modal from './Modal';
+// const Modal = lazy(() => import('./components/myComp'))
 
 const BUTTON_WRAPPER_STYLES = {
   position: 'relative',
@@ -135,6 +136,8 @@ const ImageSlider = (props) => {
                 <ProductImageDiv>
                   <ProductImage
                     src={props.currentGroupOfImageURLs.photos[item].url}
+                    alt="product image"
+                    loading="lazy"
                     onClick={props.handleClickProductImageDiv}
                     onClick={() => setIsOpen(true)}
                   />

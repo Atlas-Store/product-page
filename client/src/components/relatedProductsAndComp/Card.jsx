@@ -244,7 +244,7 @@ const Description = styled.div`
 `;
 
 const Category = styled.div`
-  color: grey;
+  color: black;
   text-transform: uppercase;
   font-size: 80%;
   padding-top: 6px;

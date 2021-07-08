@@ -4,8 +4,8 @@ import styled, { css } from 'styled-components';
 const SelectSize = styled.select`
   background: transparent;
   border-radius: 3px;
-  border: 2px solid gray;
-  color: gray;
+  border: 2px solid black;
+  color: black;
   font-size: 14px;
   margin: 0 1em;
   padding: 0.70em 1.15em;

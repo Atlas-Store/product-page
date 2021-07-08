@@ -6,8 +6,8 @@ import QuantitySelector from './QuantitySelector.jsx';
 const AddToCart = styled.button`
     background: transparent;
     border-radius: 3px;
-    border: 2px solid gray;
-    color: gray;
+    border: 2px solid black;
+    color: black;
     font-size: 16px;
     margin: 0 1em;
     padding: 0.60em 1.35em;
