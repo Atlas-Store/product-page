@@ -1,11 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import Reviews from './Ratings_Reviews/Reviews';
-import QuestionsAnswers from './QuestionsAndAnswers';
-import Overview from './OView/Overview';
+// import Overview from './OView/Overview';
+const Overview = lazy(() => import('./OView/Overview'));
 
-import RelatedProducts from './relatedProductsAndComp/RelatedProducts';
+// import RelatedProducts from './relatedProductsAndComp/RelatedProducts';
+const RelatedProducts = lazy(()=> import('./relatedProductsAndComp/RelatedProducts'));
+
+// import QuestionsAnswers from './QuestionsAndAnswers';
+const QuestionsAnswers = lazy(() => import('./QuestionsAndAnswers'))
+
+// import Reviews from './Ratings_Reviews/Reviews';
+const Reviews = lazy(() => import('./Ratings_Reviews/Reviews'));
+
 
 const Wrapper = styled.div`
   display: flex;
@@ -39,7 +46,7 @@ const Loader = styled.div`
 `;
 
 function App() {
-  const [currentProductId, setCurrentProductId] = useState(23145);
+  const [currentProductId, setCurrentProductId] = useState(25167);
   const [products, setProducts] = useState([]);
   const [currentProduct, setCurrentProduct] = useState({});
   const [styles, setStyles] = useState({});
@@ -79,6 +86,7 @@ function App() {
   }, [currentProductId]);
 
   return (
+    <Suspense fallback={<div>Loading.....</div>} >
     <>
       {loading ? <Loader /> : (
         <Wrapper>
@@ -86,12 +94,14 @@ function App() {
           <br />
           <br />
           <section>
+
             <Overview
               currentProduct={currentProduct}
               styles={styles}
               starRating={ratings}
               key={Date.now()}
             />
+
           </section>
 
           <section>
@@ -120,6 +130,7 @@ function App() {
         </Wrapper>
       )}
     </>
+    </Suspense>
   );
 }
 

@@ -8,6 +8,16 @@ const RoundedImageDiv = styled.div`
 
 `;
 
+const getFinalURL = (URLstr) => {
+ if (URLstr.slice(0, -11).slice(-1) === "&") {
+   return URLstr.slice(0, -11) + "w=273&q=80";
+ } else if (URLstr.slice(0, -11).slice(-1) !== "&" && URLstr.slice(0, -11).slice(-1) !== "w") {
+  return URLstr.slice(0, -11) + "&w=273&q=80";
+ } else {
+  return URLstr.slice(0, -11) + "=273&q=80";
+ }
+};
+
 const Style = (props) => {
   const [test, setTest] = useState(false);
 
@@ -41,7 +51,7 @@ const Style = (props) => {
 
   return (
     <RoundedImageDiv onClick={handleClick}>
-      <RoundedImage src={props.styleURL} />
+      <RoundedImage loading="lazy" src={getFinalURL(props.styleURL) } alt="rounded image" />
     </RoundedImageDiv>
   );
 };
